@@ -18,6 +18,8 @@ const ListStudents = () => {
             .then((students) => {
                 setStudents(students);
             });
+
+        fetch("http://localhost:8080/api/openai")
     }
 
     useEffect(() => {

@@ -3,12 +3,19 @@ const cors = require('cors');
 require('dotenv').config();
 const path = require('path');
 const db = require('./db/db-connection.js');
-
+const { Configuration, OpenAIApi } = require("openai");
 
 const app = express();
 const PORT = process.env.PORT || 8080;
 app.use(cors());
 app.use(express.json());
+
+
+const configuration = new Configuration({
+    organization: "org-e9LvttIoF3o21ySUOzFoq4oi",
+    apiKey: process.env.OPENAI_API_KEY,
+});
+const openai = new OpenAIApi(configuration);
 
 // creates an endpoint for the route "/""
 app.get('/', (req, res) => {
@@ -24,6 +31,25 @@ app.get('/api/students', async (req, res) => {
         return res.status(400).json({ e });
     }
 });
+
+// app.get('/api/openai', async (req, res) => {
+//     console.log('testing this thing')
+//     try {
+//         const response = await openai.createCompletion({
+//             "model": "text-davinci-003",
+//             "prompt": "I want you to act as a trip planner. What should I pack for Corolla, North Carolina? Write your response in the form of an array that looks like {\"list\": [sandals, beach towel, sunglasses]}",
+//             "max_tokens": 500,
+//             "temperature": 1
+//             //   "n": 2
+//         });
+//         console.log(JSON.parse(response.data.choices[0].text));
+//     } catch (e) {
+//         return res.status(400).json({ e });
+//     }
+    
+// });
+
+
 
 // create the POST request
 app.post('/api/students', async (req, res) => {
