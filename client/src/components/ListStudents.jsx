@@ -17,9 +17,14 @@ const ListStudents = () => {
             .then((response) => response.json())
             .then((students) => {
                 setStudents(students);
-            });
-
-        fetch("http://localhost:8080/api/openai")
+            })
+            .then(() => {
+                fetch("http://localhost:8080/api/openai")
+                    .then((response) => response.json())
+                    .then((data) => {
+                       console.log(data);
+                    })
+            })
     }
 
     useEffect(() => {
