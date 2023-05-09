@@ -4,7 +4,8 @@ require('dotenv').config();
 const path = require('path');
 const db = require('./db/db-connection.js');
 const { Configuration, OpenAIApi } = require('openai');
-const data = require('./mock-data.json')
+const data = require('./mock-data.json');
+const { log } = require('console');
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -33,8 +34,19 @@ app.get('/api/students', async (req, res) => {
     }
 });
 
+app.get('/api/user/:email', async (req, res) => {
+    try {
+        const {email} = req.params;
+        const { rows: ready_user } = await db.query('SELECT * FROM ready_users WHERE user_email=$1', [email]);
+        res.send(ready_user);
+        console.log("backend response to a user get request", ready_user);
+    } catch (e) {
+        return res.status(400).json({ e });
+    }
+});
+
 app.get('/api/openai', async (req, res) => {
-    console.log('testing this thing')
+    // console.log('testing this thing')
     try {
         // res.send(data)
         // const response = await openai.createCompletion({
@@ -45,7 +57,7 @@ app.get('/api/openai', async (req, res) => {
         //     //   "n": 2
         // });
         res.json(data)
-        console.log(data)
+        // console.log('testing', data)
         // console.log(JSON.parse(response.data.choices[0].text));
     } catch (e) {
         return res.status(400).json({ e });
