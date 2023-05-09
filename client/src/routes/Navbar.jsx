@@ -8,7 +8,7 @@ import { useEffect } from 'react';
   const getUser = (auth0User, setUser) => {
     // A function to fetch the list of students that will be load anytime that list change
     const { email } = auth0User
-    fetch(`http://localhost:8080/api/user/${email}`)
+    fetch(`/api/user/${email}`)
       .then((response) => response.json())
       .then((user) => {
         setUser(user);
