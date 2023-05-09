@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 
 function MyNavBar(props) {
-  const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
+  const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
 
   return (
     <>
@@ -21,7 +21,8 @@ function MyNavBar(props) {
               alt="React Bootstrap logo"
             />
           </Navbar.Brand>
-          <Nav.Link >Your Link</Nav.Link>
+          {!user ? null : <Nav.Link to="/user-profile">{user.name}</Nav.Link>}
+          {/* <Nav.Link >Your Link</Nav.Link> */}
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
             {!isAuthenticated ? <button onClick={() => loginWithRedirect()}>Log In</button> : <button onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
