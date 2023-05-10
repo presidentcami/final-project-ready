@@ -8,7 +8,7 @@ import { useState } from 'react';
 function App() {
 
   const [user, setUser] = useState(null)
-console.log("this is current user", user)
+  console.log("this is current user", user)
   return (
     <div className="App">
       <MyNavBar setUser={setUser} user={user} />

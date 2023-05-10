@@ -72,20 +72,16 @@ app.get('/api/openai', async (req, res) => {
 
 
 // create the POST request
-app.post('/api/students', async (req, res) => {
+app.post('/api/user', async (req, res) => {
     try {
-        const newStudent = {
-            firstname: req.body.firstname,
-            lastname: req.body.lastname,
-            iscurrent: req.body.iscurrent
-        };
+        const { email, family_name, given_name, nickname } = req.body;
         //console.log([newStudent.firstname, newStudent.lastname, newStudent.iscurrent]);
         const result = await db.query(
-            'INSERT INTO students(firstname, lastname, is_current) VALUES($1, $2, $3) RETURNING *',
-            [newStudent.firstname, newStudent.lastname, newStudent.iscurrent],
+            'INSERT INTO ready_users(user_email, user_last_name, user_first_name, user_auth0_nickname) VALUES($1, $2, $3, $4) ON CONFLICT DO NOTHING RETURNING *',
+            [email, family_name, given_name, nickname],
         );
         console.log(result.rows[0]);
-        res.json(result.rows[0]);
+        res.json(result.rows[0] ?? {});
 
     } catch (e) {
         console.log(e);
