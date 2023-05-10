@@ -1,8 +1,9 @@
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import MyNavBar from './routes/Navbar'
-import ListStudents from './components/ListStudents'
+import Homepage from './components/Homepage'
 import { useState } from 'react';
+import Profile from './components/Profile';
 
 
 function App() {
@@ -12,7 +13,8 @@ function App() {
   return (
     <div className="App">
       <MyNavBar setUser={setUser} user={user} />
-      <ListStudents />
+      {user ? <Profile user={user} /> :  <Homepage />}
+      {/* <ListStudents /> */}
 
     </div>
   )

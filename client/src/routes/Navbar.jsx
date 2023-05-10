@@ -27,14 +27,14 @@ function MyNavBar({ user, setUser }) {
     <>
       <Navbar data-testid="navbar" bg="dark" variant="dark" sticky="top">
         <Container>
-          <Navbar.Brand href="/">
+          {/* <Navbar.Brand href="/">
             <img
               src={Logo}
               height="30"
               className="d-lg-inline-block"
               alt="React Bootstrap logo"
             />
-          </Navbar.Brand>
+          </Navbar.Brand> */}
           {!user ? null : <Nav.Link to="/user-profile">{user[0].user_first_name} {user[0].user_last_name}</Nav.Link>}
           {/* <Nav.Link >Your Link</Nav.Link> */}
           <Navbar.Toggle />
