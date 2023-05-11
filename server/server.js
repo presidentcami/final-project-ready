@@ -93,19 +93,22 @@ app.post('/adduser', async (req, res) => {
 
 });
 
-// create the POST request
+// create the POST request to add a new trip to 
 app.post('/addtrip', async (req, res) => {
     try {
-        const {trip_name, trip_start_date, trip_end_date, location, readyusers_user_id, trip_description } = req.body;
+        const {trip_name, trip_start_date, trip_end_date, location, user_id, trip_description } = req.body;
         console.log("request body", req.body);
         const result = await db.query(
-            'INSERT INTO ready_trips(trip_name, trip_start_date, trip_end_date, location, readyusers_user_id, trip_description) VALUES($1, $2, $3, $4, $5, $6) RETURNING *',
-            [trip_name, trip_start_date, trip_end_date, location, readyusers_user_id, trip_description],
+            'INSERT INTO ready_trips(trip_name, trip_start_date, trip_end_date, location, user_id, trip_description) VALUES($1, $2, $3, $4, $5, $6) RETURNING *',
+            [trip_name, trip_start_date, trip_end_date, location, user_id, trip_description],
         );
         console.log(result.rows[0]);
         // res.json(result.rows[0] ?? {});
+        const preTodoList = await db.query('INSERT INTO ready_lists(list_name, trip_id, user_id) VALUES($1, $2, $3)', ['Pre-Trip To-Do List', result.rows[0].trip_id, user_id])
+        const postTodoList = await db.query('INSERT INTO ready_lists(list_name, trip_id, user_id) VALUES($1, $2, $3)', ['Post-Trip To-Do List', result.rows[0].trip_id, user_id])
 
-        const { rows: ready_trip } = await db.query('SELECT * FROM ready_trips WHERE readyusers_user_id=$1', [readyusers_user_id]);
+        console.log(preTodoList.rows, postTodoList.rows)
+        const { rows: ready_trip } = await db.query('SELECT * FROM ready_trips WHERE user_id=$1', [user_id]);
         res.send(ready_trip);
 
     } catch (e) {

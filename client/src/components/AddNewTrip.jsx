@@ -9,7 +9,7 @@ const initialValue = {
     trip_start_date: '',
     trip_end_date: '',
     location: '',
-    readyusers_user_id: '',
+    user_id: '',
     trip_description: '',
 }
 
@@ -46,7 +46,7 @@ const AddTrip = ({ setTrips, user }) => {
             type: 'add',
             payload: { key: event.target.name, value: event.target.value },
         });
-        state.readyusers_user_id = user[0].user_id;
+        state.user_id = user[0].user_id;
         console.log(state)
     };
 
