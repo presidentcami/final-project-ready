@@ -13,13 +13,13 @@ const ListStudents = () => {
 
     const loadStudents = () => {
         // A function to fetch the list of students that will be load anytime that list change
-        fetch("/api/students")
+        fetch("/students")
             .then((response) => response.json())
             .then((students) => {
                 setStudents(students);
             })
             .then(() => {
-                fetch("/api/openai")
+                fetch("/openai")
                     .then((response) => response.json())
                     .then((data) => {
                        console.log(data);

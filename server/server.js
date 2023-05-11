@@ -9,10 +9,10 @@ const { log } = require('console');
 
 const app = express();
 const PORT = process.env.PORT || 8080;
-const REACT_BUILD_DIR = path.join(__dirname, "..", "client", "dist");
+// const REACT_BUILD_DIR = path.join(__dirname, "..", "client", "dist");
 app.use(cors());
 app.use(express.json());
-app.use(express.static(REACT_BUILD_DIR))
+// app.use(express.static(REACT_BUILD_DIR))
 
 
 
@@ -24,12 +24,12 @@ const openai = new OpenAIApi(configuration);
 
 // creates an endpoint for the route "/""
 app.get('/', (req, res) => {
-    // res.json({ message: 'Hola, from My template ExpressJS with React-Vite' });
-    res.sendFile(path.join(REACT_BUILD_DIR, "index.html"));
+    res.json({ message: 'Hola, from My template ExpressJS with React-Vite' });
+    // res.sendFile(path.join(REACT_BUILD_DIR, "index.html"));
 });
 
 // create the get request for students in the endpoint '/api/students'
-app.get('/api/students', async (req, res) => {
+app.get('/students', async (req, res) => {
     try {
         const { rows: students } = await db.query('SELECT * FROM students');
         res.send(students);
@@ -38,7 +38,7 @@ app.get('/api/students', async (req, res) => {
     }
 });
 
-app.get('/api/user/:email', async (req, res) => {
+app.get('/user/:email', async (req, res) => {
     try {
         const {email} = req.params;
         const { rows: ready_user } = await db.query('SELECT * FROM ready_users WHERE user_email=$1', [email]);
@@ -49,7 +49,7 @@ app.get('/api/user/:email', async (req, res) => {
     }
 });
 
-app.get('/api/openai', async (req, res) => {
+app.get('/openai', async (req, res) => {
     // console.log('testing this thing')
     try {
         // res.send(data)
@@ -72,16 +72,19 @@ app.get('/api/openai', async (req, res) => {
 
 
 // create the POST request
-app.post('/api/user', async (req, res) => {
+app.post('/adduser', async (req, res) => {
     try {
         const { email, family_name, given_name, nickname } = req.body;
-        //console.log([newStudent.firstname, newStudent.lastname, newStudent.iscurrent]);
+        console.log("request body", req.body);
         const result = await db.query(
             'INSERT INTO ready_users(user_email, user_last_name, user_first_name, user_auth0_nickname) VALUES($1, $2, $3, $4) ON CONFLICT DO NOTHING RETURNING *',
             [email, family_name, given_name, nickname],
         );
         console.log(result.rows[0]);
-        res.json(result.rows[0] ?? {});
+        // res.json(result.rows[0] ?? {});
+
+        const { rows: ready_user } = await db.query('SELECT * FROM ready_users WHERE user_email=$1', [email]);
+        res.send(ready_user);
 
     } catch (e) {
         console.log(e);

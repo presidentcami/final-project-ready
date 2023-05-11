@@ -5,21 +5,58 @@ import Logo from '../assets/BlueTechtonicaWord.png'
 import { useAuth0 } from '@auth0/auth0-react'
 import { useEffect } from 'react';
 
-  const getUser = (auth0User, setUser) => {
-    // A function to fetch the list of students that will be load anytime that list change
-    const { email } = auth0User
-    fetch(`/api/user/${email}`)
-      .then((response) => response.json())
-      .then((user) => {
-        setUser(user);
+  const addUser = (auth0User, setUser) => {
+    const { email, family_name, given_name, nickname } = auth0User
+
+    const userObj =  {
+     email: email,
+     given_name: given_name,
+     family_name: family_name,
+     nickname: nickname,
+   };
+   console.log("testing userObj", userObj);
+
+   try {
+     fetch("http://localhost:8080/adduser", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        // Authorization: `Bearer ${authToken}`,
+      },
+      body: JSON.stringify(userObj),
+    })
+      .then((response) => {
+        console.log("Response from post method ", response);
+        return response.json();
       })
-    }
+      .then((user) => {
+        console.log(user);
+        setUser(user)
+      });
+   } catch (error) {
+    console.error(error.message)
+   }
+
+  }
+
+  // const getUser = (auth0User, setUser) => {
+  //   // A function to fetch the list of students that will be load anytime that list change
+  //   const { email } = auth0User
+  //   fetch(`/user/${email}`)
+  //     .then((response) => response.json())
+  //     .then((user) => {
+  //       setUser(user);
+  //     })
+  //   }
 
 function MyNavBar({ user, setUser }) {
   const { loginWithRedirect, logout, isAuthenticated, user: auth0User } = useAuth0();
 
   useEffect(() => {
-    if (auth0User) getUser(auth0User, setUser);
+
+    if (auth0User) addUser(auth0User, setUser)
+      // getUser(auth0User, setUser)} ;
   }, [auth0User])
 
   console.log(auth0User)

@@ -11,7 +11,7 @@ const CLIENTID = import.meta.env.VITE_AUTH0_CLIENT_ID
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App />}>
-      <Route path='user-profile' element={<Profile />} />
+      {/* <Route path='user-profile' element={<Profile />} /> */}
     </Route>
   )
 )
@@ -25,7 +25,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         redirect_uri: window.location.origin
       }}
     >
-      <App />
+      {/* <App /> */}
       <RouterProvider router={router} />
     </Auth0Provider>
   </React.StrictMode>,
