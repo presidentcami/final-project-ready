@@ -93,6 +93,28 @@ app.post('/adduser', async (req, res) => {
 
 });
 
+// create the POST request
+app.post('/addtrip', async (req, res) => {
+    try {
+        const {trip_name, trip_start_date, trip_end_date, location, readyusers_user_id, trip_description } = req.body;
+        console.log("request body", req.body);
+        const result = await db.query(
+            'INSERT INTO ready_trips(trip_name, trip_start_date, trip_end_date, location, readyusers_user_id, trip_description) VALUES($1, $2, $3, $4, $5, $6) RETURNING *',
+            [trip_name, trip_start_date, trip_end_date, location, readyusers_user_id, trip_description],
+        );
+        console.log(result.rows[0]);
+        // res.json(result.rows[0] ?? {});
+
+        const { rows: ready_trip } = await db.query('SELECT * FROM ready_trips WHERE readyusers_user_id=$1', [readyusers_user_id]);
+        res.send(ready_trip);
+
+    } catch (e) {
+        console.log(e);
+        return res.status(400).json({ e });
+    }
+
+});
+
 // delete request for students
 app.delete('/api/students/:studentId', async (req, res) => {
     try {

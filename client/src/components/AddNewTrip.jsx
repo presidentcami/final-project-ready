@@ -27,7 +27,7 @@ const reducer = (state, action) => {
     }
 };
 
-const AddTrip = ({ setTrips }) => {
+const AddTrip = ({ setTrips, user }) => {
 
     const [state, dispatch] = useReducer(reducer, initialValue);
     const [show, setShow] = useState(false);
@@ -46,14 +46,17 @@ const AddTrip = ({ setTrips }) => {
             type: 'add',
             payload: { key: event.target.name, value: event.target.value },
         });
+        state.readyusers_user_id = user[0].user_id;
         console.log(state)
     };
+
+    // console.log(user)
 
     //A function to handle the post request
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            fetch('http://localhost:8080/api/newtrip/', {
+            fetch('http://localhost:8080/addtrip', {
                 method: "POST",
                 headers: {
                     Accept: "application/json",
@@ -64,7 +67,7 @@ const AddTrip = ({ setTrips }) => {
                 .then((response) => response.json())
                 .then(trip => {
                     setTrips(trip);
-                    console.log('Contacts fetched when new contact is added', trip);
+                    console.log('trips fetched when new trip is added', trip);
                     handleClose()
                 })
                 dispatch ({ type: 'reset', initialValue })
@@ -81,12 +84,6 @@ const AddTrip = ({ setTrips }) => {
 
     return (
         <>
-            {/*     trip_name: '',
-    trip_start_date: '',
-    trip_end_date: '',
-    location: '',
-    readyusers_user_id: '',
-    trip_description: '', */}
             {show ? <>
                 <form onSubmit={handleSubmit} id="addNewTripForm">
                     <h3>Add New Trip</h3>
