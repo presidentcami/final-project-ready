@@ -9,10 +9,11 @@ const { log } = require('console');
 
 const app = express();
 const PORT = process.env.PORT || 8080;
-// const REACT_BUILD_DIR = path.join(__dirname, "..", "client", "dist");
+const REACT_BUILD_DIR = path.join(__dirname, "..", "client", "dist");
+
 app.use(cors());
 app.use(express.json());
-// app.use(express.static(REACT_BUILD_DIR))
+app.use(express.static(REACT_BUILD_DIR))
 
 
 
@@ -154,6 +155,13 @@ app.put('/api/students/:studentId', async (req, res) =>{
     }
   })
 
+//    for Proxy
+  app.get('/*', (req, res) => {
+    console.log("/* is executing")
+    res.sendFile(path.join(REACT_BUILD_DIR, 
+        'index.html'))
+});
+ 
 // console.log that your server is up and running
 app.listen(PORT, () => {
     console.log(`Hola, Server listening on ${PORT}`);
