@@ -17,7 +17,7 @@ import { useEffect } from 'react';
    console.log("testing userObj", userObj);
 
    try {
-     fetch("/adduser", {
+     fetch("http://localhost:8080/adduser", {
       method: "POST",
       headers: {
         Accept: "application/json",

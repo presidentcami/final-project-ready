@@ -9,11 +9,11 @@ const { log } = require('console');
 
 const app = express();
 const PORT = process.env.PORT || 8080;
-const REACT_BUILD_DIR = path.join(__dirname, "..", "client", "dist");
+// const REACT_BUILD_DIR = path.join(__dirname, "..", "client", "dist");
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static(REACT_BUILD_DIR))
+// app.use(express.static(REACT_BUILD_DIR))
 
 
 
@@ -45,6 +45,17 @@ app.get('/user/:email', async (req, res) => {
         const { rows: ready_user } = await db.query('SELECT * FROM ready_users WHERE user_email=$1', [email]);
         res.send(ready_user);
         console.log("backend response to a user get request", ready_user);
+    } catch (e) {
+        return res.status(400).json({ e });
+    }
+});
+
+app.get('/trips/:userid', async (req, res) => {
+    try {
+        const { userid } = req.params;
+        const { rows: ready_trip } = await db.query('SELECT * FROM ready_trips WHERE user_id=$1', [userid]);
+        res.send(ready_trip);
+        console.log("backend response to a user get request", ready_trip);
     } catch (e) {
         return res.status(400).json({ e });
     }
@@ -156,11 +167,11 @@ app.put('/api/students/:studentId', async (req, res) =>{
   })
 
 //    for Proxy
-  app.get('/*', (req, res) => {
-    console.log("/* is executing")
-    res.sendFile(path.join(REACT_BUILD_DIR, 
-        'index.html'))
-});
+//   app.get('/*', (req, res) => {
+//     console.log("/* is executing")
+//     res.sendFile(path.join(REACT_BUILD_DIR, 
+//         'index.html'))
+// });
  
 // console.log that your server is up and running
 app.listen(PORT, () => {

@@ -1,11 +1,29 @@
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
 import AddTrip from "./AddNewTrip";
+import AllTrips from "./AllTrips";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const Profile = ({ user }) => {
     const [trips, setTrips] = useState([])
-    // console.log("profile", user)
+    const { user_id, user_first_name, user_last_name, user_email } = user[0]
+    
+    // console.log("profile", user_id)
     const { isLoading } = useAuth0();
+
+const loadTrips = () => {
+        // A function to fetch the list of students that will be load anytime that list change
+        fetch(`http://localhost:8080/trips/${user_id}`)
+            .then((response) => response.json())
+            .then((trips) => {
+                // console.log(trips)
+                setTrips(trips);
+            });
+    }
+
+    useEffect(() => {
+        loadTrips();
+    }, []);
+    
 
     if (isLoading) {
         return <div>Loading ...</div>;
@@ -14,10 +32,11 @@ const Profile = ({ user }) => {
     return (
             <div>
                 {/* <img src={user.picture} alt={user.name} /> */}
-                <h2>{user[0].user_first_name} {user[0].user_last_name}</h2>
-                <p>Welcome to your homepage, user at {user[0].user_email}</p>
+                <h2>{user_first_name} {user_last_name}</h2>
+                <p>Welcome to your homepage, user at {user_email}</p>
+                <AllTrips trips={trips} />
                 <AddTrip user={user} setTrips={setTrips} />
-                {/* {trips.map(trip => trip.trip_name)} */}
+                
             </div>
         
     );
