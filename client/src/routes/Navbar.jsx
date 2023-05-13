@@ -53,6 +53,17 @@ import { useEffect } from 'react';
 function MyNavBar({ user, setUser }) {
   const { loginWithRedirect, logout, isAuthenticated, user: auth0User } = useAuth0();
 
+  const handleSignUp = async () => {
+    await loginWithRedirect({
+      appState: {
+        returnTo: "/profile",
+      },
+      authorizationParams: {
+        screen_hint: "signup",
+      },
+    });
+  };
+
   useEffect(() => {
 
     if (auth0User) addUser(auth0User, setUser)
@@ -76,7 +87,10 @@ function MyNavBar({ user, setUser }) {
           {/* <Nav.Link >Your Link</Nav.Link> */}
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
-            {!isAuthenticated ? <button onClick={() => loginWithRedirect()}>Log In</button> : <button onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
+            {!isAuthenticated ? <div><button onClick={() => loginWithRedirect()}>Log In</button> <button onClick={handleSignUp}>
+              Sign Up
+            </button>
+            </div> : <button onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
               Log Out
             </button>}
 
