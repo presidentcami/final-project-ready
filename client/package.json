@@ -17,7 +17,8 @@
     "react-bootstrap": "^2.7.2",
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
-    "react-router-dom": "^6.9.0"
+    "react-router-dom": "^6.9.0",
+    "styled-components": "^5.3.10"
   },
   "devDependencies": {
     "@testing-library/react": "^14.0.0",

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import AddTrip from "./AddNewTrip";
 import AllTrips from "./AllTrips";
 import { useAuth0 } from "@auth0/auth0-react";
+import SideBar from "./SideBar";
 
 const Profile = ({ user }) => {
     const [trips, setTrips] = useState([])
@@ -31,6 +32,7 @@ const loadTrips = () => {
 
     return (
             <div>
+                {trips && <SideBar trips={trips} />}
                 {/* <img src={user.picture} alt={user.name} /> */}
                 <h2>{user_first_name} {user_last_name}</h2>
                 <p>Welcome to your homepage, user at {user_email}</p>
