@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 
 
-export default function AllTrips({trips}) {
+export default function AllTrips({ trips }) {
+
     const [show, setShow] = useState(false);
     console.log("trips", trips)
 

@@ -3,9 +3,10 @@ import AddTrip from "./AddNewTrip";
 import AllTrips from "./AllTrips";
 import { useAuth0 } from "@auth0/auth0-react";
 import SideBar from "./SideBar";
+import { Outlet } from "react-router-dom";
 
-const Profile = ({ user }) => {
-    const [trips, setTrips] = useState([])
+const Profile = ({ user, trips, setTrips }) => {
+
     const { user_id, user_first_name, user_last_name, user_email } = user[0]
     
     // console.log("profile", user_id)
@@ -36,9 +37,9 @@ const loadTrips = () => {
                 {/* <img src={user.picture} alt={user.name} /> */}
                 <h2>{user_first_name} {user_last_name}</h2>
                 <p>Welcome to your homepage, user at {user_email}</p>
-                <AllTrips trips={trips} />
+                {/* <AllTrips trips={trips} /> */}
                 <AddTrip user={user} setTrips={setTrips} />
-                
+                <Outlet />
             </div>
         
     );

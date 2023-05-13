@@ -27,15 +27,15 @@ const SidebarData = [
     },
     {
         title: 'Trips',
-        path: '/trips',
+        path: '/dashboard/trips',
         icon: <IoIcons.IoIosPaper />,
         iconClosed: <RiIcons.RiArrowDownSFill />,
         iconOpened: <RiIcons.RiArrowUpSFill />,
 
         subNav: [
             // {
-            //     title: 'Reports',
-            //     path: '/reports/reports1',
+            //     title: 'Specific Trip',
+            //     path: '/dashboard/trips/:trip_id',
             //     icon: <IoIcons.IoIosPaper />,
             //     cName: 'sub-nav'
             // },
@@ -62,27 +62,27 @@ const SidebarData = [
     //     path: '/team',
     //     icon: <IoIcons.IoMdPeople />
     // },
-    {
-        title: 'List Templates',
-        path: '/list-templates',
-        icon: <FaIcons.FaEnvelopeOpenText />,
+    // {
+    //     title: 'List Templates',
+    //     path: '/list-templates',
+    //     icon: <FaIcons.FaEnvelopeOpenText />,
 
-        iconClosed: <RiIcons.RiArrowDownSFill />,
-        iconOpened: <RiIcons.RiArrowUpSFill />,
+    //     iconClosed: <RiIcons.RiArrowDownSFill />,
+    //     iconOpened: <RiIcons.RiArrowUpSFill />,
 
-        subNav: [
-        //     {
-        //         title: 'Message 1',
-        //         path: '/messages/message1',
-        //         icon: <IoIcons.IoIosPaper />
-        //     },
-        //     {
-        //         title: 'Message 2',
-        //         path: '/messages/message2',
-        //         icon: <IoIcons.IoIosPaper />
-        //     }
-        ]
-    },
+    //     subNav: [
+    //     //     {
+    //     //         title: 'Message 1',
+    //     //         path: '/messages/message1',
+    //     //         icon: <IoIcons.IoIosPaper />
+    //     //     },
+    //     //     {
+    //     //         title: 'Message 2',
+    //     //         path: '/messages/message2',
+    //     //         icon: <IoIcons.IoIosPaper />
+    //     //     }
+    //     ]
+    // },
     {
         title: 'Support',
         path: '/support',

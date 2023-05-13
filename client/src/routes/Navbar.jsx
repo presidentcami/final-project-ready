@@ -64,6 +64,12 @@ function MyNavBar({ user, setUser }) {
     });
   };
 
+  useEffect(() => {
+
+    if (auth0User) addUser(auth0User, setUser)
+      // getUser(auth0User, setUser)} ;
+  }, [auth0User])
+
   if (isLoading) {
     return (
       <div className="page-layout">
@@ -71,13 +77,6 @@ function MyNavBar({ user, setUser }) {
       </div>
     );
   }
-
-  useEffect(() => {
-
-    if (auth0User) addUser(auth0User, setUser)
-      // getUser(auth0User, setUser)} ;
-  }, [auth0User])
-
   console.log(auth0User)
   return (
     <>
