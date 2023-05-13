@@ -1,7 +1,7 @@
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import Logo from '../assets/BlueTechtonicaWord.png'
+import PageLoader from '../components/PageLoader';
 import { useAuth0 } from '@auth0/auth0-react'
 import { useEffect } from 'react';
 
@@ -51,7 +51,7 @@ import { useEffect } from 'react';
   //   }
 
 function MyNavBar({ user, setUser }) {
-  const { loginWithRedirect, logout, isAuthenticated, user: auth0User } = useAuth0();
+  const { loginWithRedirect, logout, isAuthenticated, user: auth0User, isLoading } = useAuth0();
 
   const handleSignUp = async () => {
     await loginWithRedirect({
@@ -63,6 +63,14 @@ function MyNavBar({ user, setUser }) {
       },
     });
   };
+
+  if (isLoading) {
+    return (
+      <div className="page-layout">
+        <PageLoader />
+      </div>
+    );
+  }
 
   useEffect(() => {
 

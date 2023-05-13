@@ -17,9 +17,9 @@ const Auth0WithNavigate = ({ children }) => {
                 authorizationParams={{
                     audience: import.meta.env.VITE_AUTH0_AUDIENCE,
                     scope: "openid profile email",
+                    redirect_uri: `${window.location.origin}/dashboard`,
                 }}
                 cacheLocation="localstorage"
-                redirectUri={`${window.location.origin}/dashboard`}
                 onRedirectCallback={onRedirectCallback}
             >
                 {children}
