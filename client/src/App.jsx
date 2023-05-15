@@ -2,11 +2,12 @@ import { useState } from 'react';
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import MyNavBar from './routes/Navbar'
-import Homepage from './components/Homepage'
+import Homepage from './components/NotLoggedInLandingPage'
 import Profile from './components/Profile';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import AllTrips from './components/AllTrips';
 import OneTrip from './components/OneTrip';
+import Layout from './components/Layout';
 
 
 
@@ -17,21 +18,16 @@ function App() {
 
   console.log("this is current user", user)
   return (
-    <div className="App">
-      <MyNavBar setUser={setUser} user={user} />
-      <Routes>
-        <Route exact path="/" element={<Homepage />} />
-        {user && 
-        <Route
-          exact path="/dashboard"
-          element={<Profile user={user} setTrips={setTrips} trips={trips} />}
-        >
-          <Route path='/dashboard/trips' element={<AllTrips trips={trips} />} />
-          <Route path='/dashboard/trips/:trip_id' element={<OneTrip />} />
-        </Route>}
-        
+   
+      <Routes className="App">
+        <Route path='/' element={<Layout setUser={setUser} user={user} trips={trips} setTrips={setTrips} />}>
+            
+            <Route path='dashboard' element={<Profile user={user} setTrips={setTrips} trips={trips} />} />
+            <Route path='trips' element={<AllTrips trips={trips} />} />
+            <Route path='trips/:trip_id' element={<OneTrip />} />
+        </Route>
       </Routes>
-    </div>
+    
   )
 }
 
