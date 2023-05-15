@@ -32,13 +32,17 @@ const loadTrips = () => {
     }
 
     return (
-            <div>
-                {trips && <SideBar trips={trips} />}
+            <div className="dashboard">
+                <div>
+                    {trips && <SideBar trips={trips} />}
+                </div>
                 {/* <img src={user.picture} alt={user.name} /> */}
+                <div className="profile">
                 <h2>{user_first_name} {user_last_name}</h2>
                 <p>Welcome to your homepage, user at {user_email}</p>
                 {/* <AllTrips trips={trips} /> */}
                 <AddTrip user={user} setTrips={setTrips} />
+                </div>
                 <Outlet />
             </div>
         

@@ -79,8 +79,8 @@ function MyNavBar({ user, setUser }) {
   }
   console.log(auth0User)
   return (
-    <>
-      <Navbar data-testid="navbar" bg="dark" variant="dark" sticky="top">
+    
+      <Navbar data-testid="navbar" bg="dark" variant="dark" sticky="top" className='navbar'>
         <Container>
           {/* <Navbar.Brand href="/">
             <img
@@ -107,7 +107,7 @@ function MyNavBar({ user, setUser }) {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-    </>
+    
   );
 };
 
