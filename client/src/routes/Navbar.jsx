@@ -4,6 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 import PageLoader from '../components/PageLoader';
 import { useAuth0 } from '@auth0/auth0-react'
 import { useEffect } from 'react';
+import { Outlet } from 'react-router-dom';
 
   const addUser = (auth0User, setUser) => {
     const { email, family_name, given_name, nickname } = auth0User
@@ -79,7 +80,7 @@ function MyNavBar({ user, setUser }) {
   }
   console.log(auth0User)
   return (
-    
+    <div>
       <Navbar data-testid="navbar" bg="dark" variant="dark" sticky="top" className='navbar'>
         <Container>
           {/* <Navbar.Brand href="/">
@@ -106,8 +107,9 @@ function MyNavBar({ user, setUser }) {
           </Navbar.Text> */}
           </Navbar.Collapse>
         </Container>
+        
       </Navbar>
-    
+    </div> 
   );
 };
 
