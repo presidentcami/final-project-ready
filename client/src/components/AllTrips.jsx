@@ -14,8 +14,8 @@ export default function AllTrips({ trips }) {
     };
   return (
     <div> 
-        {show ? <div>
-              <button onClick={handleClose}>Hide Trips</button>{trips.map((trip) => {
+        <div className='profile'>
+              {trips.map((trip) => {
                 return (
                 <li key={trip.trip_id}>
                 {trip.trip_name}
@@ -28,9 +28,7 @@ export default function AllTrips({ trips }) {
                 }
                 
 
-        </div> :
-        
-        <button onClick={handleShow}>All Trips</button>}
+        </div>
         
 
 
