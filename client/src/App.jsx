@@ -23,7 +23,7 @@ function App() {
         <Route path='/' element={<Layout setUser={setUser} user={user} trips={trips} setTrips={setTrips} />}>
             
             <Route path='dashboard' element={<Profile user={user} setTrips={setTrips} trips={trips} />} />
-            <Route path='trips' element={<AllTrips trips={trips} />} />
+            <Route path='trips' element={<AllTrips user={user} setTrips={setTrips} trips={trips} />} />
             <Route path='trips/:trip_id' element={<OneTrip />} />
         </Route>
       </Routes>
