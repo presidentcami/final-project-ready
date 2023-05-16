@@ -12,20 +12,6 @@ const Profile = ({ user, trips, setTrips }) => {
     
     // console.log("profile", user)
     const { isLoading } = useAuth0();
-
-    const loadTrips = () => {
-        // A function to fetch the list of students that will be load anytime that list change
-        fetch(`http://localhost:8080/trips/${user_id}`)
-            .then((response) => response.json())
-            .then((trips) => {
-                // console.log(trips)
-                setTrips(trips);
-            });
-    }
-
-    useEffect(() => {
-        loadTrips();
-    }, []);
     
 
     if (isLoading) {
