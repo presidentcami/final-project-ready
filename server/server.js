@@ -50,6 +50,18 @@ app.get('/user/:email', async (req, res) => {
     }
 });
 
+app.get('/tripdetails/:tripid', async (req, res) => {
+    try {
+        const {tripid} = req.params;
+        console.log("trip id from req.params", tripid)
+        const { rows: trip_details } = await db.query('SELECT ready_lists.list_id, list_name, ready_trips.trip_id, ready_trips.user_id, trip_name, trip_start_date, trip_end_date, location, trip_description, item_id, item, item_is_done, item_due_date FROM ready_lists LEFT JOIN ready_trips ON ready_lists.trip_id=ready_trips.trip_id LEFT JOIN ready_items ON ready_lists.list_id=ready_items.list_id WHERE ready_lists.trip_id=$1;', [tripid])
+        res.send(trip_details)
+        console.log(trip_details)
+    } catch (e) {
+        return res.status(400).json({ e });
+    }
+})
+
 app.get('/trips/:userid', async (req, res) => {
     try {
         const { userid } = req.params;
