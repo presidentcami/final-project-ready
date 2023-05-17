@@ -1,10 +1,8 @@
 import { useState } from 'react';
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import MyNavBar from './routes/Navbar'
-import Homepage from './components/NotLoggedInLandingPage'
 import Profile from './components/Profile';
-import { Route, Routes, Navigate } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import AllTrips from './components/AllTrips';
 import OneTrip from './components/OneTrip';
 import Layout from './components/Layout';
