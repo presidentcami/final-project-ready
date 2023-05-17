@@ -9,11 +9,11 @@ const { log } = require('console');
 
 const app = express();
 const PORT = process.env.PORT || 8080;
-const REACT_BUILD_DIR = path.join(__dirname, "..", "client", "dist");
+// const REACT_BUILD_DIR = path.join(__dirname, "..", "client", "dist");
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static(REACT_BUILD_DIR))
+// app.use(express.static(REACT_BUILD_DIR))
 
 
 
@@ -45,6 +45,29 @@ app.get('/user/:email', async (req, res) => {
         const { rows: ready_user } = await db.query('SELECT * FROM ready_users WHERE user_email=$1', [email]);
         res.send(ready_user);
         console.log("backend response to a user get request", ready_user);
+    } catch (e) {
+        return res.status(400).json({ e });
+    }
+});
+
+app.get('/tripdetails/:tripid', async (req, res) => {
+    try {
+        const {tripid} = req.params;
+        console.log("trip id from req.params", tripid)
+        const { rows: trip_details } = await db.query('SELECT ready_lists.list_id, list_name, ready_trips.trip_id, ready_trips.user_id, trip_name, trip_start_date, trip_end_date, location, trip_description, item_id, item, item_is_done, item_due_date, item_version FROM ready_lists LEFT JOIN ready_trips ON ready_lists.trip_id=ready_trips.trip_id LEFT JOIN ready_items ON ready_lists.list_id=ready_items.list_id WHERE ready_lists.trip_id=$1;', [tripid])
+        res.send(trip_details)
+        console.log(trip_details)
+    } catch (e) {
+        return res.status(400).json({ e });
+    }
+})
+
+app.get('/trips/:userid', async (req, res) => {
+    try {
+        const { userid } = req.params;
+        const { rows: ready_trip } = await db.query('SELECT * FROM ready_trips WHERE user_id=$1', [userid]);
+        res.send(ready_trip);
+        console.log("backend response to a user get request", ready_trip);
     } catch (e) {
         return res.status(400).json({ e });
     }
@@ -134,18 +157,18 @@ app.delete('/api/students/:studentId', async (req, res) => {
 });
 
 //A put request - Update a student 
-app.put('/api/students/:studentId', async (req, res) =>{
+app.put('/updateitemdone/:item_id', async (req, res) =>{
     //console.log(req.params);
     //This will be the id that I want to find in the DB - the student to be updated
-    const studentId = req.params.studentId
-    const updatedStudent = { id: req.body.id, firstname: req.body.firstname, lastname: req.body.lastname, iscurrent: req.body.is_current}
-    console.log("In the server from the url - the student id", studentId);
-    console.log("In the server, from the react - the student to be edited", updatedStudent);
-    // UPDATE students SET lastname = "something" WHERE id="16";
-    const query = `UPDATE students SET firstname=$1, lastname=$2, is_current=$3 WHERE id=${studentId} RETURNING *`;
-    const values = [updatedStudent.firstname, updatedStudent.lastname, updatedStudent.iscurrent];
+    const {item_id} = req.params
+    let {item_is_done} = req.body
+
+    console.log("item id", item_id, "item is done from req", item_is_done);
+
+
     try {
-      const updated = await db.query(query, values);
+        
+      const updated = await db.query('UPDATE ready_items SET item_is_done=$1 WHERE item_id=$2;', [item_is_done, item_id]);
       console.log(updated.rows[0]);
       res.send(updated.rows[0]);
   
@@ -156,11 +179,11 @@ app.put('/api/students/:studentId', async (req, res) =>{
   })
 
 //    for Proxy
-  app.get('/*', (req, res) => {
-    console.log("/* is executing")
-    res.sendFile(path.join(REACT_BUILD_DIR, 
-        'index.html'))
-});
+//   app.get('/*', (req, res) => {
+//     console.log("/* is executing")
+//     res.sendFile(path.join(REACT_BUILD_DIR, 
+//         'index.html'))
+// });
  
 // console.log that your server is up and running
 app.listen(PORT, () => {

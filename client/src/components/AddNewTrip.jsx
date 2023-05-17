@@ -56,7 +56,7 @@ const AddTrip = ({ setTrips, user }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            fetch('/addtrip', {
+            fetch('http://localhost:8080/addtrip', {
                 method: "POST",
                 headers: {
                     Accept: "application/json",

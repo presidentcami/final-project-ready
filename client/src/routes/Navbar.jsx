@@ -1,9 +1,10 @@
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import Logo from '../assets/BlueTechtonicaWord.png'
+import PageLoader from '../components/PageLoader';
 import { useAuth0 } from '@auth0/auth0-react'
 import { useEffect } from 'react';
+import { Outlet } from 'react-router-dom';
 
   const addUser = (auth0User, setUser) => {
     const { email, family_name, given_name, nickname } = auth0User
@@ -17,7 +18,7 @@ import { useEffect } from 'react';
    console.log("testing userObj", userObj);
 
    try {
-     fetch("/adduser", {
+     fetch("http://localhost:8080/adduser", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -51,7 +52,18 @@ import { useEffect } from 'react';
   //   }
 
 function MyNavBar({ user, setUser }) {
-  const { loginWithRedirect, logout, isAuthenticated, user: auth0User } = useAuth0();
+  const { loginWithRedirect, logout, isAuthenticated, user: auth0User, isLoading } = useAuth0();
+
+  const handleSignUp = async () => {
+    await loginWithRedirect({
+      appState: {
+        returnTo: "/profile",
+      },
+      authorizationParams: {
+        screen_hint: "signup",
+      },
+    });
+  };
 
   useEffect(() => {
 
@@ -59,10 +71,17 @@ function MyNavBar({ user, setUser }) {
       // getUser(auth0User, setUser)} ;
   }, [auth0User])
 
+  if (isLoading) {
+    return (
+      <div className="page-layout">
+        <PageLoader />
+      </div>
+    );
+  }
   console.log(auth0User)
   return (
-    <>
-      <Navbar data-testid="navbar" bg="dark" variant="dark" sticky="top">
+    <div>
+      <Navbar data-testid="navbar" bg="dark" variant="dark" sticky="top" className='navbar'>
         <Container>
           {/* <Navbar.Brand href="/">
             <img
@@ -76,7 +95,10 @@ function MyNavBar({ user, setUser }) {
           {/* <Nav.Link >Your Link</Nav.Link> */}
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
-            {!isAuthenticated ? <button onClick={() => loginWithRedirect()}>Log In</button> : <button onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
+            {!isAuthenticated ? <div><button onClick={() => loginWithRedirect()}>Log In</button> <button onClick={handleSignUp}>
+              Sign Up
+            </button>
+            </div> : <button onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
               Log Out
             </button>}
 
@@ -85,8 +107,9 @@ function MyNavBar({ user, setUser }) {
           </Navbar.Text> */}
           </Navbar.Collapse>
         </Container>
+        
       </Navbar>
-    </>
+    </div> 
   );
 };
 
