@@ -4,12 +4,17 @@ require('dotenv').config();
 const path = require('path');
 const db = require('./db/db-connection.js');
 const { Configuration, OpenAIApi } = require('openai');
-const data = require('./mock-data.json')
+const data = require('./mock-data.json');
+const { log } = require('console');
 
 const app = express();
 const PORT = process.env.PORT || 8080;
+const REACT_BUILD_DIR = path.join(__dirname, "..", "client", "dist");
+
 app.use(cors());
 app.use(express.json());
+app.use(express.static(REACT_BUILD_DIR))
+
 
 
 const configuration = new Configuration({
@@ -21,10 +26,11 @@ const openai = new OpenAIApi(configuration);
 // creates an endpoint for the route "/""
 app.get('/', (req, res) => {
     res.json({ message: 'Hola, from My template ExpressJS with React-Vite' });
+    // res.sendFile(path.join(REACT_BUILD_DIR, "index.html"));
 });
 
 // create the get request for students in the endpoint '/api/students'
-app.get('/api/students', async (req, res) => {
+app.get('/students', async (req, res) => {
     try {
         const { rows: students } = await db.query('SELECT * FROM students');
         res.send(students);
@@ -33,8 +39,19 @@ app.get('/api/students', async (req, res) => {
     }
 });
 
-app.get('/api/openai', async (req, res) => {
-    console.log('testing this thing')
+app.get('/user/:email', async (req, res) => {
+    try {
+        const {email} = req.params;
+        const { rows: ready_user } = await db.query('SELECT * FROM ready_users WHERE user_email=$1', [email]);
+        res.send(ready_user);
+        console.log("backend response to a user get request", ready_user);
+    } catch (e) {
+        return res.status(400).json({ e });
+    }
+});
+
+app.get('/openai', async (req, res) => {
+    // console.log('testing this thing')
     try {
         // res.send(data)
         // const response = await openai.createCompletion({
@@ -45,7 +62,7 @@ app.get('/api/openai', async (req, res) => {
         //     //   "n": 2
         // });
         res.json(data)
-        console.log(data)
+        // console.log('testing', data)
         // console.log(JSON.parse(response.data.choices[0].text));
     } catch (e) {
         return res.status(400).json({ e });
@@ -56,20 +73,44 @@ app.get('/api/openai', async (req, res) => {
 
 
 // create the POST request
-app.post('/api/students', async (req, res) => {
+app.post('/adduser', async (req, res) => {
     try {
-        const newStudent = {
-            firstname: req.body.firstname,
-            lastname: req.body.lastname,
-            iscurrent: req.body.iscurrent
-        };
-        //console.log([newStudent.firstname, newStudent.lastname, newStudent.iscurrent]);
+        const { email, family_name, given_name, nickname } = req.body;
+        console.log("request body", req.body);
         const result = await db.query(
-            'INSERT INTO students(firstname, lastname, is_current) VALUES($1, $2, $3) RETURNING *',
-            [newStudent.firstname, newStudent.lastname, newStudent.iscurrent],
+            'INSERT INTO ready_users(user_email, user_last_name, user_first_name, user_auth0_nickname) VALUES($1, $2, $3, $4) ON CONFLICT DO NOTHING RETURNING *',
+            [email, family_name, given_name, nickname],
         );
         console.log(result.rows[0]);
-        res.json(result.rows[0]);
+        // res.json(result.rows[0] ?? {});
+
+        const { rows: ready_user } = await db.query('SELECT * FROM ready_users WHERE user_email=$1', [email]);
+        res.send(ready_user);
+
+    } catch (e) {
+        console.log(e);
+        return res.status(400).json({ e });
+    }
+
+});
+
+// create the POST request to add a new trip to 
+app.post('/addtrip', async (req, res) => {
+    try {
+        const {trip_name, trip_start_date, trip_end_date, location, user_id, trip_description } = req.body;
+        console.log("request body", req.body);
+        const result = await db.query(
+            'INSERT INTO ready_trips(trip_name, trip_start_date, trip_end_date, location, user_id, trip_description) VALUES($1, $2, $3, $4, $5, $6) RETURNING *',
+            [trip_name, trip_start_date, trip_end_date, location, user_id, trip_description],
+        );
+        console.log(result.rows[0]);
+        // res.json(result.rows[0] ?? {});
+        const preTodoList = await db.query('INSERT INTO ready_lists(list_name, trip_id, user_id) VALUES($1, $2, $3)', ['Pre-Trip To-Do List', result.rows[0].trip_id, user_id])
+        const postTodoList = await db.query('INSERT INTO ready_lists(list_name, trip_id, user_id) VALUES($1, $2, $3)', ['Post-Trip To-Do List', result.rows[0].trip_id, user_id])
+
+        console.log(preTodoList.rows, postTodoList.rows)
+        const { rows: ready_trip } = await db.query('SELECT * FROM ready_trips WHERE user_id=$1', [user_id]);
+        res.send(ready_trip);
 
     } catch (e) {
         console.log(e);
@@ -114,6 +155,13 @@ app.put('/api/students/:studentId', async (req, res) =>{
     }
   })
 
+//    for Proxy
+  app.get('/*', (req, res) => {
+    console.log("/* is executing")
+    res.sendFile(path.join(REACT_BUILD_DIR, 
+        'index.html'))
+});
+ 
 // console.log that your server is up and running
 app.listen(PORT, () => {
     console.log(`Hola, Server listening on ${PORT}`);
