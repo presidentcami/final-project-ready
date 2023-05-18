@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import AddToDo from './AddToDo';
 import EditToDo from './EditToDo';
 import DeleteToDo from './DeleteToDo';
+
 
 // const updateItemDone = (itemDone, item_id) => {
 //     try {
@@ -26,39 +27,53 @@ import DeleteToDo from './DeleteToDo';
 //     }
 // }
 
-const ToDoList = ({ tripDetails: toDoItems }) => {
+const ToDoList = ({ trip_id }) => {
+    const [todos, setTodos] = useState(null)
 
-    const {item, item_due_date, item_id, item_is_done, list_id, list_name, item_version} = toDoItems;
-    const [itemDone, setItemDone] = useState(
+    const loadTripTodos = () => {
+        // A function to fetch the list of students that will be load anytime that list change
+        fetch(`http://localhost:8080/triptodos/${trip_id}`)
+            .then((response) => response.json())
+            .then((deets) => {
 
-    )
-
-    const checkboxHandler = async (item_id, is_done) => {
-        setItemDone(!is_done)
-        const responseObj = updateItemDone(itemDone, item_id)
-        // console.log(itemDone)
-
+                console.log("intial data from backend", deets)
+                setTodos(deets);
+            });
     }
 
-  return (
-    <div>
-        {toDoItems.map((tripDetail) => {
-        
-        return (
-            <div key={tripDetail.list_id}>
-            <p>{tripDetail.list_name}</p>
-            <AddToDo />
-            <div key={tripDetail.item_id}>
-                    <input type="checkbox" onChange={() => checkboxHandler(tripDetail.item_id, tripDetail.item_is_done)} />
-                    {tripDetail.item} 
-                    <EditToDo />
-                    
-                    <DeleteToDo />
-            </div>
-            </div>
-        )}
-        )}
+    useEffect(() => {
+        loadTripTodos();
+    }, []);
 
+// todos && console.log("todos after useeffect has loaded?", todos)
+  return todos && (
+
+    
+    <div>
+          {Object.entries(todos).map(([listName, items]) => {
+            console.log("in map", items)
+        const listId= items.length > 0 ? items[0].list_id : null;
+        const tripId= items.length > 0 ? items[0].trip_id : null;
+
+        console.log("in map", {listId}, {tripId})
+    return (
+        <div key={listName}>
+            <h4>{listName}</h4>
+            <AddToDo list_id={listId} tripId={tripId} setTodos={setTodos} />
+            <ul>
+                {items.map (item => (
+                    <>
+                    <input type="checkbox" key={item.item_id} />
+                        {item.item}
+                        <EditToDo todos={todos} />
+
+                        <DeleteToDo item_id={item.item_id} />
+                    <br /></> 
+                ))}
+            </ul>
+        </div>
+    )
+})}
     </div>
   )
 }
