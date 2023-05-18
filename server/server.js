@@ -5,7 +5,7 @@ const path = require('path');
 const db = require('./db/db-connection.js');
 const { Configuration, OpenAIApi } = require('openai');
 const data = require('./mock-data.json');
-const { log } = require('console');
+const { log, error } = require('console');
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -29,34 +29,48 @@ app.get('/', (req, res) => {
     // res.sendFile(path.join(REACT_BUILD_DIR, "index.html"));
 });
 
-// create the get request for students in the endpoint '/api/students'
-app.get('/students', async (req, res) => {
-    try {
-        const { rows: students } = await db.query('SELECT * FROM students');
-        res.send(students);
-    } catch (e) {
-        return res.status(400).json({ e });
-    }
-});
 
 app.get('/user/:email', async (req, res) => {
     try {
         const {email} = req.params;
         const { rows: ready_user } = await db.query('SELECT * FROM ready_users WHERE user_email=$1', [email]);
         res.send(ready_user);
-        console.log("backend response to a user get request", ready_user);
+        console.log("details for ready app user", ready_user);
     } catch (e) {
         return res.status(400).json({ e });
     }
 });
-
+// SELECT ready_lists.list_id, list_name, ready_trips.trip_id, ready_trips.user_id, trip_name, trip_start_date, trip_end_date, location, trip_description, item_id, item, item_is_done, item_due_date, item_version FROM ready_lists LEFT JOIN ready_trips ON ready_lists.trip_id=ready_trips.trip_id LEFT JOIN ready_items ON ready_lists.list_id=ready_items.list_id WHERE ready_lists.trip_id=$1;'
 app.get('/tripdetails/:tripid', async (req, res) => {
     try {
         const {tripid} = req.params;
         console.log("trip id from req.params", tripid)
-        const { rows: trip_details } = await db.query('SELECT ready_lists.list_id, list_name, ready_trips.trip_id, ready_trips.user_id, trip_name, trip_start_date, trip_end_date, location, trip_description, item_id, item, item_is_done, item_due_date, item_version FROM ready_lists LEFT JOIN ready_trips ON ready_lists.trip_id=ready_trips.trip_id LEFT JOIN ready_items ON ready_lists.list_id=ready_items.list_id WHERE ready_lists.trip_id=$1;', [tripid])
+        const { rows: trip_details } = await db.query('SELECT * FROM ready_trips WHERE trip_id=$1;', [tripid])
         res.send(trip_details)
-        console.log(trip_details)
+        console.log('all trip details', trip_details)
+    } catch (e) {
+        return res.status(400).json({ e });
+    }
+})
+
+app.get('/triptodos/:tripid', async (req, res) => {
+    try {
+        const { tripid } = req.params;
+        console.log("trip id from req.params", tripid)
+        const { rows } = await db.query('select ready_lists.list_id, list_name, trip_id, user_id, is_template, list_created, item_id, item, item_is_done, item_due_date, item_version from ready_lists left join ready_items on ready_lists.list_id=ready_items.list_id where trip_id=$1;', [tripid])
+
+        let lists = {}
+        for (let i = 0; i < rows.length; i++) {
+            let list_name = rows[i].list_name;
+
+            if (!lists[list_name]) {
+                lists[list_name] = [rows[i]]
+            } else {
+                lists[list_name].push(rows[i])
+            }
+        }
+        res.send(lists)
+        console.log('all trip todo lists', lists)
     } catch (e) {
         return res.status(400).json({ e });
     }
@@ -67,7 +81,7 @@ app.get('/trips/:userid', async (req, res) => {
         const { userid } = req.params;
         const { rows: ready_trip } = await db.query('SELECT * FROM ready_trips WHERE user_id=$1', [userid]);
         res.send(ready_trip);
-        console.log("backend response to a user get request", ready_trip);
+        console.log("all trips for a specific user", ready_trip);
     } catch (e) {
         return res.status(400).json({ e });
     }
@@ -141,6 +155,30 @@ app.post('/addtrip', async (req, res) => {
     }
 
 });
+
+app.post('/addtodo', async (req, res) => {
+    try {
+        const {item, item_due_date, list_id, trip_id} = req.body;
+        console.log('add to do request', req.body)
+        const result = await db.query('INSERT INTO ready_items(item, item_due_date, list_id) VALUES($1, $2, $3)', [item, item_due_date, list_id]);
+
+        const { rows } = await db.query('select ready_lists.list_id, list_name, trip_id, user_id, is_template, list_created, item_id, item, item_is_done, item_due_date, item_version from ready_lists left join ready_items on ready_lists.list_id=ready_items.list_id where trip_id=$1;', [trip_id])
+        let lists = {}
+        for (let i = 0; i < rows.length; i++) {
+            let list_name = rows[i].list_name;
+
+            if (!lists[list_name]) {
+                lists[list_name] = [rows[i]]
+            } else {
+                lists[list_name].push(rows[i])
+            }
+        }
+        console.log('selected items from backend being sent', lists)
+        res.send(lists)
+    } catch (e) {
+        return res.status(400).json({ e });
+    }
+})
 
 // delete request for students
 app.delete('/api/students/:studentId', async (req, res) => {
