@@ -3,6 +3,7 @@ import AddToDo from './AddToDo';
 import EditToDo from './EditToDo';
 import DeleteToDo from './DeleteToDo';
 import ListColumn from './ListColumn';
+import { DragDropContext } from 'react-beautiful-dnd'
 
 
 // const updateItemDone = (itemDone, item_id) => {
@@ -46,21 +47,27 @@ const ToDoList = ({ trip_id }) => {
         loadTripTodos();
     }, []);
 
+    const onDragEnd = result => {
+
+    }
 // todos && console.log("todos after useeffect has loaded?", todos)
   return todos && (
 
-    
-    <div>
+   <DragDropContext onDragEnd={onDragEnd}> 
+
           {Object.entries(todos).map(([listName, items]) => {
             // console.log("in map", items)
         const listId= items.length > 0 ? items[0].list_id : null;
         const tripId= items.length > 0 ? items[0].trip_id : null;
         const column = listName;
-        const items1 = items.map(item => ([item.item_id, item.item, item.item_due_date, item.item_version ]))
+              const items1 = items.map(item => {
+                  const withNeWId = [item.item_id, item.item, item.item_due_date, item.item_version, `task-${item.item_id}`]
+                  return withNeWId;
+              })
               
         // console.log("in map", {listId}, {tripId})
     return (
-        <ListColumn key={listId} column={column} items={items1} />
+        <ListColumn key={listId} list_id={listId} tripId={tripId} setTodos={setTodos} column={column} items={items1} />
         // <div key={listName}>
         //     <h4>{listName}</h4>
         //     <AddToDo list_id={listId} tripId={tripId} setTodos={setTodos} />
@@ -78,7 +85,7 @@ const ToDoList = ({ trip_id }) => {
         // </div>
     )
 })}
-    </div>
+      </DragDropContext>
   )
 }
 

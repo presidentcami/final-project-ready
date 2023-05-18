@@ -8,11 +8,11 @@ import './index.css'
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <BrowserRouter>
       <Auth0WithNavigate>
         <App />
       </Auth0WithNavigate>
     </BrowserRouter>
-  </React.StrictMode>,
+
 )
