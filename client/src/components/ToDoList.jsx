@@ -48,6 +48,39 @@ const ToDoList = ({ trip_id }) => {
     }, []);
 
     const onDragEnd = result => {
+        console.log("result", result);
+        const { destination, source, draggableId } = result;
+
+        if (!destination) {
+            return
+        }
+
+        if (
+            destination.droppableId === source.droppableId &&
+            destination.index === source.index
+        ) {
+            return
+        }
+        const column = todos[source.droppableId];
+        const newItemIds = Array.from(column.itemIds);
+        newItemIds.splice(source.index, 1);
+        newItemIds.splice(destination.index, 0, draggableId);
+
+        const newColumn = {
+            ...column,
+            itemIds: newItemIds,
+        }
+
+        // console.log("new column", newColumn);
+
+        const newState = {
+            ...todos, 
+            column: {
+                [newColumn.draggableId]: newColumn,
+            }
+        }
+
+        setTodos(newState)
 
     }
 // todos && console.log("todos after useeffect has loaded?", todos)
