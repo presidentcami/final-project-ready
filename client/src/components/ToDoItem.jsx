@@ -11,7 +11,7 @@ const Container = styled.div`
 `;
 
 const Item = ({ item, index }) => {
-    console.log(item[item.length -1])
+    // console.log(item[item.length -1])
     // [item_id, item, item_due_date, item_version]
     // const { item_id, item, item_due_date, item_version } = item
   return (
