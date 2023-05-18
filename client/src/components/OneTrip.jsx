@@ -30,7 +30,7 @@ Trip Details from get request to send as props or map onto screen
   return tripDetails && (
     <div className='profile'>
       <TripDetails tripDetails={tripDetails} />
-      <ToDoList tripDetails={tripDetails} />
+      <ToDoList trip_id={trip_id}/>
     </div>
   )
 }
