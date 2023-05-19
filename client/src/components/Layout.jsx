@@ -6,7 +6,7 @@ import { Outlet } from "react-router-dom";
 
 const Layout = ({ setUser, user, trips, setTrips }) => {
   return (
-    <div>
+    <div className="App">
       <MyNavBar setUser={setUser} user={user} />
 
       {!!user ? (

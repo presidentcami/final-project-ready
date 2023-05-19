@@ -77,15 +77,13 @@ function MyNavBar({ user, setUser }) {
     if (auth0User) addUser(auth0User, setUser);
   }, [auth0User]);
 
-  // if (isLoading) {
-  //   return (
-  //     <div className="page-layout">
-  //       <PageLoader />
-  //     </div>
-  //   );
-  // }
-
-
+  if (isLoading) {
+    return (
+      <div className="page-layout">
+        <PageLoader />
+      </div>
+    );
+  }
 
   console.log(user);
   return (
