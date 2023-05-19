@@ -5,16 +5,23 @@ import Item from './ToDoItem';
 import AddToDo from './AddToDo';
 
 const Container = styled.div`
-    margin: 8px;
-    border: 1px solid lightgrey;
-    border-radius: 2px;
+  margin: 8px;
+  border: 1px solid lightgrey;
+  border-radius: 2px;
+  width: 220px;
+
+  display: flex;
+  flex-direction: column;
 `;
 const Title = styled.h4`
     padding: 8px;
 
 `;
 const ItemList = styled.div`
-    padding: 8px;
+  padding: 8px;
+  background-color: ${(props) => (props.isDragging ? "black" : "white")};
+  flex-grow: 1;
+  min-height: 100px;
 `;
 
 const ListColumn = ({ column, items, list_id, tripId, setTodos }) => {
@@ -26,11 +33,13 @@ const ListColumn = ({ column, items, list_id, tripId, setTodos }) => {
        <Title>{column}</Title>
        <AddToDo list_id={list_id} tripId={tripId} setTodos={setTodos} />
        <Droppable droppableId={column}>
-       {(provided) => (
+       {(provided, snapshot) => (
         <ItemList 
             ref={provided.innerRef}
-            {...provided.droppableProps} >
-                  {items.map((item, index) => <Item key={item[0]} item={[...item]} index={index} /> 
+            {...provided.droppableProps}
+            isDraggingOver={snapshot.isDraggingOver} 
+        >
+                  {items && items.map((item, index) => <Item key={item[0]} item={[...item]} index={index} /> 
         )}
         {provided.placeholder}
         </ItemList>)}

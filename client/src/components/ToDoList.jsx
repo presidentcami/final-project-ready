@@ -4,6 +4,7 @@ import EditToDo from './EditToDo';
 import DeleteToDo from './DeleteToDo';
 import ListColumn from './ListColumn';
 import { DragDropContext } from 'react-beautiful-dnd'
+import styled from 'styled-components';
 
 
 // const updateItemDone = (itemDone, item_id) => {
@@ -28,6 +29,10 @@ import { DragDropContext } from 'react-beautiful-dnd'
 //         console.error(error.message)
 //     }
 // }
+const Container = styled.div`
+    display: flex;
+
+`;
 
 const ToDoList = ({ trip_id, todos, setTodos }) => {
 
@@ -61,6 +66,7 @@ const ToDoList = ({ trip_id, todos, setTodos }) => {
         ) {
             return
         }
+        
         const sourceList = [...todos[source.droppableId]];
         const destinationList = [...todos[destination.droppableId]];
 
@@ -94,7 +100,8 @@ const ToDoList = ({ trip_id, todos, setTodos }) => {
               
         // console.log("in map", {listId}, {tripId})
     return (
-        <ListColumn key={listId} list_id={listId} tripId={tripId} setTodos={setTodos} column={column} items={items1} />
+        <Container>
+        <ListColumn key={listId} list_id={listId} tripId={tripId} setTodos={setTodos} column={column} items={items1} /></Container>
         // <div key={listName}>
         //     <h4>{listName}</h4>
         //     <AddToDo list_id={listId} tripId={tripId} setTodos={setTodos} />
