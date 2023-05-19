@@ -4,7 +4,7 @@ const NotLoggedInLandingPage = () => {
 
 
     return (
-        <div>
+        <div data-testid="landing">
             <h2>Log in to get Ready!</h2>
         </div>
     )
