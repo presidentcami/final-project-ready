@@ -111,7 +111,7 @@ const AddToDoList = ({ setTodos, tripDetails }) => {
           </form>
         </>
       ) : (
-        <Button onClick={handleShow}> New To Do List </Button>
+        <Button onClick={handleShow}> New List </Button>
       )}
     </>
   );
