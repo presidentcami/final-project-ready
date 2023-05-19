@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom'
 import ToDoList from './ToDoList';
 import TripDetails from './TripDetails';
+import SuggestionBoxForm from './SuggestionBoxForm';
 
 const OneTrip = () => {
   const { trip_id } = useParams();
@@ -30,6 +31,7 @@ Trip Details from get request to send as props or map onto screen
   return tripDetails && (
     <div className='profile'>
       <TripDetails tripDetails={tripDetails} />
+      <SuggestionBoxForm tripDetails={tripDetails} />
       <ToDoList trip_id={trip_id}/>
     </div>
   )
