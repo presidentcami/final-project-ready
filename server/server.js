@@ -185,6 +185,32 @@ app.post('/addtodo', async (req, res) => {
     }
 })
 
+// post request to add a new to-do list to a specfic trip
+app.post('/addtriplist', async (req, res) => {
+    try {
+        const {list_name, trip_id, user_id} = req.body;
+        console.log('add to do list to a trip request', req.body)
+        const result = await db.query('INSERT INTO ready_lists(list_name, trip_id, user_id) VALUES($1, $2, $3)', [list_name, trip_id, user_id]);
+
+        const { rows } = await db.query('select ready_lists.list_id, list_name, trip_id, user_id, is_template, list_created, item_id, item, item_is_done, item_due_date, item_version from ready_lists left join ready_items on ready_lists.list_id=ready_items.list_id where trip_id=$1;', [trip_id])
+        let lists = {}
+        for (let i = 0; i < rows.length; i++) {
+            let list_name = rows[i].list_name;
+
+            if (!lists[list_name]) {
+                lists[list_name] = [rows[i]]
+            } else {
+                lists[list_name].push(rows[i])
+            }
+        }
+        console.log('selected items from backend being sent', lists)
+        res.send(lists)
+    } catch (e) {
+        return res.status(400).json({ e });
+    }
+})
+
+
 // delete request for students
 app.delete('/api/students/:studentId', async (req, res) => {
     try {

@@ -29,8 +29,8 @@ import { DragDropContext } from 'react-beautiful-dnd'
 //     }
 // }
 
-const ToDoList = ({ trip_id }) => {
-    const [todos, setTodos] = useState(null)
+const ToDoList = ({ trip_id, todos, setTodos }) => {
+
 
     const loadTripTodos = () => {
         // A function to fetch the list of students that will be load anytime that list change

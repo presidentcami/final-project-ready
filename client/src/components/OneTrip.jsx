@@ -3,10 +3,12 @@ import { useParams } from 'react-router-dom'
 import ToDoList from './ToDoList';
 import TripDetails from './TripDetails';
 import SuggestionBoxForm from './SuggestionBoxForm';
+import AddToDoList from './AddTripToDoList';
 
 const OneTrip = () => {
   const { trip_id } = useParams();
   const [tripDetails, setTripDetails] = useState(null)
+  const [todos, setTodos] = useState(null);
   // console.log(trip_id)
 
   
@@ -32,7 +34,8 @@ Trip Details from get request to send as props or map onto screen
     <div className='profile'>
       <TripDetails tripDetails={tripDetails} />
       <SuggestionBoxForm tripDetails={tripDetails} />
-      <ToDoList trip_id={trip_id}/>
+      <AddToDoList setTodos={setTodos} tripDetails={tripDetails} />
+      <ToDoList trip_id={trip_id} todos={todos} setTodos={setTodos} />
     </div>
   )
 }
