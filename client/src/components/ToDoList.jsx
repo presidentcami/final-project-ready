@@ -61,23 +61,17 @@ const ToDoList = ({ trip_id }) => {
         ) {
             return
         }
-        const column = todos[source.droppableId];
-        const newItemIds = Array.from(column.itemIds);
-        newItemIds.splice(source.index, 1);
-        newItemIds.splice(destination.index, 0, draggableId);
+        const sourceList = [...todos[source.droppableId]];
+        const destinationList = [...todos[destination.droppableId]];
 
-        const newColumn = {
-            ...column,
-            itemIds: newItemIds,
-        }
-
-        // console.log("new column", newColumn);
+        const movingItem = sourceList.splice(source.index, 1)
+        
+        console.log(movingItem)
 
         const newState = {
             ...todos, 
-            column: {
-                [newColumn.draggableId]: newColumn,
-            }
+            [source.droppableId]: sourceList,
+            [destination.droppableId]: destinationList.concat(movingItem)
         }
 
         setTodos(newState)
