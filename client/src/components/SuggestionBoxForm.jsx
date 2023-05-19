@@ -1,4 +1,13 @@
 import React, { useState } from 'react'
+import styled from 'styled-components';
+
+  const Button = styled.button`
+    border-radius: 10px;
+    border: none;
+    background-color: #fddc95;
+    margin: 5px;
+    margin-right: 3rem;
+  `;
 
 const SuggestionBoxForm = ({ tripDetails }) => {
 
@@ -46,7 +55,7 @@ const SuggestionBoxForm = ({ tripDetails }) => {
                 //   value={activities}
                   onChange={(e) => setActivities(e.target.value)}
               />
-              <button type="submit">Submit</button>
+              <Button type="submit">Submit</Button>
         </form>
 
     </div>

@@ -1,8 +1,6 @@
-
-
 import React, { useState, useReducer } from 'react'
-import { Button } from "react-bootstrap"
 import * as ioicons from 'react-icons/io5'
+import styled from 'styled-components';
 
 const initialValue = {
     trip_name: '',
@@ -26,6 +24,13 @@ const reducer = (state, action) => {
             throw new Error(`Unknown action type: ${action.type}`);
     }
 };
+
+  const Button = styled.button`
+    border-radius: 10px;
+    border: none;
+    background-color: #fddc95;
+    margin: 5px;
+`;
 
 const AddTrip = ({ setTrips, user }) => {
 
@@ -134,11 +139,11 @@ const AddTrip = ({ setTrips, user }) => {
                         />
                     </div>
                     <section>
-                        <Button type="submit" variant="outline" className='functionalButton' style={{ padding: '0.6em', marginTop: '0.9em' }}>Submit</Button>
-                        <Button type="button" variant="outline" className='functionalButton' onClick={handleClose} style={{ padding: '0.6em', marginTop: '0.9em' }}>Cancel</Button>
+                        <Button type="submit">Submit</Button>
+                        <Button type="button" onClick={handleClose}>Cancel</Button>
                     </section>
                 </form>
-            </> : <Button id="add-blog" className='functionalButton' variant="outline" aria-label="Add Trip" onClick={handleShow} style={{ padding: '0.6em', marginRight: '0.9em', marginTop: '0.3em' }}> Add a New Trip </Button>
+            </> : <Button onClick={handleShow}> Add a New Trip </Button>
 }
 
 
