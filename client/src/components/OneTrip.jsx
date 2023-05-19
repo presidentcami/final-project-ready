@@ -12,7 +12,7 @@ const OneTrip = () => {
 
   const loadTripDetails = () => {
     // A function to fetch the list of students that will be load anytime that list change
-    fetch(`http://localhost:8080/tripdetails/${trip_id}`)
+    fetch(`/tripdetails/${trip_id}`)
       .then((response) => response.json())
       .then((deets) => {
         console.log(deets)
