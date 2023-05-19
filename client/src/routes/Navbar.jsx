@@ -4,7 +4,7 @@ import Nav from "react-bootstrap/Nav";
 import PageLoader from "../components/PageLoader";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect } from "react";
-import { Outlet } from "react-router-dom";
+import styled from 'styled-components'
 
 const addUser = (auth0User, setUser) => {
   const { email, family_name, given_name, nickname } = auth0User;
@@ -40,6 +40,19 @@ const addUser = (auth0User, setUser) => {
   }
 };
 
+  const Button = styled.button`
+    border-radius: 10px;
+    border: none;
+    background-color: #fddc95;
+    margin: 5px;
+    margin-right: 3rem;
+  `;
+
+  const ButtonsDiv = styled.div`
+    position: fixed;
+    right: 0;
+  `;
+
 function MyNavBar({ user, setUser }) {
   const {
     loginWithRedirect,
@@ -71,10 +84,34 @@ function MyNavBar({ user, setUser }) {
   //     </div>
   //   );
   // }
+
+
+
   console.log(user);
   return (
-    <div data-testid="navbar">
-      <Navbar bg="dark" variant="dark" sticky="top" className="navbar">
+    <nav data-testid="navbar" className="navbar">
+    
+        {!user ? null : (
+          <Nav.Link to="/user-profile">
+            {user[0].user_first_name} {user[0].user_last_name}
+          </Nav.Link>
+        )}
+        {!isAuthenticated ? (
+          <ButtonsDiv>
+            <Button onClick={() => loginWithRedirect()}>Log In</Button>{" "}
+            <Button onClick={handleSignUp}>Sign Up</Button>
+          </ButtonsDiv>
+        ) : (
+          <Button
+            onClick={() =>
+              logout({ logoutParams: { returnTo: window.location.origin } })
+            }
+          >
+            Log Out
+          </Button>
+        )}
+
+      {/* <Navbar bg="dark" variant="dark" sticky="top">
         <Container>
           {!user ? null : (
             <Nav.Link to="/user-profile">
@@ -82,25 +119,10 @@ function MyNavBar({ user, setUser }) {
             </Nav.Link>
           )}
           <Navbar.Toggle />
-          <Navbar.Collapse className="justify-content-end">
-            {!isAuthenticated ? (
-              <div>
-                <button onClick={() => loginWithRedirect()}>Log In</button>{" "}
-                <button onClick={handleSignUp}>Sign Up</button>
-              </div>
-            ) : (
-              <button
-                onClick={() =>
-                  logout({ logoutParams: { returnTo: window.location.origin } })
-                }
-              >
-                Log Out
-              </button>
-            )}
-          </Navbar.Collapse>
+          <Navbar.Collapse></Navbar.Collapse>
         </Container>
-      </Navbar>
-    </div>
+      </Navbar> */}
+    </nav>
   );
 }
 
