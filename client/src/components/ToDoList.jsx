@@ -60,13 +60,18 @@ const ToDoList = ({ trip_id, todos, setTodos }) => {
             return
         }
 
-        if (
-            destination.droppableId === source.droppableId &&
-            destination.index === source.index
-        ) {
-            return
-        }
-        
+        if (destination.droppableId === source.droppableId) {
+            if (destination.index === source.index) {
+                return
+            } else {
+                let shallowList = [...todos[source.droppableId]];
+                let [movingItem] = shallowList.splice(source.index, 1);
+                shallowList.splice(destination.index, 0, movingItem);
+                setTodos({...todos, [destination.droppableId]: shallowList})
+                return;
+            }
+        } 
+
         const sourceList = [...todos[source.droppableId]];
         const destinationList = [...todos[destination.droppableId]];
 

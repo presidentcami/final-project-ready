@@ -27,6 +27,7 @@ const Button = styled.button`
   border: none;
   background-color: #fddc95;
   margin: 5px;
+  width: 100px;
 `;
 
 const AddToDoList = ({ setTodos, tripDetails }) => {
