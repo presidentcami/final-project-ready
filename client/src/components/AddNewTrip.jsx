@@ -30,6 +30,7 @@ const reducer = (state, action) => {
     border: none;
     background-color: #fddc95;
     margin: 5px;
+    width: 200px;
 `;
 
 const AddTrip = ({ setTrips, user }) => {
