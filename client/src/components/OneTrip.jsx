@@ -30,14 +30,19 @@ const OneTrip = () => {
   /* 
 Trip Details from get request to send as props or map onto screen 
 {item, item_due_date, item_id, item_is_done, list_id, list_name, location, trip_description, trip_end_date, trip_id, trip_name, trip_start_date, user_id}   */
-  return tripDetails && (
-    <div className='profile'>
-      <TripDetails tripDetails={tripDetails} />
-      <SuggestionBoxForm tripDetails={tripDetails} />
-      <AddToDoList setTodos={setTodos} tripDetails={tripDetails} />
-      <ToDoList trip_id={trip_id} todos={todos} setTodos={setTodos} />
-    </div>
-  )
+  return (
+    tripDetails && (
+      <div className="profile">
+        <TripDetails
+          tripDetails={tripDetails}
+          setTripDetails={setTripDetails}
+        />
+        <SuggestionBoxForm tripDetails={tripDetails} />
+        <AddToDoList setTodos={setTodos} tripDetails={tripDetails} />
+        <ToDoList trip_id={trip_id} todos={todos} setTodos={setTodos} />
+      </div>
+    )
+  );
 }
 
 export default OneTrip
