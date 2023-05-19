@@ -225,6 +225,26 @@ app.delete('/api/students/:studentId', async (req, res) => {
     }
 });
 
+// a put request to update trip details
+
+app.put('/edittrip/:trip_id', async (req, res) => {
+    try {
+        const { trip_id } = req.params;
+        const { location, trip_description, trip_end_date, trip_name, trip_start_date } = req.body;
+
+        const updatedTrip = await db.query('UPDATE ready_trips SET location=$1, trip_description=$2, trip_end_date=$3, trip_name=$4, trip_start_date=$5 WHERE trip_id=$6 RETURNING *',
+        [location, trip_description, trip_end_date, trip_name, trip_start_date, trip_id])
+        
+        console.log(updatedTrip)
+        
+        const { rows: trip_details } = await db.query('SELECT * FROM ready_trips WHERE trip_id=$1;', [trip_id])
+        res.send(trip_details)
+        console.log('all trip details', trip_details)
+    } catch (error) {
+        console.error(error)
+    }
+})
+
 //A put request - Update a student 
 app.put('/updateitemdone/:item_id', async (req, res) =>{
     //console.log(req.params);
