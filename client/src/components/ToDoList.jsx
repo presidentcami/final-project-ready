@@ -3,7 +3,7 @@ import AddToDo from './AddToDo';
 import EditToDo from './EditToDo';
 import DeleteToDo from './DeleteToDo';
 import ListColumn from './ListColumn';
-import { DragDropContext } from 'react-beautiful-dnd'
+import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 import styled from 'styled-components';
 
 
@@ -33,7 +33,27 @@ const Container = styled.div`
     display: flex;
 
 `;
+const DoneBox = styled.div`
+  margin: 8px;
+  border: 1px solid lightgrey;
+  border-radius: 2px;
+  width: 220px;
+  background-color: white;
 
+  display: flex;
+  flex-direction: column;
+`;
+
+const Title = styled.h4`
+  padding: 8px;
+`;
+
+const ItemList = styled.div`
+  padding: 8px;
+  background-color: ${(props) => (props.isDragging ? "black" : "white")};
+  flex-grow: 1;
+  min-height: 100px;
+`;
 const ToDoList = ({ trip_id, todos, setTodos }) => {
 
 
@@ -89,43 +109,71 @@ const ToDoList = ({ trip_id, todos, setTodos }) => {
 
     }
 // todos && console.log("todos after useeffect has loaded?", todos)
-  return todos && (
+  return (
+    todos && (
+      <DragDropContext onDragEnd={onDragEnd}>
+        {Object.entries(todos).map(([listName, items]) => {
+          // console.log("in map", items)
+          const listId = items.length > 0 ? items[0].list_id : null;
+          const tripId = items.length > 0 ? items[0].trip_id : null;
+          const column = listName;
+          const items1 = items.map((item) => {
+            const withNeWId = [
+              item.item_id,
+              item.item,
+              item.item_due_date,
+              item.item_version,
+              `task-${item.item_id}`,
+            ];
+            return withNeWId;
+          });
 
-   <DragDropContext onDragEnd={onDragEnd}> 
+          // console.log("in map", {listId}, {tripId})
+          return (
+            <Container>
+              <ListColumn
+                key={listId}
+                list_id={listId}
+                tripId={tripId}
+                setTodos={setTodos}
+                column={column}
+                items={items1}
+              />
+            </Container>
+            // <div key={listName}>
+            //     <h4>{listName}</h4>
+            //     <AddToDo list_id={listId} tripId={tripId} setTodos={setTodos} />
+            //     <ul>
+            //         {items.map (item => (
+            //             <>
+            //             <input type="checkbox" key={item.item_id} />
+            //                 {item.item}
+            //                 <EditToDo todos={todos} />
 
-          {Object.entries(todos).map(([listName, items]) => {
-            // console.log("in map", items)
-        const listId= items.length > 0 ? items[0].list_id : null;
-        const tripId= items.length > 0 ? items[0].trip_id : null;
-        const column = listName;
-              const items1 = items.map(item => {
-                  const withNeWId = [item.item_id, item.item, item.item_due_date, item.item_version, `task-${item.item_id}`]
-                  return withNeWId;
-              })
-              
-        // console.log("in map", {listId}, {tripId})
-    return (
-        <Container>
-        <ListColumn key={listId} list_id={listId} tripId={tripId} setTodos={setTodos} column={column} items={items1} /></Container>
-        // <div key={listName}>
-        //     <h4>{listName}</h4>
-        //     <AddToDo list_id={listId} tripId={tripId} setTodos={setTodos} />
-        //     <ul>
-        //         {items.map (item => (
-        //             <>
-        //             <input type="checkbox" key={item.item_id} />
-        //                 {item.item}
-        //                 <EditToDo todos={todos} />
-
-        //                 <DeleteToDo item_id={item.item_id} />
-        //             <br /></> 
-        //         ))}
-        //     </ul>
-        // </div>
-    )
-})}
+            //                 <DeleteToDo item_id={item.item_id} />
+            //             <br /></>
+            //         ))}
+            //     </ul>
+            // </div>
+          );
+        })}
+        <DoneBox>
+          <Title>Done</Title>
+          <Droppable droppableId="Done">
+            {(provided, snapshot) => (
+              <ItemList
+                ref={provided.innerRef}
+                {...provided.droppableProps}
+                isDraggingOver={snapshot.isDraggingOver}
+              >
+                {provided.placeholder}
+              </ItemList>
+            )}
+          </Droppable>
+        </DoneBox>
       </DragDropContext>
-  )
+    )
+  );
 }
 
 export default ToDoList
