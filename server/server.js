@@ -150,7 +150,7 @@ app.post('/addtrip', async (req, res) => {
         const preTodoList = await db.query('INSERT INTO ready_lists(list_name, trip_id, user_id) VALUES($1, $2, $3)', ['Pre-Trip To-Do List', result.rows[0].trip_id, user_id])
         const postTodoList = await db.query('INSERT INTO ready_lists(list_name, trip_id, user_id) VALUES($1, $2, $3)', ['Post-Trip To-Do List', result.rows[0].trip_id, user_id])
 
-        console.log(preTodoList.rows, postTodoList.rows)
+        // console.log(preTodoList.rows, postTodoList.rows)
         const { rows: ready_trip } = await db.query('SELECT * FROM ready_trips WHERE user_id=$1', [user_id]);
         res.send(ready_trip);
 
