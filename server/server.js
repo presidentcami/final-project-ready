@@ -87,25 +87,28 @@ app.get('/trips/:userid', async (req, res) => {
     }
 });
 
-app.post('/openai', async (req, res) => {
+app.get('/api/openai/:prompt', async (req, res) => {
     // console.log('testing this thing')
+    console.log(req.params.prompt)
     try {
-        console.log(req.body)
-        const { location, description, activities } = req.body;
+        // const { location, description, activities } = req.body;
+        const prompt = req.params.prompt
         // res.send(data)
         const response = await openai.createCompletion({
-            "model": "text-davinci-003",
+            model: "text-davinci-003",
             // "prompt": `I want you to act as a trip planner. I am going to ${location}. Here is a description of my trip: ${description} . Here are some activities I may do ${activities}. What should I pack for this trip? Write your response in the form of an array that looks like {'list': ['sandals', 'beach towel', 'sunglasses']}`,
-            "prompt": "What should I pack for vacation?",
-            "max_tokens": 500,
-            "temperature": 1
-            //   "n": 2
+            prompt: prompt,
+            max_tokens: 500,
+            temperature: 0.6,
+            n: 1,
+            frequency_penalty: 0,
+            presence_penalty: 0,
         });
         // res.json(data)
-        res.json(response)
-        console.log(response)
+        console.log('new notes', response.data.choices[0])
+        res.json(response.data.choices[0].text)
         // console.log('testing', data)
-        // console.log(JSON.parse(response.data.choices[0].text));
+        // console.log(JSON.parse(response.data.choices));
     } catch (e) {
         return res.status(400).json({ e });
     }
