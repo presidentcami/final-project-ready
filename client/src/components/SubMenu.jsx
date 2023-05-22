@@ -40,9 +40,9 @@ const DropdownLink = styled(Link)`
   }
 `;
 
-const SubMenu = ({ item }) => {
+const SubMenu = ({ item, subMenuList, user }) => {
     const [subnav, setSubnav] = useState(false);
-
+    console.log(user)
     const showSubnav = () => setSubnav(!subnav);
 
     return (
@@ -60,12 +60,20 @@ const SubMenu = ({ item }) => {
                             : null}
                 </div>
             </SidebarLink>
-            {subnav &&
-                item.subNav.map((item, index) => {
+            {subnav && user && 
+              user.map((index) => {
+                return (
+                  <DropdownLink to={`dashboard/profile`} key={index}>
+                    <SidebarLabel>Edit Your Profile</SidebarLabel>
+                  </DropdownLink>
+                )
+              })}
+            {subnav && subMenuList && 
+                subMenuList.map((item, index) => {
                     return (
-                        <DropdownLink to={item.path} key={index}>
+                        <DropdownLink to={`trips/${item.trip_id}`} key={index}>
                             {item.icon}
-                            <SidebarLabel>{item.title}</SidebarLabel>
+                            <SidebarLabel>{item.trip_name}</SidebarLabel>
                         </DropdownLink>
                     );
                 })}

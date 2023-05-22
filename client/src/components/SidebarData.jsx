@@ -15,7 +15,7 @@ const SidebarData = [
         subNav: [
             {
                 title: 'Users',
-                path: '/dashboard/users',
+                path: '/dashboard/profile',
                 icon: <IoIcons.IoIosPaper />
             },
         //     {
