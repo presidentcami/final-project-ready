@@ -28,7 +28,7 @@ const addUser = (auth0User, setUser) => {
       body: JSON.stringify(userObj),
     })
       .then((response) => {
-        console.log("Response from post method ", response);
+        // console.log("Response from post method ", response);
         return response.json();
       })
       .then((user) => {
@@ -89,10 +89,10 @@ function MyNavBar({ user, setUser }) {
   return (
     <nav data-testid="navbar" className="navbar">
     
-        {!user ? null : (
+        {!user ? null : ( <div>
           <Nav.Link to="/user-profile">
             {user[0].user_first_name} {user[0].user_last_name}
-          </Nav.Link>
+          </Nav.Link></div>
         )}
         {!isAuthenticated ? (
           <ButtonsDiv>
@@ -109,17 +109,6 @@ function MyNavBar({ user, setUser }) {
           </Button>
         )}
 
-      {/* <Navbar bg="dark" variant="dark" sticky="top">
-        <Container>
-          {!user ? null : (
-            <Nav.Link to="/user-profile">
-              {user[0].user_first_name} {user[0].user_last_name}
-            </Nav.Link>
-          )}
-          <Navbar.Toggle />
-          <Navbar.Collapse></Navbar.Collapse>
-        </Container>
-      </Navbar> */}
     </nav>
   );
 }
