@@ -1,7 +1,7 @@
 import React from 'react'
 import MyNavBar from '../routes/Navbar'
 import NotLoggedInLandingPage from './NotLoggedInLandingPage'
-import SideBar from './SideBar'
+import SideBar from './Sidebar'
 import { Outlet } from 'react-router-dom'
 
 const Layout = ({ setUser, user, trips, setTrips }) => {
