@@ -80,6 +80,7 @@ const ToDoList = ({ trip_id, todos, setTodos }) => {
             return
         }
 
+        if (destination.droppableId === 'Done') {
         if (destination.droppableId === source.droppableId) {
             if (destination.index === source.index) {
                 return
@@ -106,6 +107,9 @@ const ToDoList = ({ trip_id, todos, setTodos }) => {
         }
 
         setTodos(newState)
+    } else {
+        return
+    }
 
     }
 // todos && console.log("todos after useeffect has loaded?", todos)
