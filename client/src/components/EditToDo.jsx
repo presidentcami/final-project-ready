@@ -1,4 +1,7 @@
 import React, { useReducer } from 'react'
+import * as GrIcons from "react-icons/gr";
+import * as GiIcons from "react-icons/gi";
+import styled from 'styled-components';
 
 const initialValue = {
   'item_id': '',
@@ -17,6 +20,11 @@ const reducer = (state, action) => {
       throw new Error(`Unknown action type: ${action.type}`);
   }
 };
+
+const Button = styled.button`
+  border: none;
+  background-color: white;
+`;
 
 const EditToDo = ({ item, setIsEditing, setTodos, tripId }) => {
   // console.log('from editing todo', item)
@@ -63,6 +71,10 @@ const EditToDo = ({ item, setIsEditing, setTodos, tripId }) => {
         
   };
 
+  const cancelEdit = () => {
+    setIsEditing(false);
+  }
+
   return (
     <form onSubmit={handleSubmit}>
       <input
@@ -72,7 +84,9 @@ const EditToDo = ({ item, setIsEditing, setTodos, tripId }) => {
         defaultValue={item[1]}
         onChange={inputAction}
       />
-      <button type="submit">save</button>
+      
+      <Button type="submit" id='save'><GrIcons.GrStatusGood style={{color: 'blue'}} /></Button>
+      <Button id='cancel' onClick={cancelEdit}><GiIcons.GiCancel /></Button>
     </form>
   );
 };

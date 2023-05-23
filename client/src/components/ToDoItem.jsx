@@ -3,8 +3,6 @@ import styled from 'styled-components'
 import { Draggable } from 'react-beautiful-dnd';
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
-import * as IoIcons from "react-icons/io";
-import * as RiIcons from "react-icons/ri";
 import EditToDo from './EditToDo';
 
 const Container = styled.div`
@@ -44,7 +42,7 @@ const Item = ({ item, index, setTodos, tripId }) => {
             <>
               {item[1]}{" "}
               <span>
-                <button onClick={handleEditClick}>edit</button>
+                <AiIcons.AiOutlineEdit onClick={handleEditClick}/>
               </span>{" "}
             </>
           )}
