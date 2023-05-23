@@ -7,28 +7,6 @@ import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 import styled from 'styled-components';
 
 
-// const updateItemDone = (itemDone, item_id) => {
-//     try {
-//         fetch(`http://localhost:8080/updateitemdone/${item_id}`, {
-//             method: "PUT",
-//             headers: {
-//                 Accept: "application/json",
-//                 "Content-Type": "application/json"
-//             },
-//             body: JSON.stringify({item_is_done: itemDone}),
-//         })
-//             .then((response) => response.json())
-//             .then(trip => {
-//                 setTrips(trip);
-//                 console.log('trips fetched when new trip is added', trip);
-//             })
-
-//         // console.log(state)
-//         // window.location = "/"; 
-//     } catch (error) {
-//         console.error(error.message)
-//     }
-// }
 const Container = styled.div`
     display: flex;
 
@@ -94,6 +72,7 @@ const ToDoList = ({ trip_id, todos, setTodos }) => {
         } 
 
         const sourceList = [...todos[source.droppableId]];
+        // const destinationList = 
         const destinationList = [...todos[destination.droppableId]];
 
         const movingItem = sourceList.splice(source.index, 1)

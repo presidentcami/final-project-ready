@@ -76,7 +76,7 @@ const SubMenu = ({ item, subMenuList, user }) => {
                             <SidebarLabel>{item.trip_name}</SidebarLabel>
                         </DropdownLink>
                     );
-                })}
+                })}     
         </>
     );
 };

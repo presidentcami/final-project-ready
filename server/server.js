@@ -40,7 +40,7 @@ app.get('/user/:email', async (req, res) => {
         return res.status(400).json({ e });
     }
 });
-// SELECT ready_lists.list_id, list_name, ready_trips.trip_id, ready_trips.user_id, trip_name, trip_start_date, trip_end_date, location, trip_description, item_id, item, item_is_done, item_due_date, item_version FROM ready_lists LEFT JOIN ready_trips ON ready_lists.trip_id=ready_trips.trip_id LEFT JOIN ready_items ON ready_lists.list_id=ready_items.list_id WHERE ready_lists.trip_id=$1;'
+
 app.get('/tripdetails/:tripid', async (req, res) => {
     try {
         const {tripid} = req.params;
@@ -117,7 +117,7 @@ app.get('/api/openai/:prompt', async (req, res) => {
 
 
 
-// create the POST request
+// post request to add a new user upon sign up or log someone in if they already exist
 app.post('/adduser', async (req, res) => {
     try {
         const { email, family_name, given_name, nickname } = req.body;
@@ -139,7 +139,7 @@ app.post('/adduser', async (req, res) => {
 
 });
 
-// create the POST request to add a new trip 
+// post request to add a new trip 
 app.post('/addtrip', async (req, res) => {
     try {
         const {trip_name, trip_start_date, trip_end_date, location, user_id, trip_description } = req.body;
@@ -164,6 +164,7 @@ app.post('/addtrip', async (req, res) => {
 
 });
 
+// post request to add a new todo
 app.post('/addtodo', async (req, res) => {
     try {
         const {item, item_due_date, list_id, trip_id} = req.body;
@@ -276,27 +277,6 @@ app.put('/edituser/:user_id', async (req, res) => {
 })
 
 
-//A put request - Update a student 
-app.put('/updateitemdone/:item_id', async (req, res) =>{
-    //console.log(req.params);
-    //This will be the id that I want to find in the DB - the student to be updated
-    const {item_id} = req.params
-    let {item_is_done} = req.body
-
-    console.log("item id", item_id, "item is done from req", item_is_done);
-
-
-    try {
-        
-      const updated = await db.query('UPDATE ready_items SET item_is_done=$1 WHERE item_id=$2;', [item_is_done, item_id]);
-      console.log(updated.rows[0]);
-      res.send(updated.rows[0]);
-  
-    }catch(e){
-      console.log(e);
-      return res.status(400).json({e})
-    }
-  })
 
 //    for Proxy
 //   app.get('/*', (req, res) => {
