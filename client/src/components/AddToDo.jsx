@@ -27,9 +27,8 @@ const reducer = (state, action) => {
     border-radius: 10px;
     border: none;
     background-color: #fddc95;
-    margin: auto;
-    margin-bottom: 1em;
-    width: 150px;
+    margin: 4%;
+    width: 30%;
   `;
 
 const AddToDo = ({ list_id, tripId, setTodos }) => {
