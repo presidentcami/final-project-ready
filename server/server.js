@@ -248,6 +248,37 @@ app.put('/edittrip/:trip_id', async (req, res) => {
     }
 })
 
+// a put request to update if a todo is changed
+app.put('/edittodo/:item_id', async (req, res) => {
+    try {
+        const { item_id } = req.params;
+        const { item, trip_id } = req.body;
+
+        const updatedTodo = await db.query('UPDATE ready_items SET item=$1 WHERE item_id=$2 RETURNING *',
+        [item, item_id])
+        
+        console.log(updatedTodo)
+        
+        const { rows } = await db.query('select ready_lists.list_id, list_name, trip_id, user_id, is_template, list_created, item_id, item, item_is_done, item_due_date, item_version from ready_lists left join ready_items on ready_lists.list_id=ready_items.list_id where trip_id=$1;', [trip_id])
+
+        let lists = {}
+        for (let i = 0; i < rows.length; i++) {
+            let list_name = rows[i].list_name;
+
+            if (!lists[list_name]) {
+                lists[list_name] = [rows[i]]
+            } else {
+                lists[list_name].push(rows[i])
+            }
+        }
+        res.send(lists)
+        console.log('all trip todo lists', lists)
+    } catch (error) {
+        console.error(error)
+    }
+})
+
+
 //A put request - Update a student 
 app.put('/updateitemdone/:item_id', async (req, res) =>{
     //console.log(req.params);
