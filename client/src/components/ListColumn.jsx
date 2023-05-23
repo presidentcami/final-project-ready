@@ -40,7 +40,7 @@ const ListColumn = ({ column, items, list_id, tripId, setTodos }) => {
             {...provided.droppableProps}
             isDraggingOver={snapshot.isDraggingOver} 
         >
-                  {items && items.map((item, index) => <Item key={item[0]} item={[...item]} index={index} /> 
+            {items.map((item, index) => <Item key={item[0]} item={[...item]} index={index} /> 
         )}
         {provided.placeholder}
         </ItemList>)}

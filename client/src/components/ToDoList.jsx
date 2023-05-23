@@ -57,9 +57,9 @@ const ItemList = styled.div`
 const ToDoList = ({ trip_id, todos, setTodos }) => {
 
 
-    const loadTripTodos = () => {
+    const loadTripTodos = (tripid) => {
         // A function to fetch the list of students that will be load anytime that list change
-        fetch(`http://localhost:8080/triptodos/${trip_id}`)
+        fetch(`http://localhost:8080/triptodos/${tripid}`)
             .then((response) => response.json())
             .then((deets) => {
 
@@ -69,8 +69,8 @@ const ToDoList = ({ trip_id, todos, setTodos }) => {
     }
 
     useEffect(() => {
-        loadTripTodos();
-    }, []);
+        loadTripTodos(trip_id);
+    }, [trip_id]);
 
     const onDragEnd = result => {
         console.log("result", result);
@@ -112,25 +112,31 @@ const ToDoList = ({ trip_id, todos, setTodos }) => {
   return (
     todos && (
       <DragDropContext onDragEnd={onDragEnd}>
-        {Object.entries(todos).map(([listName, items]) => {
-          // console.log("in map", items)
-          const listId = items.length > 0 ? items[0].list_id : null;
-          const tripId = items.length > 0 ? items[0].trip_id : null;
-          const column = listName;
-          const items1 = items.map((item) => {
-            const withNeWId = [
-              item.item_id,
-              item.item,
-              item.item_due_date,
-              item.item_version,
-              `task-${item.item_id}`,
-            ];
-            return withNeWId;
-          });
-
-          // console.log("in map", {listId}, {tripId})
-          return (
-            <Container>
+        <Container>
+          {Object.entries(todos).map(([listName, items]) => {
+            console.log("in map", items)
+            const listId = items.length > 0 ? items[0].list_id : null;
+            const tripId = items.length > 0 ? items[0].trip_id : null;
+            const column = listName;
+            const items1 = items.map((item) => {
+                
+              const withNeWId = item.item_id
+                ? [
+                    item.item_id,
+                    item.item,
+                    item.item_due_date,
+                    item.item_version,
+                    `task-${item.item_id}`,
+                  ]
+                : [
+                    item.item_id,
+                    item.item,
+                    item.item_due_date,
+                    item.item_version
+                  ];
+              return withNeWId;
+            });
+            return (
               <ListColumn
                 key={listId}
                 list_id={listId}
@@ -139,38 +145,40 @@ const ToDoList = ({ trip_id, todos, setTodos }) => {
                 column={column}
                 items={items1}
               />
-            </Container>
-            // <div key={listName}>
-            //     <h4>{listName}</h4>
-            //     <AddToDo list_id={listId} tripId={tripId} setTodos={setTodos} />
-            //     <ul>
-            //         {items.map (item => (
-            //             <>
-            //             <input type="checkbox" key={item.item_id} />
-            //                 {item.item}
-            //                 <EditToDo todos={todos} />
 
-            //                 <DeleteToDo item_id={item.item_id} />
-            //             <br /></>
-            //         ))}
-            //     </ul>
-            // </div>
-          );
-        })}
-        <DoneBox>
-          <Title>Done</Title>
-          <Droppable droppableId="Done">
-            {(provided, snapshot) => (
-              <ItemList
-                ref={provided.innerRef}
-                {...provided.droppableProps}
-                isDraggingOver={snapshot.isDraggingOver}
-              >
-                {provided.placeholder}
-              </ItemList>
-            )}
-          </Droppable>
-        </DoneBox>
+              // <div key={listName}>
+              //     <h4>{listName}</h4>
+              //     <AddToDo list_id={listId} tripId={tripId} setTodos={setTodos} />
+              //     <ul>
+              //         {items.map (item => (
+              //             <>
+              //             <input type="checkbox" key={item.item_id} />
+              //                 {item.item}
+              //                 <EditToDo todos={todos} />
+
+              //                 <DeleteToDo item_id={item.item_id} />
+              //             <br /></>
+              //         ))}
+              //     </ul>
+              // </div>
+            );
+          })}
+          <DoneBox>
+            <Title>Done</Title>
+            <Droppable droppableId="Done">
+
+              {(provided, snapshot) => (
+                <ItemList
+                  ref={provided.innerRef}
+                  {...provided.droppableProps}
+                  isDraggingOver={snapshot.isDraggingOver}
+                > Drag done items here
+                  {provided.placeholder}
+                </ItemList>
+              )}
+            </Droppable>
+          </DoneBox>
+        </Container>
       </DragDropContext>
     )
   );
