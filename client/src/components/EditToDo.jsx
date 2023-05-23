@@ -86,7 +86,7 @@ const EditToDo = ({ item, setIsEditing, setTodos, tripId }) => {
       />
       
       <Button type="submit" id='save'><GrIcons.GrStatusGood style={{color: 'blue'}} /></Button>
-      <Button id='cancel' onClick={cancelEdit}><GiIcons.GiCancel /></Button>
+      <Button type='button' id='cancel' onClick={cancelEdit}><GiIcons.GiCancel /></Button>
     </form>
   );
 };
