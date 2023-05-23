@@ -17,7 +17,7 @@ const Container = styled.div`
 const Item = ({ item, index, setTodos, tripId }) => {
   const disableInteractiveElementBlocking = useRef(false);
   const [isEditing, setIsEditing] = useState(false);
-console.log(item)
+// console.log(item)
   const handleEditClick = () => {
     setIsEditing(true);
   };

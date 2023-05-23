@@ -4,8 +4,8 @@ import NotLoggedInLandingPage from "./NotLoggedInLandingPage";
 import SideBar from "./Sidebar";
 import { Outlet } from "react-router-dom";
 
-const Layout = ({ setUser, user, trips, setTrips }) => {
-  console.log(trips)
+const Layout = ({ setUser, user, trips }) => {
+  // console.log(trips)
   return (
     <div className="App">
       <MyNavBar setUser={setUser} user={user} />

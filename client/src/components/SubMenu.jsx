@@ -42,7 +42,7 @@ const DropdownLink = styled(Link)`
 
 const SubMenu = ({ item, subMenuList, user }) => {
     const [subnav, setSubnav] = useState(false);
-    console.log(user)
+    // console.log(user)
     const showSubnav = () => setSubnav(!subnav);
 
     return (

@@ -85,7 +85,7 @@ function MyNavBar({ user, setUser }) {
     );
   }
 
-  console.log(user);
+  // console.log(user);
   return (
     <nav data-testid="navbar" className="navbar">
     

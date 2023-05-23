@@ -20,7 +20,7 @@ function App() {
       fetch(`http://localhost:8080/trips/${userid}`)
         .then((response) => response.json())
         .then((trips) => {
-          console.log('trips in app', trips)
+          // console.log('trips in app', trips)
           setTrips(trips);
         });
     };
@@ -32,7 +32,7 @@ function App() {
       }
     }, [user]);
 
-  console.log("this is current user", user)
+  // console.log("this is current user", user)
 
   return (
    

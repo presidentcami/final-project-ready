@@ -63,7 +63,7 @@ const ToDoList = ({ trip_id, todos, setTodos }) => {
             .then((response) => response.json())
             .then((deets) => {
 
-                console.log("intial data from backend", deets)
+                // console.log("intial data from backend", deets)
                 setTodos(deets);
             });
     }
@@ -118,7 +118,7 @@ const ToDoList = ({ trip_id, todos, setTodos }) => {
       <DragDropContext onDragEnd={onDragEnd}>
         <Container>
           {Object.entries(todos).map(([listName, items]) => {
-            console.log("in map", items)
+            // console.log("in map", items)
             const listId = items.length > 0 ? items[0].list_id : null;
             const tripId = items.length > 0 ? items[0].trip_id : null;
             const column = listName;
@@ -149,22 +149,6 @@ const ToDoList = ({ trip_id, todos, setTodos }) => {
                 column={column}
                 items={items1}
               />
-
-              // <div key={listName}>
-              //     <h4>{listName}</h4>
-              //     <AddToDo list_id={listId} tripId={tripId} setTodos={setTodos} />
-              //     <ul>
-              //         {items.map (item => (
-              //             <>
-              //             <input type="checkbox" key={item.item_id} />
-              //                 {item.item}
-              //                 <EditToDo todos={todos} />
-
-              //                 <DeleteToDo item_id={item.item_id} />
-              //             <br /></>
-              //         ))}
-              //     </ul>
-              // </div>
             );
           })}
           <DoneBox>

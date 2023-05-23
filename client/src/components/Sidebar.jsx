@@ -42,7 +42,7 @@ import * as AiIcons from 'react-icons/ai'
 
 const SideBar = ({ trips, user }) => {
 
-console.log(user)
+// console.log(user)
 // user && console.log(user)
 
   return (

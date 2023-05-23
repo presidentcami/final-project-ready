@@ -27,7 +27,7 @@ const ItemList = styled.div`
 
 const ListColumn = ({ column, items, list_id, tripId, setTodos }) => {
 
-  console.log('testing props', column, items, list_id)
+  // console.log('testing props', column, items, list_id)
     
   return (
     <Container>

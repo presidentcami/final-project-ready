@@ -17,7 +17,7 @@ const OneTrip = () => {
     fetch(`http://localhost:8080/tripdetails/${trip_id}`)
       .then((response) => response.json())
       .then((deets) => {
-        console.log(deets);
+        // console.log(deets);
         setTripDetails(deets);
       });
   };
