@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-  const Container = styled.div`
+   const Container = styled.div`
     display: flex;
     flex-wrap: wrap;
   `;
@@ -12,7 +12,7 @@ export default function AllTrips({ user, trips }) {
   if (!user) return null;
   // console.log("trips", trips)
 
-  return (
+  return trips && (
     <div> 
         <div className='profile'>
       
