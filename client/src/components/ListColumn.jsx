@@ -31,22 +31,30 @@ const ListColumn = ({ column, items, list_id, tripId, setTodos }) => {
     
   return (
     <Container>
-       <Title>{column}</Title>
-       <AddToDo list_id={list_id} tripId={tripId} setTodos={setTodos} />
-       <Droppable droppableId={column}>
-       {(provided, snapshot) => (
-        <ItemList 
+      <Title>{column}</Title>
+      <AddToDo list_id={list_id} tripId={tripId} setTodos={setTodos} />
+      <Droppable droppableId={column}>
+        {(provided, snapshot) => (
+          <ItemList
             ref={provided.innerRef}
             {...provided.droppableProps}
-            isDraggingOver={snapshot.isDraggingOver} 
-        >
-            {items.map((item, index) => <Item key={item[0]} item={[...item]} index={index} /> 
+            isDraggingOver={snapshot.isDraggingOver}
+          >
+            {items.map((item, index) => (
+              <Item
+                key={item[0]}
+                item={[...item]}
+                index={index}
+                setTodos={setTodos}
+                tripId={tripId}
+              />
+            ))}
+            {provided.placeholder}
+          </ItemList>
         )}
-        {provided.placeholder}
-        </ItemList>)}
-       </Droppable>
+      </Droppable>
     </Container>
-  )
+  );
 }
 
 export default ListColumn
