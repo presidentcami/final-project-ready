@@ -20,7 +20,7 @@ export default function AllTrips({ user, trips, setTrips }) {
                 {trip.trip_start_date} - {trip.trip_end_date} */}
                 
                 </li>)
-                }) : <h3>You don't have any trips yet! Get started here.</h3>
+                }) : <h3>You don't have any trips yet! Get started <span><a href='/dashboard'>here</a></span>.</h3>
                 }
                 
 
