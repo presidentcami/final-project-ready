@@ -252,10 +252,10 @@ app.put('/edittrip/:trip_id', async (req, res) => {
 app.put('/edittodo/:item_id', async (req, res) => {
     try {
         const { item_id } = req.params;
-        const { item, trip_id } = req.body;
+        const { item, trip_id, item_due_date, item_version } = req.body;
 
-        const updatedTodo = await db.query('UPDATE ready_items SET item=$1 WHERE item_id=$2 RETURNING *',
-        [item, item_id])
+        const updatedTodo = await db.query('UPDATE ready_items SET item=$1, item_due_date=$2, item_version=$3 WHERE item_id=$4 RETURNING *',
+        [item, item_due_date, item_version, item_id])
         
         console.log(updatedTodo)
         

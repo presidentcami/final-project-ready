@@ -13,10 +13,11 @@ const Container = styled.div`
     background-color: ${props => (props.isDragging ? '#c1beea' : 'white')};
 `;
 
+
 const Item = ({ item, index, setTodos, tripId }) => {
   const disableInteractiveElementBlocking = useRef(false);
   const [isEditing, setIsEditing] = useState(false);
-
+console.log(item)
   const handleEditClick = () => {
     setIsEditing(true);
   };
@@ -40,7 +41,7 @@ const Item = ({ item, index, setTodos, tripId }) => {
             />
           ) : (
             <>
-              {item[1]}{" "}
+              {item[1]} {item[2] ? <>due: {item[2]}</> : null}  
               <span>
                 <AiIcons.AiOutlineEdit onClick={handleEditClick}/>
               </span>{" "}

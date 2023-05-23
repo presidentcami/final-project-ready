@@ -6,7 +6,8 @@ import styled from 'styled-components';
 const initialValue = {
   'item_id': '',
   'item': '',
-  'list_id': ''
+  'item_due_date': '',
+  'item_version': '',
 }
 
 const reducer = (state, action) => {
@@ -38,9 +39,11 @@ const EditToDo = ({ item, setIsEditing, setTodos, tripId }) => {
       type: "update",
       payload: { key: event.target.name, value: event.target.value },
     });
-    initialValue.item = item;
+    initialValue.item = item[1];
     initialValue.item_id = item[0];
-    initialValue.trip_id = tripId
+    initialValue.trip_id = tripId;
+    initialValue.item_due_date = item[2];
+    initialValue.item_version = item[3] + 1;
     console.log(state);
   };
 
@@ -84,9 +87,25 @@ const EditToDo = ({ item, setIsEditing, setTodos, tripId }) => {
         defaultValue={item[1]}
         onChange={inputAction}
       />
-      
-      <Button type="submit" id='save'><GrIcons.GrStatusGood style={{color: 'blue'}} /></Button>
-      <Button type='button' id='cancel' onClick={cancelEdit}><GiIcons.GiCancel /></Button>
+      <div>
+        <label>Due Date</label>
+      </div>
+      <div>
+        <input
+          type="date"
+          id="update-due-date"
+          name="item_due_date"
+          value={item[2]}
+          onChange={inputAction}
+        />
+      </div>
+
+      <Button type="submit" id="save">
+        <GrIcons.GrStatusGood style={{ color: "blue" }} />
+      </Button>
+      <Button type="button" id="cancel" onClick={cancelEdit}>
+        <GiIcons.GiCancel />
+      </Button>
     </form>
   );
 };
