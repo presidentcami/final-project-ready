@@ -23,6 +23,8 @@ const ItemList = styled.div`
   background-color: ${(props) => (props.isDragging ? "black" : "white")};
   flex-grow: 1;
   min-height: 100px;
+  height: 200px;
+  overflow-y: scroll;
 `;
 
 const ListColumn = ({ column, items, list_id, tripId, setTodos }) => {
