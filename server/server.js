@@ -139,7 +139,7 @@ app.post('/adduser', async (req, res) => {
 
 });
 
-// create the POST request to add a new trip to 
+// create the POST request to add a new trip 
 app.post('/addtrip', async (req, res) => {
     try {
         const {trip_name, trip_start_date, trip_end_date, location, user_id, trip_description } = req.body;
@@ -214,20 +214,6 @@ app.post('/addtriplist', async (req, res) => {
 })
 
 
-// delete request for students
-app.delete('/api/students/:studentId', async (req, res) => {
-    try {
-        const studentId = req.params.studentId;
-        await db.query('DELETE FROM students WHERE id=$1', [studentId]);
-        console.log("From the delete request-url", studentId);
-        res.status(200).end();
-    } catch (e) {
-        console.log(e);
-        return res.status(400).json({ e });
-
-    }
-});
-
 // a put request to update trip details
 
 app.put('/edittrip/:trip_id', async (req, res) => {
@@ -276,6 +262,17 @@ app.put('/edittodo/:item_id', async (req, res) => {
     } catch (error) {
         console.error(error)
     }
+})
+
+// A put request to update user info 
+app.put('/edituser/:user_id', async (req, res) => {
+    const { user_id } = req.params;
+    const { user_email, user_first_name, user_last_name, user_username } = req.body;
+
+    const updateUser = await db.query('UPDATE ready_users SET user_first_name=$1, user_last_name=$2, user_username=$3 WHERE user_id=$4',
+    [user_first_name, user_last_name, user_username, user_id])
+    const { rows: ready_user } = await db.query('SELECT * FROM ready_users WHERE user_email=$1', [user_email]);
+    res.send(ready_user);
 })
 
 
