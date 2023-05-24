@@ -10,6 +10,19 @@ import Suggestions from './Suggestions';
     margin-right: 3rem;
   `;
 
+  const PillButton = styled.button`
+    background-color: #c1beea;
+    border: none;
+    color: black;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 16px;
+  `;
+
 const SuggestionBoxForm = ({ tripDetails }) => {
 
     const location = tripDetails[0].location
@@ -28,9 +41,9 @@ const SuggestionBoxForm = ({ tripDetails }) => {
         e.preventDefault();
         // console.log(activities)
         const userPrompt = `I am going to ${location}. Here is a description of my trip: ${description}. I think we'll do these activities: ${activities}. Act as a trip planner for me. What should I pack for this trip? Write your response in the form of an array that looks like {'list': ['sandals', 'beach towel', 'sunglasses']}`
-        setSuggestions(
-          "? -Swimsuits -Beach towels -Kayaking gear -Sunscreen -Sunglasses -Hat -Sarong -Flip Flops -Snorkeling gear -Beach toys -Karaoke machine -Beach chairs -Cooler -Picnic blanket -Snacks -Drinks -Binoculars -Camera -Bug spray -First aid kit"
-        );
+        let mockDataArray = "? -Swimsuits -Beach towels -Kayaking gear -Sunscreen -Sunglasses -Hat -Sarong -Flip Flops -Snorkeling gear -Beach toys -Karaoke machine -Beach chairs -Cooler -Picnic blanket -Snacks -Drinks -Binoculars -Camera -Bug spray -First aid kit".split(/[-?]/)
+        let noEmptiesArray = mockDataArray.filter((item) => item.trim() != '');
+        setSuggestions(noEmptiesArray);
         // console.log(userPrompt)
         // try {
         //  fetch(`http://localhost:8080/api/openai/${userPrompt}`)
@@ -45,7 +58,7 @@ const SuggestionBoxForm = ({ tripDetails }) => {
         // }
         clearForm()
     }
-    // console.log(activities)
+    console.log(suggestions);
 
   return (
     <div>
@@ -60,7 +73,10 @@ const SuggestionBoxForm = ({ tripDetails }) => {
               />
               <Button type="submit">Submit</Button>
         </form>
-        {!suggestions ? null : suggestions.split(/[-?]/)}
+        {!suggestions ? null : <div>{suggestions.map((item, index) => {
+          console.log(item)
+          return( 
+        <PillButton key={index}>{item}</PillButton>)})}</div> }
 
     </div>
   )
