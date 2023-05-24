@@ -30,6 +30,13 @@ const reducer = (state, action) => {
     margin: 4%;
     width: 30%;
   `;
+    const AddButton = styled.button`
+      border-radius: 10px;
+      border: none;
+      background-color: #fddc95;
+      margin: 4%;
+      width: 50%;
+    `;
 
 const AddToDo = ({ list_id, tripId, setTodos }) => {
 
@@ -113,7 +120,7 @@ const AddToDo = ({ list_id, tripId, setTodos }) => {
                         <Button type="button" onClick={handleClose}>Cancel</Button>
                     </section>
                 </form>
-            </> : <Button onClick={handleShow}> Add List Item </Button>
+            </> : <AddButton onClick={handleShow}> Add List Item </AddButton>
             }
 
 
