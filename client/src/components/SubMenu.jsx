@@ -38,6 +38,7 @@ const DropdownLink = styled(Link)`
     color: #f1efed;
     cursor: pointer;
     border-left: 4px solid #333333;
+    border-top: 4px solid #333333;
   }
 `;
 
