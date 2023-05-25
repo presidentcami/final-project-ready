@@ -115,13 +115,15 @@ function MyNavBar({ user, setUser }) {
           <Button onClick={handleSignUp}>Sign Up</Button>
         </ButtonsDiv>
       ) : (
-        <Button
-          onClick={() =>
-            logout({ logoutParams: { returnTo: window.location.origin } })
-          }
-        >
-          Log Out
-        </Button>
+        <ButtonsDiv>
+          <Button
+            onClick={() =>
+              logout({ logoutParams: { returnTo: window.location.origin } })
+            }
+          >
+            Log Out
+          </Button>
+        </ButtonsDiv>
       )}
     </NavBar>
   );
