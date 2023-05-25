@@ -17,7 +17,7 @@ const NotLoggedInLandingPage = () => {
       background-color: rgb(217, 184, 169, 0.5);
       padding: 100px;
       border-radius: 10px;
-      height: 400px;
+      min-height: 400px;
     `;
 
     const Text = styled.h3`
