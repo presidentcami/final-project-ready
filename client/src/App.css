@@ -4,7 +4,7 @@
   min-height: 100vh;
   font-family: 'Lato', sans-serif, 16px, !important;
   font-weight: lighter !important;
-  background-color: #f1efed;
+  background-color: #e5ccc0;
   /* margin: 5px; */
   display: flex;
   /* grid-template-columns: 1fr 3fr; */
@@ -61,7 +61,7 @@ h1, h2, h3, h4 {
 }
 
 .profile, dashboard {
-  background-color: #f1efed;
+  background-color: #e5ccc0;
   margin-left: 20%;
   padding: 15px;
   height: 100%;
@@ -76,7 +76,7 @@ button {
 }
 
 .profile1 {
-  background-color: #f1efed;
+  background-color: #e5ccc0;
   margin-left: 20%;
   padding: 15px;
   height: 100%;
