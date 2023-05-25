@@ -21,12 +21,12 @@ const DoneList = ({ doneItems, setDoneItems, trip_id }) => {
 const getDoneItems = (trip_id) => {
        
    try {
-     console.log(trip_id);
+    //  console.log(trip_id);
      fetch(`http://localhost:8080/donetodos/${trip_id}`)
        .then((response) => response.json())
        .then((doneTodos) => {
 
-         console.log("done todo details fetched", doneTodos);
+        //  console.log("done todo details fetched", doneTodos);
          setDoneItems(doneTodos);
        });
      //  console.log(state);
@@ -38,7 +38,7 @@ const getDoneItems = (trip_id) => {
 
   useEffect(() => {
     getDoneItems(trip_id);
-  }, []);
+  }, [trip_id]);
 
   return (
     <DoneBox>

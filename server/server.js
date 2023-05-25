@@ -57,7 +57,7 @@ app.get('/triptodos/:tripid', async (req, res) => {
     try {
         const { tripid } = req.params;
         console.log("trip id from req.params", tripid)
-        const { rows } = await db.query('select ready_lists.list_id, list_name, trip_id, user_id, is_template, list_created, item_id, item, item_is_done, item_due_date, item_version from ready_lists left join ready_items on ready_lists.list_id=ready_items.list_id where trip_id=$1;', [tripid])
+        const { rows } = await db.query('select ready_lists.list_id, list_name, trip_id, user_id, is_template, list_created, item_id, item, item_is_done, item_due_date, item_version from ready_lists left join ready_items on ready_lists.list_id=ready_items.list_id where trip_id=$1', [tripid])
 
         let lists = {}
         for (let i = 0; i < rows.length; i++) {
@@ -183,7 +183,7 @@ app.post('/addtodo', async (req, res) => {
         console.log('add to do request', req.body)
         const result = await db.query('INSERT INTO ready_items(item, item_due_date, list_id) VALUES($1, $2, $3)', [item, item_due_date, list_id]);
 
-        const { rows } = await db.query('select ready_lists.list_id, list_name, trip_id, user_id, is_template, list_created, item_id, item, item_is_done, item_due_date, item_version from ready_lists left join ready_items on ready_lists.list_id=ready_items.list_id where trip_id=$1;', [trip_id])
+        const { rows } = await db.query('select ready_lists.list_id, list_name, trip_id, user_id, is_template, list_created, item_id, item, item_is_done, item_due_date, item_version from ready_lists left join ready_items on ready_lists.list_id=ready_items.list_id where trip_id=$1', [trip_id])
         let lists = {}
         for (let i = 0; i < rows.length; i++) {
             let list_name = rows[i].list_name;
@@ -284,7 +284,7 @@ app.put('/markdone/:item_id', async (req, res) => {
     const { item_is_done, trip_id } = req.body;
 
     try {
-        const setDone = await db.query('update ready_items set item_is_done=$1, list_id=null where item_id=$2;', [item_is_done, item_id]);
+        const setDone = await db.query('update ready_items set item_is_done=$1 where item_id=$2;', [item_is_done, item_id]);
         
         const { rows: done_items } = await db.query('select * from ready_items left join ready_lists on ready_lists.list_id=ready_items.list_id where item_is_done=true AND trip_id=$1;', [trip_id]);
         console.log("all done items for a specific trip", done_items);

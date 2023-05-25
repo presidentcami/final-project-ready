@@ -8,15 +8,15 @@ import styled from 'styled-components';
 import DoneList from './DoneList';
 
 
-export const Container = styled.div`
+const Container = styled.div`
     display: flex;
 `;
 
-export const Title = styled.h4`
+const Title = styled.h4`
   padding: 8px;
 `;
 
-export const ItemList = styled.div`
+const ItemList = styled.div`
   padding: 8px;
   background-color: ${(props) => (props.isDragging ? "black" : "white")};
   flex-grow: 1;
@@ -33,7 +33,7 @@ const ToDoList = ({ trip_id, todos, setTodos }) => {
             .then((response) => response.json())
             .then((deets) => {
 
-                // console.log("intial data from backend", deets)
+                console.log("intial data from backend", deets)
                 setTodos(deets);
             });
     }
@@ -41,8 +41,9 @@ const ToDoList = ({ trip_id, todos, setTodos }) => {
     const setItemDone = (item_id) => {
      const doneData = {
         "item_is_done": true,
-        "trip_id": 3
+        "trip_id":`${trip_id}`
       }
+      // console.log('testing trycatch')
       try {
         fetch(`http://localhost:8080/markdone/${item_id}`, {
           method: "PUT",
@@ -52,15 +53,24 @@ const ToDoList = ({ trip_id, todos, setTodos }) => {
           },
           body: JSON.stringify(doneData),
         })
-          .then((response) => response.json())
+          .then((response) => {
+            // console.log("response being logged", response)
+              return response.json()
+            }
+              )
           .then((items) => {
-            console.log("items details fetched when current items is updated", items)
+            // console.log("items details fetched when current items is updated", items)
               setDoneItems(items);
-            ;
-          });
+              // console.log('successss')
+          })
+          .then(() => {
+            // console.log('testing testing') 
+            loadTripTodos(trip_id)
+          })
         // console.log(state)
         // window.location = "/";
       } catch (error) {
+        // console.log('error happening here');
         console.error(error.message);
       }
     }
@@ -92,15 +102,15 @@ const ToDoList = ({ trip_id, todos, setTodos }) => {
 
         const sourceList = [...todos[source.droppableId]];
         // const destinationList = 
-        console.log('todos', todos)
-        console.log('todos at droppableid', todos[destination.droppableId]);
-        console.log("droppable id", destination.droppableId);
+        // console.log('todos', todos)
+        // console.log('todos at droppableid', todos[destination.droppableId]);
+        // console.log("droppable id", destination.droppableId);
         // const destinationList = [...todos[destination.droppableId]];
         // const  destinationList = doneItems;
 
         const movingItem = sourceList.splice(source.index, 1)
         
-        console.log(movingItem[0].item_id)
+        // console.log(movingItem[0].item_id)
         // console.log(doneItems)
 
         const newState = doneItems.concat(...movingItem)
@@ -124,24 +134,24 @@ const ToDoList = ({ trip_id, todos, setTodos }) => {
             const tripId = items.length > 0 ? items[0].trip_id : null;
             const column = listName;
             const items1 = items.map((item) => {
-                
-              const withNeWId = item.item_id
-                ? [
-                    item.item_id,
-                    item.item,
-                    item.item_due_date,
-                    item.item_version,
-                    `task-${item.item_id}`,
-                  ]
-                : [
-                    item.item_id,
-                    item.item,
-                    item.item_due_date,
-                    item.item_version
-                  ];
-              return withNeWId;
+                if (!item.item_is_done) {
+                  if (item.item_id) {
+                    return [
+                      item.item_id,
+                      item.item,
+                      item.item_due_date,
+                      item.item_version,
+                      `task-${item.item_id}`,
+                    ];
+                  }
+                } else {
+                  return;
+                }
+                  // console.log('with new id', withNeWId)
+              
             });
-            return (
+            //  console.log(items1, "in map");
+            return  (
               <ListColumn
                 key={listId}
                 list_id={listId}

@@ -64,7 +64,7 @@ const AddToDo = ({ list_id, tripId, setTodos }) => {
         });
         state.list_id = list_id;
         state.trip_id = tripId;
-        console.log(state)
+        // console.log(state)
     };
 
     // console.log(user)
@@ -85,7 +85,7 @@ const AddToDo = ({ list_id, tripId, setTodos }) => {
                 .then((response) => response.json())
                 .then(todoDeets => {
                     setTodos(todoDeets);
-                    console.log('todo details fetched when new todo is added', todoDeets);
+                    // console.log('todo details fetched when new todo is added', todoDeets);
                     handleClose()
                 })
             dispatch({ type: 'reset', initialValue })
