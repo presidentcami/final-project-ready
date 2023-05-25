@@ -13,7 +13,7 @@ import Suggestions from './Suggestions';
   `;
 
   const PillButton = styled.button`
-    background-color: #c1beea;
+    background-color: #afc8ee;
     border: none;
     color: black;
     padding: 5px 10px;
