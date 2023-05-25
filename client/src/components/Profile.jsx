@@ -9,12 +9,12 @@ const Profile = ({ user, setTrips }) => {
     const { user_first_name, user_last_name, user_email } = user[0]
     
     // console.log("profile", user)
-    const { isLoading } = useAuth0();
+    // const { isLoading } = useAuth0();
     
 
-    if (isLoading) {
-        return <div>Loading ...</div>;
-    }
+    // if (isLoading) {
+    //     return <div>Loading ...</div>;
+    // }
 
     return user && ( 
             <div className="dashboard">
