@@ -70,25 +70,6 @@ React Testing Library
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-
-<!-- GETTING STARTED -->
-## Getting Started
-<!-- instructions for how to use my project and more information about it
-
- -->
-<!-- This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps. -->
-
-<!-- COMBINE THESE SECTIONS and just take it to one link with installing js and react etc
- -->
-<!-- ### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ``` -->
-
 <!-- Installation -->
 
 ## Installation
