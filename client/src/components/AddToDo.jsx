@@ -29,6 +29,8 @@ const reducer = (state, action) => {
     background-color: #fddc95;
     margin: 4%;
     width: 30%;
+    font-family: "Lato", sans-serif;
+    font-weight: lighter;
   `;
     const AddButton = styled.button`
       border-radius: 10px;
@@ -36,6 +38,8 @@ const reducer = (state, action) => {
       background-color: #fddc95;
       margin: 4%;
       width: 50%;
+      font-family: "Lato", sans-serif;
+      font-weight: lighter;
     `;
 
 const AddToDo = ({ list_id, tripId, setTodos }) => {

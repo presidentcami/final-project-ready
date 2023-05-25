@@ -25,6 +25,8 @@ const reducer = (state, action) => {
 const Button = styled.button`
   border: none;
   background-color: white;
+  font-family: "Lato", sans-serif;
+  font-weight: lighter;
 `;
 
 const EditToDo = ({ item, setIsEditing, setTodos, tripId }) => {

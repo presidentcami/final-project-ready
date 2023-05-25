@@ -26,6 +26,8 @@ const reducer = (state, action) => {
     border: none;
     background-color: #fddc95;
     margin: 5px;
+    font-family: "Lato", sans-serif;
+    font-weight: lighter;
   `;
 
 const ChangeInfo = ({ user, setUser }) => {

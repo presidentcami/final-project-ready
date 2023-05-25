@@ -3,11 +3,13 @@ import styled from 'styled-components';
 import EditTripDetails from './EditTripDetails';
 
 const Button = styled.button`
-    border-radius: 10px;
-    border: none;
-    background-color: #fddc95;
-    margin: 5px;
-  `;
+  border-radius: 10px;
+  border: none;
+  background-color: #fddc95;
+  margin: 5px;
+  font-family: "Lato", sans-serif;
+  font-weight: lighter;
+`;
 
 const TripDetails = ({ tripDetails, setTripDetails }) => {
   const [show, setShow] = useState(true);

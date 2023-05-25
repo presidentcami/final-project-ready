@@ -27,6 +27,8 @@ const reducer = (state, action) => {
 
   const Button = styled.button`
     border-radius: 10px;
+    font-family: 'Lato', sans-serif;
+    font-weight: lighter;
     border: none;
     background-color: #fddc95;
     margin: 5px;

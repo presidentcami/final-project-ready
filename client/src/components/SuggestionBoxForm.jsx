@@ -8,6 +8,8 @@ import Suggestions from './Suggestions';
     background-color: #fddc95;
     margin: 5px;
     margin-right: 3rem;
+    font-family: "Lato", sans-serif;
+    font-weight: lighter;
   `;
 
   const PillButton = styled.button`
@@ -21,6 +23,8 @@ import Suggestions from './Suggestions';
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 16px;
+    font-family: "Lato", sans-serif;
+    font-weight: lighter;
   `;
 
 const SuggestionBoxForm = ({ tripDetails }) => {
@@ -58,7 +62,7 @@ const SuggestionBoxForm = ({ tripDetails }) => {
         // }
         clearForm()
     }
-    console.log(suggestions);
+    // console.log(suggestions);
 
   return (
     <div>

@@ -28,6 +28,8 @@ const Button = styled.button`
   background-color: #fddc95;
   margin: 5px;
   width: 100px;
+  font-family: "Lato", sans-serif;
+  font-weight: lighter;
 `;
 
 const AddToDoList = ({ setTodos, tripDetails }) => {
