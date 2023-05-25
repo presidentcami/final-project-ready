@@ -22,29 +22,18 @@ const SidebarData = [
     },
     {
         title: 'Trips',
-        path: '/trips',
+        // path: '/trips',
         icon: <IoIcons.IoIosPaper />,
         iconClosed: <RiIcons.RiArrowDownSFill />,
         iconOpened: <RiIcons.RiArrowUpSFill />,
 
         subNav: [
-            // {
-            //     title: 'All Trips',
-            //     path: '/trips',
-            //     icon: <IoIcons.IoIosPaper />,
-            //     cName: 'sub-nav'
-            // },
-            // {
-            //     title: 'Reports 2',
-            //     path: '/reports/reports2',
-            //     icon: <IoIcons.IoIosPaper />,
-            //     cName: 'sub-nav'
-            // },
-            // {
-            //     title: 'Reports 3',
-            //     path: '/reports/reports3',
-            //     icon: <IoIcons.IoIosPaper />
-            // }
+            {
+                title: 'All Trips',
+                path: '/trips',
+                icon: <IoIcons.IoIosPaper />,
+                cName: 'sub-nav'
+            },
         ]
     },
     {

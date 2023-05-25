@@ -25,7 +25,7 @@ const SidebarLabel = styled.span`
 `;
 
 const DropdownLink = styled(Link)`
-  background: #ffa784;
+  background: #ebc288;
   height: 60px;
   padding-left: 3rem;
   display: flex;
@@ -78,7 +78,12 @@ const SubMenu = ({ item, subMenuList, user }) => {
                             <SidebarLabel>{item.trip_name}</SidebarLabel>
                         </DropdownLink>
                     );
-                })}     
+                })} 
+                {subnav && subMenuList && 
+                <DropdownLink to={'/trips'}>
+                  <SidebarLabel>All Trips</SidebarLabel>
+                </DropdownLink>
+                }    
         </>
     );
 };
