@@ -39,6 +39,19 @@ const addUser = (auth0User, setUser) => {
     console.error(error.message);
   }
 };
+  const NavBar = styled.nav`
+      width: 100%;
+      padding: 1rem;
+      display: flex;
+      height: 3.4em;
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      background-color: #333333;
+      font-family: "Lato", sans-serif;
+      margin-top: -5px;
+  `;
 
   const Button = styled.button`
     border-radius: 10px;
@@ -89,29 +102,29 @@ function MyNavBar({ user, setUser }) {
 
   // console.log(user);
   return (
-    <nav data-testid="navbar" className="navbar">
-    
-        {!user ? null : ( <div>
-          <Nav.Link to="/user-profile">
+    <NavBar data-testid="navbar" className="navbar">
+      {!user ? null : (
+        <div>
+          <Nav.Link to="dashboard/profile">
             {user[0].user_first_name} {user[0].user_last_name}
-          </Nav.Link></div>
-        )}
-        {!isAuthenticated ? (
-          <ButtonsDiv>
-            <Button onClick={() => loginWithRedirect()}>Log In</Button>{" "}
-            <Button onClick={handleSignUp}>Sign Up</Button>
-          </ButtonsDiv>
-        ) : (
-          <Button
-            onClick={() =>
-              logout({ logoutParams: { returnTo: window.location.origin } })
-            }
-          >
-            Log Out
-          </Button>
-        )}
-
-    </nav>
+          </Nav.Link>
+        </div>
+      )}
+      {!isAuthenticated ? (
+        <ButtonsDiv>
+          <Button onClick={() => loginWithRedirect()}>Log In</Button>{" "}
+          <Button onClick={handleSignUp}>Sign Up</Button>
+        </ButtonsDiv>
+      ) : (
+        <Button
+          onClick={() =>
+            logout({ logoutParams: { returnTo: window.location.origin } })
+          }
+        >
+          Log Out
+        </Button>
+      )}
+    </NavBar>
   );
 }
 
