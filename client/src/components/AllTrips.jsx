@@ -10,9 +10,8 @@ export default function AllTrips({ user, trips }) {
     const navigate = useNavigate();
 
   return trips && (
-    <div> 
         <div className='profile'>
-          <Card.Group itemsPerRow={2}>
+          <Card.Group itemsPerRow={2} style={{margin: '1em'}}>
                 {trips.length > 0 ? trips.map((trip) => {
                 return (
                   <Card 
@@ -23,15 +22,13 @@ export default function AllTrips({ user, trips }) {
                   fluid
                   >
                     <Card.Content>
-                      <Card.Header>{trip.trip_name}</Card.Header>
+                      <Card.Header style={{fontFamily: 'Lato, sans-serif', fontWeight: 'lighter'}}>{trip.trip_name}</Card.Header>
                       <Card.Meta>
                         {trip.trip_start_date} - {trip.trip_end_date}
                       </Card.Meta>
                       <Card.Description>
                         {trip.trip_description}
                       </Card.Description>
-
-                      <Link to={`${trip.trip_id}`}></Link>
                     </Card.Content>
                     <Card.Content extra>{trip.location}</Card.Content>
                   </Card>
@@ -40,17 +37,6 @@ export default function AllTrips({ user, trips }) {
                 }  
 
           </Card.Group>
-          
-            
-         
-      
-                
-                 
-
         </div>
-        
-
-
-    </div>
-  )
+       )
 }
