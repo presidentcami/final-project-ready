@@ -46,12 +46,11 @@ const EditToDo = ({ item, setIsEditing, setTodos, tripId }) => {
     initialValue.trip_id = tripId;
     initialValue.item_due_date = item[2];
     initialValue.item_version = item[3] + 1;
-    console.log(state);
+    // console.log(state);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(state);
     
         try {
             fetch(`/edittodo/${state.item_id}`, {
@@ -65,10 +64,10 @@ const EditToDo = ({ item, setIsEditing, setTodos, tripId }) => {
                 .then((response) => response.json())
                 .then(todos => {
                     setTodos(todos);
-                    console.log('todo details fetched when current todo is updated', todos);
+                    // console.log('todo details fetched when current todo is updated', todos);
                     setIsEditing(false)
                 })
-            console.log(state)
+            // console.log(state)
             // window.location = "/"; 
         } catch (error) {
             console.error(error.message)

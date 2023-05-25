@@ -54,7 +54,7 @@ const EditTripDetails = ({ tripDetails, setTripDetails, show, setShow }) => {
         initialValue.trip_end_date = trip_end_date;
         initialValue.trip_name = trip_name;
         initialValue.trip_start_date = trip_start_date;
-        console.log(state)
+        // console.log(state)
     };
 
     //A function to handle the post request
@@ -72,7 +72,7 @@ const EditTripDetails = ({ tripDetails, setTripDetails, show, setShow }) => {
                 .then((response) => response.json())
                 .then(trip => {
                     setTripDetails(trip);
-                    console.log('Trip details fetched when current trip is updated', trip);
+                    // console.log('Trip details fetched when current trip is updated', trip);
                     handleClose()
                 })
             // console.log(state)

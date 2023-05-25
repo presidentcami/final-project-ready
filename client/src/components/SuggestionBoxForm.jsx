@@ -78,7 +78,7 @@ const SuggestionBoxForm = ({ tripDetails }) => {
               <Button type="submit">Submit</Button>
         </form>
         {!suggestions ? null : <div>{suggestions.map((item, index) => {
-          console.log(item)
+          // console.log(item)
           return( 
         <PillButton key={index}>{item}</PillButton>)})}</div> }
 

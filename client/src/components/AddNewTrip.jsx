@@ -55,7 +55,7 @@ const AddTrip = ({ setTrips, user }) => {
             payload: { key: event.target.name, value: event.target.value },
         });
         state.user_id = user[0].user_id;
-        console.log(state)
+        // console.log(state)
     };
 
     // console.log(user)

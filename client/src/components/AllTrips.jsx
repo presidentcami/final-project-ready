@@ -24,7 +24,7 @@ export default function AllTrips({ user, trips, setTrips }) {
     loadTrips();
   }, []);
 
-    console.log("trips", trips)
+    // console.log("trips", trips)
   return trips && (
         <div className='profile'>
           <Card.Group itemsPerRow={2} style={{margin: '1em'}}>

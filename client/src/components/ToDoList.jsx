@@ -51,7 +51,7 @@ const ToDoList = ({ trip_id, todos, setTodos }) => {
     }, [trip_id]);
 
     const onDragEnd = result => {
-        console.log("result", result);
+        // console.log("result", result);
         const { destination, source, draggableId } = result;
 
         if (!destination) {
@@ -77,7 +77,7 @@ const ToDoList = ({ trip_id, todos, setTodos }) => {
 
         const movingItem = sourceList.splice(source.index, 1)
         
-        console.log(movingItem)
+        // console.log(movingItem)
 
         const newState = {
             ...todos, 

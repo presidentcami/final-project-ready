@@ -64,10 +64,7 @@ const ChangeInfo = ({ user, setUser }) => {
                     .then((response) => response.json())
                     .then((user) => {
                       setUser(user);
-                      console.log(
-                        "user details fetched when current user is updated",
-                        user
-                      );
+                      // console.log("user details fetched when current user is updated",user);
                     });
                   // console.log(state)
                   // window.location = "/";

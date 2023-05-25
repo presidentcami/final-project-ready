@@ -54,7 +54,7 @@ const AddToDoList = ({ setTodos, tripDetails }) => {
     });
     state.user_id = user_id;
     state.trip_id = trip_id;
-    console.log(state);
+    // console.log(state);
   };
 
   // console.log(user)
@@ -74,7 +74,7 @@ const AddToDoList = ({ setTodos, tripDetails }) => {
         .then((response) => response.json())
         .then((trip) => {
           setTodos(trip);
-          console.log("trips fetched when new trip is added", trip);
+          // console.log("trips fetched when new trip is added", trip);
           handleClose();
         });
       dispatch({ type: "reset", initialValue });
