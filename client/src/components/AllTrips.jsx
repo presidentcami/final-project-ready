@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Card } from 'semantic-ui-react'
 
 
-export default function AllTrips({ user, trip, setTrips }) {
+export default function AllTrips({ user, trips, setTrips }) {
 
   if (!user) return null;
 
