@@ -1,33 +1,9 @@
 <!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
 <a name="readme-top"></a>
-<!--
-*** Thanks for checking out the Best-README-Template. If you have a suggestion
-*** that would make this better, please fork the repo and create a pull request
-*** or simply open an issue with the tag "enhancement".
-*** Don't forget to give the project a star!
-*** Thanks again! Now go create something AMAZING! :D
--->
-
-
 
 <!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
 
 [![Contributors][contributors-shield]][contributors-url] [![LinkedIn][linkedin-shield]][linkedin-url]
-
-<!-- [![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url] -->
-
-
-
 
 <!-- PROJECT LOGO -->
 <br />
@@ -44,42 +20,13 @@ Ready is a vacation management app that can make you ready to go on your trip AN
     <br />
     <br />
     <!-- Need to add pictures for demo -->
-    <a href="https://github.com/presidentcami/ready">View Demo</a> 
+    <a href="https://server-n6hd.onrender.com">View Demo</a> 
     ·
     <a href="https://github.com/presidentcami/ready/issues">Report Bug</a>
     ·
     <a href="https://github.com/presidentcami/ready/issues">Request Feature</a>
   </p>
 </div>
-
-
-
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
-  </ol>
-</details>
-
 
 
 <!-- ABOUT THE PROJECT -->
@@ -179,82 +126,12 @@ Step 5: Run the app!
 ```
 
 
-<!-- add a badge to take ppl to these instructions to a HTML page or another README for setting up the code 
-better practice is to have one readme for one project -->
-<!-- 
-#### Quick Setup 
-#### Once you have successfully setup this template and initial database, the view will look like this:
-
-![Initial View of the project](https://raw.githubusercontent.com/Yosolita1978/screenshoots/50a5573f21c1265d20d838a36b98588f9b4eefce/2023/H1/Screen%20Shot%202023-03-09%20at%208.03.32%20PM.png)
-### Your First Express and React App with a DB connection
-
-1. Go to your source directory in your terminal and run the command `git clone https://github.com/Yosolita1978/2023EventonicaTemplate.git <NAMENEWDIRECTORY>`
-![You will see something like this in your terminal.]
-
-> <img width="768" alt="Screen Shot 2023-03-10 at 11 10 34 AM" src="https://user-images.githubusercontent.com/102179075/224608432-5e3d18bd-7cf5-4576-8b3f-2e903106abe1.png">
-
-2. To clean your folder from the owner's git, run the command `rm -rf .git` inside the folder <NAMENEWDIRECTORY>. Then re-initialize as the owner with `git init`.
-
-3. Go to the server folder in the project (`cd server`) and run the command `npm install`
-
-4. Go to the client folder (`cd .. and cd client`) and run the command `npm install`
-
-5. This template has two servers already working. Both servers should start simultaneously, or "concurrently", by running `npm run dev` from within the server directory in your terminal. Please note that your backend server will run from port 8080, and your frontend React server will run from port 3000 .
-
-6. To add a Postgres DB - you will need another terminal window for this part
-
-6.1 Inside your server directory create a `.env` file and copy there the values that are in `.envexample`
-
-* In a different terminal window go to the psql terminal with the comand `psql`
-* Inside the psql prompt create your database eventonica with the command `create database eventonica;` (don't forget the semicolon!)
-
-![You will see something like this](https://raw.githubusercontent.com/Yosolita1978/screenshoots/b6b7e47b8ccda4b9f709d20e94cacb6506d4dc13/2023/H1/Screen%20Shot%202023-03-13%20at%2011.13.13%20AM.png)
-
-Back in the terminal window with the project go inside the server directory and run the command `psql -d eventonica -f db.sql` that will create a table `events` with 5 rows inside your db eventonica. 
-![This will be the result of that command](https://raw.githubusercontent.com/Yosolita1978/screenshoots/b6b7e47b8ccda4b9f709d20e94cacb6506d4dc13/2023/H1/Screen%20Shot%202023-03-13%20at%2011.12.29%20AM.png)
-
-Your DB should look like this inside the psql terminal
-![Your DB should look like this](https://raw.githubusercontent.com/Yosolita1978/screenshoots/696689a627eb5ca206b5a2eaebec7cc1efa15ffc/2023/H1/Screen%20Shot%202023-03-09%20at%208.25.54%20PM.png)
-
-# Links that you will need
-
-* The instructions for [pg](https://node-postgres.com/apis/pool)  
-* Setup [postgres correctly](https://github.com/Techtonica/curriculum/blob/main/databases/installing-postgresql.md).
-   ``` -->
-
 <!-- <p align="right">(<a href="#readme-top">back to top</a>)</p> -->
 
 
 
-<!-- USAGE EXAMPLES -->
-<!-- ## Usage -->
-<!-- add, edit, favorite and delete events with screenshots -->
-
-<!-- Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p> -->
-
-
-
-<!-- ROADMAP -->
-<!-- things that i want to add to my README -->
-<!-- ## Roadmap
-
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-    - [ ] Nested Feature
-
-See the [open issues](https://github.com/github_username/repo_name/issues) for a full list of proposed features (and known issues).
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p> -->
-
-
-
 <!-- CONTRIBUTING -->
-<!-- ## Contributing
+## Contributing
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
@@ -267,16 +144,8 @@ Don't forget to give the project a star! Thanks again!
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p> -->
-
-
-
-<!-- LICENSE -->
-## License
-
-Distributed under the MIT License. See `LICENSE.txt` for more information.
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 
 
 
@@ -322,8 +191,6 @@ Other projects: [Techtonica Assignments Repo](https://github.com/presidentcami/t
 [linkedin-shield]: https://img.shields.io/badge/LinkedIn-0A66C2.svg?style=for-the-badge&logo=linkedin&colorB=0A66C2
 [linkedin-url]: https://linkedin.com/in/camille-williams-phl
 [product-screenshot]: client/src/assets/screenshot.png
-<!-- [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
-[Next-url]: https://nextjs.org/ -->
 [JavaScript.js]: https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black
 [JavaScript-url]: https://www.javascript.com/
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
@@ -348,89 +215,5 @@ Other projects: [Techtonica Assignments Repo](https://github.com/presidentcami/t
 [React-Router-url]: https://reactrouter.com/en/main
 [Vitest.dev]: https://img.shields.io/badge/vitest-6E9F18?style=for-the-badge&logo=vitest&logoColor=white
 [Vitest-url]: https://vitest.dev/
-<!-- [Vue.js]: https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D
-[Vue-url]: https://vuejs.org/
-[Angular.io]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
-[Angular-url]: https://angular.io/
-[Svelte.dev]: https://img.shields.io/badge/Svelte-4A4A55?style=for-the-badge&logo=svelte&logoColor=FF3E00
-[Svelte-url]: https://svelte.dev/
-[Laravel.com]: https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white
-[Laravel-url]: https://laravel.com -->
-[Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
-[Bootstrap-url]: https://getbootstrap.com
-<!-- [JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
-[JQuery-url]: https://jquery.com  -->
-
-
-
-
-
-
-<!-- ORIGINAL README FOR THIS TEMPLATE WITH VITE INFO
-# Your First Express and React App with Vite
- ⚡ Create a working full stack app with React and Express in minutes by running your client using Vite, your server using Express, and dumping your db in the template ⚡
-
-## Step by Step instructions - To use this project as your start point  🚀  
-### To create the whole project
-
-
-1. Go to your source directory in your terminal and run the command `git clone https://github.com/Techtonica/Techtonica_Template_FullStack.git NAMENEWDIRECTORY`
-
-2. To clean the owner git out of the main directory, run the command `rm -rf .git`
-
-3. Then while still within the main directory in your terminal, run the command `git init` to start your own git track 
-
-![You will something like this in your terminal](https://user-images.githubusercontent.com/102179075/227304861-7ad633d7-5ec0-463a-8554-9e8b4c8caaad.png?raw=true)
-
-4. Go to the server folder in the project (`cd server`) and run the command `npm install`
-
-5. Inside your server folder, create an .env file with `touch .env`
-
-⚠️ All these instructions should be inside your server folder ⚠️
-
-6. There are two ways to restore the DB dump file the project already contains: 
-
-A- If you have postgres set up postgres with an User:  
- * just run the command `psql -U postgres -f db.sql`. Make sure that you have your Postgres password on hand. The psql console will ask for your password. 
-
-B- If your initial configuration of postgres doesn't require a User:
-* just run the command `psql -f db.sql`
-
-7. Inside your server folder, open the file `.env.example` and copy the correct option for your configuation found there to your new .env file. 
-
-Here is what your `.env` might look like:
-
-```
-DB_URI="postgresql://localhost/techtonica"
-``` 
-For this template, the name of your db should be `techtonica`.
-
-⚠️ If you don't see a `techtonica` db, you can create one. From the terminal, navigate to the psql command line with `psql` and type `create database techtonica;` - don't forget the semicolon!! ⚠️
-
-![You will something like this in your terminal](https://raw.githubusercontent.com/Yosolita1978/screenshoots/a4674c79f61b39547b068044c5e5f2bd8510a4b8/2023/H1/Screen%20Shot%202023-03-22%20at%2011.03.12%20PM.png)
-
-8. Go to the client folder in the project (`cd .. and cd client`) and run the command `npm install`
-
-🔎 The `npm install` command installs the required dependencies defined in the package.json files and generates a node_modules folder with the installed modules.
-
-⚡ Note: Using Vite we can avoid all the package deprecation warnings ⚡
-
-9. If you want to run both servers using concurrently (which is already a npm dependency on the server) you can keep the script in the package.json in the server that reads `"dev": " concurrently 'npm start' 'cd .. && cd client && npm run dev' "`. If you run the command `npm run dev` from within your server, both the client and backend servers will start.
-
-10. Go to localhost:5173 and you should see something like this  💪
-
-![You will something like this in your terminal.](https://raw.githubusercontent.com/Yosolita1978/screenshoots/2f6afdd2318809714071b7625776c195903758ca/2023/H1/Screen%20Shot%202023-03-22%20at%2010.40.36%20PM.png)
-
-⚡ **Notes** ⚡  
-* React requires **Node >= 14.0.0** & **npm >= 5.6**
-* This template is using icons from `react-icons/io5` and `react-bootstrap` in the frontend. You can see all the frontend dependencies in the package.json on the `client` folder
-* Please note that your backend server will run from `port 8080`, and your frontend React server will run from `port 5173` (the default Vite port).
-
-* Confused about why use Vite? 🤔 → Check out the [Create a new React app with Vite](https://scrimba.com/articles/create-react-app-with-vite/)
-
-⚙️ Links that you could need:
-
-* The instructions for [pg](https://node-postgres.com/apis/pool)  
-* Setup [postgres correctly](https://github.com/Techtonica/curriculum/blob/main/databases/installing-postgresql.md) -->
 
 
