@@ -4,7 +4,7 @@ import Auth0WithNavigate from './auth/Auth0WithNavigate'
 import { BrowserRouter } from 'react-router-dom'
 import App from './App'
 import './index.css'
-
+import "semantic-ui-css/semantic.min.css";
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
