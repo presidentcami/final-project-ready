@@ -5,35 +5,27 @@ import DeleteToDo from './DeleteToDo';
 import ListColumn from './ListColumn';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 import styled from 'styled-components';
+import DoneList from './DoneList';
 
 
-const Container = styled.div`
+export const Container = styled.div`
     display: flex;
-
-`;
-const DoneBox = styled.div`
-  margin: 8px;
-  border: 1px solid lightgrey;
-  border-radius: 2px;
-  width: 220px;
-  background-color: white;
-
-  display: flex;
-  flex-direction: column;
 `;
 
-const Title = styled.h4`
+export const Title = styled.h4`
   padding: 8px;
 `;
 
-const ItemList = styled.div`
+export const ItemList = styled.div`
   padding: 8px;
   background-color: ${(props) => (props.isDragging ? "black" : "white")};
   flex-grow: 1;
   min-height: 100px;
 `;
+
 const ToDoList = ({ trip_id, todos, setTodos }) => {
 
+    const [doneItems, setDoneItems] = useState(null);
 
     const loadTripTodos = (tripid) => {
         // A function to fetch the list of students that will be load anytime that list change
@@ -44,6 +36,33 @@ const ToDoList = ({ trip_id, todos, setTodos }) => {
                 // console.log("intial data from backend", deets)
                 setTodos(deets);
             });
+    }
+
+    const setItemDone = (item_id) => {
+     const doneData = {
+        "item_is_done": true,
+        "trip_id": 3
+      }
+      try {
+        fetch(`http://localhost:8080/markdone/${item_id}`, {
+          method: "PUT",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(doneData),
+        })
+          .then((response) => response.json())
+          .then((items) => {
+            console.log("items details fetched when current items is updated", items)
+              setDoneItems(items);
+            ;
+          });
+        // console.log(state)
+        // window.location = "/";
+      } catch (error) {
+        console.error(error.message);
+      }
     }
 
     useEffect(() => {
@@ -73,19 +92,22 @@ const ToDoList = ({ trip_id, todos, setTodos }) => {
 
         const sourceList = [...todos[source.droppableId]];
         // const destinationList = 
-        const destinationList = [...todos[destination.droppableId]];
+        console.log('todos', todos)
+        console.log('todos at droppableid', todos[destination.droppableId]);
+        console.log("droppable id", destination.droppableId);
+        // const destinationList = [...todos[destination.droppableId]];
+        // const  destinationList = doneItems;
 
         const movingItem = sourceList.splice(source.index, 1)
         
-        console.log(movingItem)
+        console.log(movingItem[0].item_id)
+        // console.log(doneItems)
 
-        const newState = {
-            ...todos, 
-            [source.droppableId]: sourceList,
-            [destination.droppableId]: destinationList.concat(movingItem)
-        }
+        const newState = doneItems.concat(...movingItem)
 
-        setTodos(newState)
+        setDoneItems(newState)
+        console.log(doneItems)
+        setItemDone(movingItem[0].item_id);
     } else {
         return
     }
@@ -130,21 +152,7 @@ const ToDoList = ({ trip_id, todos, setTodos }) => {
               />
             );
           })}
-          <DoneBox>
-            <Title>Done</Title>
-            <Droppable droppableId="Done">
-
-              {(provided, snapshot) => (
-                <ItemList
-                  ref={provided.innerRef}
-                  {...provided.droppableProps}
-                  isDraggingOver={snapshot.isDraggingOver}
-                > Drag done items here
-                  {provided.placeholder}
-                </ItemList>
-              )}
-            </Droppable>
-          </DoneBox>
+         <DoneList  doneItems={doneItems} trip_id={trip_id} setDoneItems={setDoneItems} />
         </Container>
       </DragDropContext>
     )

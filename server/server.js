@@ -74,7 +74,19 @@ app.get('/triptodos/:tripid', async (req, res) => {
     } catch (e) {
         return res.status(400).json({ e });
     }
-})
+});
+
+app.get('/donetodos/:trip_id', async (req, res) => {
+    try {
+        console.log('done todos req params', req.params)
+        const { trip_id } = req.params;
+        const { rows: done_items } = await db.query('select * from ready_items left join ready_lists on ready_lists.list_id=ready_items.list_id where item_is_done=true AND trip_id=$1;', [trip_id]);
+        console.log("all done items for a specific trip", done_items);
+        res.send(done_items);
+    } catch (e) {
+        return res.status(400).json({ e });
+    }
+});
 
 app.get('/trips/:userid', async (req, res) => {
     try {
@@ -262,6 +274,23 @@ app.put('/edittodo/:item_id', async (req, res) => {
         console.log('all trip todo lists', lists)
     } catch (error) {
         console.error(error)
+    }
+})
+
+// a put request to mark an item done
+
+app.put('/markdone/:item_id', async (req, res) => {
+    const { item_id } = req.params;
+    const { item_is_done, trip_id } = req.body;
+
+    try {
+        const setDone = await db.query('update ready_items set item_is_done=$1, list_id=null where item_id=$2;', [item_is_done, item_id]);
+        
+        const { rows: done_items } = await db.query('select * from ready_items left join ready_lists on ready_lists.list_id=ready_items.list_id where item_is_done=true AND trip_id=$1;', [trip_id]);
+        console.log("all done items for a specific trip", done_items);
+        res.send(done_items);
+    } catch (error) {
+        console.error(error.message)
     }
 })
 

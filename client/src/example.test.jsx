@@ -19,13 +19,17 @@ const user = [{
 test('Navbar renders correctly', () => {
   render(<MyNavBar user={user} />);
   const navbarElement = screen.getByTestId('navbar');
-  // console.log("navbar element in test jsx", navbarElement)
+  // console.log("navbar element in test jsx", navbarElement)https://www.google.com/search?sxsrf=APwXEde4zURwLLC52tvNK3-wOjfUKDeaJw:1684955006077&q=react+testing+library+render+props&tbm=shop&sa=X&ved=2ahUKEwjp1uXE0o7_AhVKEVkFHZClBREQ0pQJegQICRAB
   expect(navbarElement).toBeDefined();
 });
 
 test('Without user landing page renders correctly', () => {
   const { getByTestId } = render(<NotLoggedInLandingPage />);
   const landingPage = getByTestId('landing');
-  expect(landingPage).toBeDefined
+  expect(landingPage).toBeDefined;
 });
+
+test('Loading page renders', () => {
+  
+})
 
