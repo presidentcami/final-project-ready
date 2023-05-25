@@ -45,21 +45,23 @@ const SuggestionBoxForm = ({ tripDetails }) => {
         e.preventDefault();
         // console.log(activities)
         const userPrompt = `I am going to ${location}. Here is a description of my trip: ${description}. I think we'll do these activities: ${activities}. Act as a trip planner for me. What should I pack for this trip? Write your response in the form of an array that looks like {'list': ['sandals', 'beach towel', 'sunglasses']}`
-        let mockDataArray = "? -Swimsuits -Beach towels -Kayaking gear -Sunscreen -Sunglasses -Hat -Sarong -Flip Flops -Snorkeling gear -Beach toys -Karaoke machine -Beach chairs -Cooler -Picnic blanket -Snacks -Drinks -Binoculars -Camera -Bug spray -First aid kit".split(/[-?]/)
-        let noEmptiesArray = mockDataArray.filter((item) => item.trim() != '');
-        setSuggestions(noEmptiesArray);
+        // let mockDataArray = "? -Swimsuits -Beach towels -Kayaking gear -Sunscreen -Sunglasses -Hat -Sarong -Flip Flops -Snorkeling gear -Beach toys -Karaoke machine -Beach chairs -Cooler -Picnic blanket -Snacks -Drinks -Binoculars -Camera -Bug spray -First aid kit".split(/[-?]/)
+        // let noEmptiesArray = mockDataArray.filter((item) => item.trim() != '');
+        // setSuggestions(noEmptiesArray);
         // console.log(userPrompt)
-        // try {
-        //  fetch(`http://localhost:8080/api/openai/${userPrompt}`)
-        //  .then((response) => response.json())
-        //  .then((data) => {
-        //     console.log('line 38 in suggestion box frontend - response', data)
-        //     setSuggestions(data)
-            
-        //   })
-        // } catch (error) {
-        //     console.error(error)
-        // }
+        try {
+         fetch(`http://localhost:8080/api/openai/${userPrompt}`)
+         .then((response) => response.json())
+         .then((data) => {
+            console.log('line 38 in suggestion box frontend - response', data)
+            let arrData = data.split(/[-?]/);
+            let noEmptiesData = arrData.filter((item) => item.trim() != "");
+            console.log('filtered data', noEmptiesData)
+            setSuggestions(noEmptiesData)
+          })
+        } catch (error) {
+            console.error(error)
+        }
         clearForm()
     }
     // console.log(suggestions);
@@ -77,7 +79,7 @@ const SuggestionBoxForm = ({ tripDetails }) => {
               />
               <Button type="submit">Submit</Button>
         </form>
-        {!suggestions ? null : <div>{suggestions.map((item, index) => {
+        {!suggestions ? null : <div> <button onClick={() => setSuggestions(null)}>clear</button> {suggestions.map((item, index) => {
           // console.log(item)
           return( 
         <PillButton key={index}>{item}</PillButton>)})}</div> }
