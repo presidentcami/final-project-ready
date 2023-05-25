@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components';
-import Suggestions from './Suggestions';
+import * as MdIcons from "react-icons/md";
 
   const Button = styled.button`
     border-radius: 10px;
@@ -23,6 +23,15 @@ import Suggestions from './Suggestions';
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 16px;
+    font-family: "Lato", sans-serif;
+    font-weight: lighter;
+  `;
+
+
+  const ClearButton = styled.button`
+    border: none;
+    background-color: white;
+    color: red;
     font-family: "Lato", sans-serif;
     font-weight: lighter;
   `;
@@ -79,7 +88,7 @@ const SuggestionBoxForm = ({ tripDetails }) => {
               />
               <Button type="submit">Submit</Button>
         </form>
-        {!suggestions ? null : <div> <button onClick={() => setSuggestions(null)}>clear</button> {suggestions.map((item, index) => {
+        {!suggestions ? null : <div> <ClearButton type="button" onClick={() => setSuggestions(null)}><MdIcons.MdClear /></ClearButton> {suggestions.map((item, index) => {
           // console.log(item)
           return( 
         <PillButton key={index}>{item}</PillButton>)})}</div> }
