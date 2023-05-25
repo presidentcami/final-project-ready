@@ -1,22 +1,25 @@
-import React from 'react'
-import MyNavBar from '../routes/Navbar'
-import NotLoggedInLandingPage from './NotLoggedInLandingPage'
-import SideBar from './Sidebar'
-import { Outlet } from 'react-router-dom'
+import React, { useState } from "react";
+import MyNavBar from "../routes/Navbar";
+import NotLoggedInLandingPage from "./NotLoggedInLandingPage";
+import SideBar from "./Sidebar";
+import { Outlet } from "react-router-dom";
 
-const Layout = ({ setUser, user, trips, setTrips }) => {
+const Layout = ({ setUser, user, trips }) => {
+  // console.log(trips)
   return (
-        <div>
-          <MyNavBar setUser={setUser} user={user}/>
+    <div className="App">
+      <MyNavBar setUser={setUser} user={user} />
 
-            {!!user ? (
-            <div style={{ flex: true }}>
-              <SideBar trips={trips} setTrips={setTrips} />
-            <Outlet />
+      {!!user ? (
+        <div style={{ flex: true }}>
+          <SideBar trips={trips} user={user} />
+          <Outlet />
         </div>
-    ) : <NotLoggedInLandingPage />}
-    </div >
-  )
-}
+      ) : (
+        <NotLoggedInLandingPage />
+      )}
+    </div>
+  );
+};
 
-export default Layout
+export default Layout;

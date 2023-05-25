@@ -15,14 +15,9 @@ const SidebarData = [
         subNav: [
             {
                 title: 'Users',
-                path: '/dashboard/users',
+                path: '/dashboard/profile',
                 icon: <IoIcons.IoIosPaper />
             },
-        //     {
-        //         title: 'Revenue',
-        //         path: '/overview/revenue',
-        //         icon: <IoIcons.IoIosPaper />
-        //     }
         ]
     },
     {
@@ -34,8 +29,8 @@ const SidebarData = [
 
         subNav: [
             // {
-            //     title: 'Specific Trip',
-            //     path: '/dashboard/trips/:trip_id',
+            //     title: 'All Trips',
+            //     path: '/trips',
             //     icon: <IoIcons.IoIosPaper />,
             //     cName: 'sub-nav'
             // },
@@ -52,37 +47,6 @@ const SidebarData = [
             // }
         ]
     },
-    // {
-    //     title: 'Products',
-    //     path: '/products',
-    //     icon: <FaIcons.FaCartPlus />
-    // },
-    // {
-    //     title: 'Team',
-    //     path: '/team',
-    //     icon: <IoIcons.IoMdPeople />
-    // },
-    // {
-    //     title: 'List Templates',
-    //     path: '/list-templates',
-    //     icon: <FaIcons.FaEnvelopeOpenText />,
-
-    //     iconClosed: <RiIcons.RiArrowDownSFill />,
-    //     iconOpened: <RiIcons.RiArrowUpSFill />,
-
-    //     subNav: [
-    //     //     {
-    //     //         title: 'Message 1',
-    //     //         path: '/messages/message1',
-    //     //         icon: <IoIcons.IoIosPaper />
-    //     //     },
-    //     //     {
-    //     //         title: 'Message 2',
-    //     //         path: '/messages/message2',
-    //     //         icon: <IoIcons.IoIosPaper />
-    //     //     }
-    //     ]
-    // },
     {
         title: 'Support',
         path: '/support',

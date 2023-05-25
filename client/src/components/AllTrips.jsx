@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { Card } from 'semantic-ui-react'
 
 
-export default function AllTrips({ user, trips, setTrips }) {
+export default function AllTrips({ user, trips }) {
 
   if (!user) return null;
-  const { user_id } = user[0]
 
-  const loadTrips = () => {
+  const { user_id } = user[0];
+  // console.log("trips", trips)
+    const navigate = useNavigate();
+ const loadTrips = () => {
     // A function to fetch the list of students that will be load anytime that list change
     fetch(`/trips/${user_id}`)
       .then((response) => response.json())
@@ -22,27 +25,34 @@ export default function AllTrips({ user, trips, setTrips }) {
   }, []);
 
     console.log("trips", trips)
-
-  return (
-    <div> 
+  return trips && (
         <div className='profile'>
-              {trips.map((trip) => {
+          <Card.Group itemsPerRow={2} style={{margin: '1em'}}>
+                {trips.length > 0 ? trips.map((trip) => {
                 return (
-                <li key={trip.trip_id}>
-                <Link to={`${trip.trip_id}`}>{trip.trip_name}</Link>
-                {/* {trip.location}
-                {trip.trip_description}
-                {trip.trip_start_date} - {trip.trip_end_date} */}
-                
-                </li>)
-                })
-                }
-                
+                  <Card 
+                  key={trip.trip_id} 
+                  onClick={() => {
+                  navigate(`${trip.trip_id}`);
+                  }}
+                  fluid
+                  >
+                    <Card.Content>
+                      <Card.Header style={{fontFamily: 'Lato, sans-serif', fontWeight: 'lighter'}}>{trip.trip_name}</Card.Header>
+                      <Card.Meta>
+                        {trip.trip_start_date} - {trip.trip_end_date}
+                      </Card.Meta>
+                      <Card.Description>
+                        {trip.trip_description}
+                      </Card.Description>
+                    </Card.Content>
+                    <Card.Content extra>{trip.location}</Card.Content>
+                  </Card>
+                );
+                }) : <h3>You don't have any trips yet! Get started <span><a href='/dashboard'>here</a></span>.</h3>
+                }  
 
+          </Card.Group>
         </div>
-        
-
-
-    </div>
-  )
+       )
 }

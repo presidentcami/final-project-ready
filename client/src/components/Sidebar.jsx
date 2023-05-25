@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import SidebarData from './SidebarData'
@@ -39,24 +39,28 @@ import * as AiIcons from 'react-icons/ai'
 //     width: 100%
 // `
 
-const SideBar = ({ trips }) => {
+
+const SideBar = ({ trips, user }) => {
+
+// console.log(user)
+// user && console.log(user)
 
   return (
-    <div className='sidebar'>
-        {/* <Nav>
+    <div className="sidebar">
+      {/* <Nav>
             <NavIcon to='#'>
                 <FaIcons.FaBars />
             </NavIcon>
         </Nav> */}
+      <div>
         <div>
-            <div>
-                {SidebarData.map((item, index) => {
-                    return <SubMenu item={item} key={index} trips={trips} />
-                })}
-            </div>
+          <SubMenu item={SidebarData[0]} user={user} />
+          <SubMenu item={SidebarData[1]} subMenuList={trips} />
+          <SubMenu item={SidebarData[2]} />
         </div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
 export default SideBar
