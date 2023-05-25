@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 import styled from 'styled-components';
-import {Title, ItemList} from './ToDoList'
+import {Title, ItemList} from './ListColumn'
 
 const DoneBox = styled.div`
   margin: 8px;
   border: 1px solid lightgrey;
   border-radius: 2px;
   width: 220px;
-  background-color: white;
-
+  background-color: #ececec;
   display: flex;
   flex-direction: column;
 `;
@@ -41,7 +40,7 @@ const getDoneItems = (trip_id) => {
     getDoneItems(trip_id);
   }, []);
 
-  return doneItems && (
+  return (
     <DoneBox>
       <Title>Done</Title>
       <Droppable droppableId="Done">
@@ -53,11 +52,12 @@ const getDoneItems = (trip_id) => {
           >
             {" "}
             {/* Drag done items here */}
-            {doneItems.length > 0 ? (
-              doneItems.map((item) => (
-                // console.log("in map", item);
-                item.item
-              ))
+            {doneItems?.length > 0 ? (
+              doneItems.map(
+                (item, index) =>
+                  // console.log("in map", item);
+                 <div key={index}>{item.item}</div> 
+              )
             ) : (
               <p>Drag done items here</p>
             )}
