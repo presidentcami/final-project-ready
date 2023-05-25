@@ -18,12 +18,14 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
+
+[![Contributors][contributors-shield]][contributors-url] [![LinkedIn][linkedin-shield]][linkedin-url]
+
+<!-- [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
+[![MIT License][license-shield]][license-url] -->
+
 
 
 
@@ -31,13 +33,13 @@
 <br />
 <div align="center">
   <a href="https://github.com/presidentcami/ready">
-    <img src="client/src/assets/BlueTechtonicaWord.png" alt="Logo" width="80" height="80">
+    <img src="client/src/assets/ready.png" alt="Logo" width="80" height="80">
   </a>
 
-<h1 align="center">READY</h1>
+<h1 align="center">Ready</h1>
 
   <p align="center">
-Ready is a vacation management app that can make you ready to go on your trip AND come back to reality. Users create to-do lists for before, during, and after their trips. Lists can be associated with a specific trip, which will include a location, date, and a description to help AI recommend an itinerary and things to pack. A user can save preset packing lists, start a new vacation, and in that vacation copy various packing list. They can also add in ad-hoc lists or details that are specific to that vacation.    <br />
+Ready is a vacation management app that can make you ready to go on your trip AND come back to reality. Users create to-do lists for before, during, and after their trips. Lists can be associated with a specific trip, which will include a location, date, and a description to help AI recommend an itinerary and things to pack. They can also add in ad-hoc lists or details that are specific to that vacation. <br />
     <a href="https://github.com/presidentcami/ready"><strong>Explore the docs »</strong></a>
     <br />
     <br />
@@ -53,7 +55,7 @@ Ready is a vacation management app that can make you ready to go on your trip AN
 
 
 <!-- TABLE OF CONTENTS -->
-<!-- <details>
+<details>
   <summary>Table of Contents</summary>
   <ol>
     <li>
@@ -76,16 +78,18 @@ Ready is a vacation management app that can make you ready to go on your trip AN
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
-</details> -->
+</details>
 
 
 
 <!-- ABOUT THE PROJECT -->
-<!-- ## About The Project -->
+## About The Project
 
-<!-- [![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![Ready Screen Shot][product-screenshot]](https://server-n6hd.onrender.com/)
 
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description` -->
+I am a person who loves planning, going on vacations, and having a good time. Sometimes that means coming back down to earth from an experience and re-entering real life can be challenging! With the Ready app, you are encouraged to not only plan the things you want to do and pack to prepare for a trip, but also plan what you'll need to do when the trip is over. 
+
+<!-- Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description` -->
 
 <!-- <p align="right">(<a href="#readme-top">back to top</a>)</p> -->
 
@@ -106,6 +110,14 @@ React Testing Library
 * [![Express][Express.js]][Express-url]
 * [![React][React.js]][React-url]
 * [![Node][Node.js]][Node-url]
+* [![Styled Components][Styled Components]][Styled-Components-Url]
+* [![Vite][Vite.js]][Vite-url]
+* [![React Router][React-Router.js]][React-Router-url]
+* [![Vitest][Vitest.dev]][Vitest-url]
+
+### API Reference
+* [![OpenAI][OpenAI]][OpenAI-url]
+
 <!-- * [![Bootstrap][Bootstrap.com]][Bootstrap-url] -->
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -113,7 +125,7 @@ React Testing Library
 
 
 <!-- GETTING STARTED -->
-<!-- ## Getting Started -->
+## Getting Started
 <!-- instructions for how to use my project and more information about it
 
  -->
@@ -130,7 +142,42 @@ This is an example of how to list things you need to use the software and how to
   npm install npm@latest -g
   ``` -->
 
-<!-- ### Installation -->
+<!-- Installation -->
+
+## Installation
+
+**This project requires Auth0! Please visit [Auth0](https://auth0.com/) to make an account and retrieve a domain and clientid. See .env.example for set up!**
+
+Step 1: Go to your terminal: clone the project and switch into the project directory.
+
+```bash
+  git clone https://github.com/presidentcami/ready.git
+  cd ready
+```
+- To clean the owner git out of the main directory, run the command `rm -rf .git` Then while still within the main directory in your terminal, run the command `git init` to start your own git track 
+Step 2: Install all packages.
+
+```bash
+  cd client && npm install && cd ../server && npm install
+```
+
+Step 3: Setup Environment Variables
+
+- Copy the instructions from both .env.example files in the client and server.
+
+Step 4: Connect the database and the data.
+
+```bash
+  cd server
+  psql techtonica -f db.sql
+```
+
+Step 5: Run the app!
+
+```bash
+  cd server && npm run dev
+```
+
 
 <!-- add a badge to take ppl to these instructions to a HTML page or another README for setting up the code 
 better practice is to have one readme for one project -->
@@ -236,14 +283,11 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Camille Williams - [@presidentcami](https://twitter.com/presidentcami)
+Twitter - [@presidentcami](https://twitter.com/presidentcami)
 
 LinkedIn - [Find Me On LinkedIn!][linkedin-url]
 
 Other projects: [Techtonica Assignments Repo](https://github.com/presidentcami/techtonica-assignments)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 
 <!-- ACKNOWLEDGMENTS -->
@@ -275,9 +319,9 @@ Other projects: [Techtonica Assignments Repo](https://github.com/presidentcami/t
 [issues-url]: https://github.com/presidentcami/ready/issues
 [license-shield]: https://img.shields.io/github/license/presidentcami/ready.svg?style=for-the-badge
 [license-url]: https://github.com/presidentcami/ready/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-shield]: https://img.shields.io/badge/LinkedIn-0A66C2.svg?style=for-the-badge&logo=linkedin&colorB=0A66C2
 [linkedin-url]: https://linkedin.com/in/camille-williams-phl
-[product-screenshot]: images/screenshot.png
+[product-screenshot]: client/src/assets/screenshot.png
 <!-- [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
 [Next-url]: https://nextjs.org/ -->
 [JavaScript.js]: https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black
@@ -294,6 +338,16 @@ Other projects: [Techtonica Assignments Repo](https://github.com/presidentcami/t
 [Bootstrap-url]: https://getbootstrap.com
 [Fontawesome.com]: https://img.shields.io/badge/fontawesome-528DD7?style=for-the-badge&logo=fontawesome&logoColor=white
 [Fontawesome-url]: https://fontawesome.com
+[Styled Components]: https://img.shields.io/badge/styledcomponents-DB7093?style=for-the-badge&logo=styledcomponents&logoColor=white
+[Styled-Components-url]: https://styled-components.com/
+[Vite.js]: https://img.shields.io/badge/vite-646CFF?style=for-the-badge&logo=vite&logoColor=white
+[Vite-url]: https://vitejs.dev/
+[OpenAi]: https://img.shields.io/badge/openai-412991?style=for-the-badge&logo=openai&logoColor=white
+[OpenAI-url]: https://platform.openai.com/
+[React-Router.js]: https://img.shields.io/badge/ReactRouter-CA4245?style=for-the-badge&logo=reactrouter&logoColor=white
+[React-Router-url]: https://reactrouter.com/en/main
+[Vitest.dev]: https://img.shields.io/badge/vitest-6E9F18?style=for-the-badge&logo=vitest&logoColor=white
+[Vitest-url]: https://vitest.dev/
 <!-- [Vue.js]: https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D
 [Vue-url]: https://vuejs.org/
 [Angular.io]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
