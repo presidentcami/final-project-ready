@@ -111,7 +111,7 @@ app.get('/api/openai/:prompt', async (req, res) => {
             // "prompt": `I want you to act as a trip planner. I am going to ${location}. Here is a description of my trip: ${description} . Here are some activities I may do ${activities}. What should I pack for this trip? Write your response in the form of an array that looks like {'list': ['sandals', 'beach towel', 'sunglasses']}`,
             prompt: prompt,
             max_tokens: 500,
-            temperature: 0.6,
+            temperature: 1,
             n: 1,
             frequency_penalty: 0,
             presence_penalty: 0,
