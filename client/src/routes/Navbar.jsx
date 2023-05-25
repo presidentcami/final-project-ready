@@ -46,6 +46,8 @@ const addUser = (auth0User, setUser) => {
     background-color: #fddc95;
     margin: 5px;
     margin-right: 3rem;
+    font-family: "Lato", sans-serif;
+    font-weight: lighter;
   `;
 
   const ButtonsDiv = styled.div`
