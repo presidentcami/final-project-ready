@@ -37,7 +37,7 @@ const ToDoList = ({ trip_id, todos, setTodos }) => {
 
     const loadTripTodos = (tripid) => {
         // A function to fetch the list of students that will be load anytime that list change
-        fetch(`http://localhost:8080/triptodos/${tripid}`)
+        fetch(`/triptodos/${tripid}`)
             .then((response) => response.json())
             .then((deets) => {
 

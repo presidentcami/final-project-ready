@@ -54,7 +54,7 @@ const EditToDo = ({ item, setIsEditing, setTodos, tripId }) => {
     console.log(state);
     
         try {
-            fetch(`http://localhost:8080/edittodo/${state.item_id}`, {
+            fetch(`/edittodo/${state.item_id}`, {
                 method: "PUT",
                 headers: {
                     Accept: "application/json",

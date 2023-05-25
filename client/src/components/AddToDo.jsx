@@ -74,7 +74,7 @@ const AddToDo = ({ list_id, tripId, setTodos }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            fetch('http://localhost:8080/addtodo', {
+            fetch('/addtodo', {
                 method: "POST",
                 headers: {
                     Accept: "application/json",
