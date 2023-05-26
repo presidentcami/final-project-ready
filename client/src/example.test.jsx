@@ -1,6 +1,6 @@
 import MyNavBar from './routes/Navbar.jsx';
 import {expect, test } from 'vitest';
-import {getByRole, render, screen, waitFor, fireEvent } from '@testing-library/react';
+import {getByRole, render, screen, fireEvent } from '@testing-library/react';
 import NotLoggedInLandingPage from './components/NotLoggedInLandingPage';
 import PageLoader from './components/PageLoader.jsx';
 import Profile from './components/Profile.jsx';
@@ -8,6 +8,7 @@ import AddTrip from './components/AddNewTrip.jsx';
 import Sidebar from './components/Sidebar.jsx';
 import { MemoryRouter } from 'react-router-dom';
 import ChangeInfo from './components/ChangeInfo.jsx';
+import TripDetails from './components/TripDetails.jsx';
 
 //Navbar rendering
 const user = [{
@@ -19,6 +20,20 @@ const user = [{
   user_last_name: "User",
   user_username: null
 }]
+
+  const trips = [
+    {
+      trip_id: 3,
+      trip_name: "Down the Shore",
+      trip_start_date: "2023-08-12",
+      trip_end_date: "2023-08-19",
+      location: "Sea Isle City",
+      user_id: 1,
+      trip_description:
+        "Family vacation with my partner Joe and his parents. We go every year, stay at a house and hit up the beach.",
+      trip_created: "2023-05-16T21:13:35.368Z",
+    },
+  ];
 
 const setUser = vi.fn();
 const handleSubmit = vi.fn();
@@ -50,18 +65,6 @@ test('Dashboard shows add new trip form', () => {
 })
 
 test("renders Sidebar component correctly", () => {
-  const trips = [
-   {
-     trip_id: 3,
-     trip_name: 'Down the Shore',
-     trip_start_date: '2023-08-12',
-     trip_end_date: '2023-08-19',
-     location: 'Sea Isle City',
-     user_id: 1,
-     trip_description: 'Family vacation with my partner Joe and his parents. We go every year, stay at a house and hit up the beach.',
-     trip_created: '2023-05-16T21:13:35.368Z'
-   }
- ];
 
   render(
   <MemoryRouter>
@@ -93,4 +96,43 @@ test("renders ChangeInfo component with user data in form", async () => {
    expect(screen.getByLabelText("Email Address").value).toBe("testuser@gmail.com");
    expect(screen.getByLabelText("First Name").value).toBe("Test");
    expect(screen.getByLabelText("Last Name").value).toBe("User");
+});
+
+test("renders trip details and toggles to edit mode on button click", () => {
+  const tripDetails = [
+    {
+      trip_id: 1,
+      trip_name: "Trip 1",
+      location: "Location 1",
+      trip_description: "Description 1",
+      trip_start_date: "2023-01-01",
+      trip_end_date: "2023-01-10",
+    },
+  ];
+
+  const setTripDetails = vi.fn();
+
+  render(
+    <TripDetails tripDetails={tripDetails} setTripDetails={setTripDetails} />
+  );
+
+  // Assert initial trip details are rendered
+  expect(screen.getByText("Trip 1")).toBe;
+  expect(screen.getByText("Location 1")).toBe;
+  expect(screen.getByText("Description 1")).toBe;
+  expect(screen.getByText("2023-01-01-2023-01-10")).toBe;
+
+  // Assert button exists and click it
+  const editButton = screen.getByText("Edit Trip");
+  expect(editButton).toBe;
+  fireEvent.click(editButton);
+
+  // Assert edit mode is toggled and EditTripDetails component is rendered
+  expect(screen.queryByText("Trip 1")).not.toBe;
+  expect(screen.queryByText("Location 1")).not.toBe;
+  expect(screen.queryByText("Description 1")).not.toBe;
+  expect(screen.queryByText("2023-01-01-2023-01-10")).not.toBe;
+  expect(screen.getByText("Edit Trip")).toBe;
+
+  // Additional assertions for the behavior of EditTripDetails component can be added here
 });
