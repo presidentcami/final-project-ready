@@ -57,7 +57,7 @@ app.get('/triptodos/:tripid', async (req, res) => {
     try {
         const { tripid } = req.params;
         console.log("trip id from req.params", tripid)
-        const { rows } = await db.query('select ready_lists.list_id, list_name, trip_id, user_id, is_template, list_created, item_id, item, item_is_done, item_due_date, item_version from ready_lists left join ready_items on ready_lists.list_id=ready_items.list_id where trip_id=$1;', [tripid])
+        const { rows } = await db.query('select ready_lists.list_id, list_name, trip_id, user_id, is_template, list_created, item_id, item, item_is_done, item_due_date, item_version from ready_lists left join ready_items on ready_lists.list_id=ready_items.list_id where trip_id=$1', [tripid])
 
         let lists = {}
         for (let i = 0; i < rows.length; i++) {
@@ -74,7 +74,19 @@ app.get('/triptodos/:tripid', async (req, res) => {
     } catch (e) {
         return res.status(400).json({ e });
     }
-})
+});
+
+app.get('/donetodos/:trip_id', async (req, res) => {
+    try {
+        console.log('done todos req params', req.params)
+        const { trip_id } = req.params;
+        const { rows: done_items } = await db.query('select * from ready_items left join ready_lists on ready_lists.list_id=ready_items.list_id where item_is_done=true AND trip_id=$1;', [trip_id]);
+        console.log("all done items for a specific trip", done_items);
+        res.send(done_items);
+    } catch (e) {
+        return res.status(400).json({ e });
+    }
+});
 
 app.get('/trips/:userid', async (req, res) => {
     try {
@@ -99,7 +111,7 @@ app.get('/api/openai/:prompt', async (req, res) => {
             // "prompt": `I want you to act as a trip planner. I am going to ${location}. Here is a description of my trip: ${description} . Here are some activities I may do ${activities}. What should I pack for this trip? Write your response in the form of an array that looks like {'list': ['sandals', 'beach towel', 'sunglasses']}`,
             prompt: prompt,
             max_tokens: 500,
-            temperature: 0.6,
+            temperature: 1,
             n: 1,
             frequency_penalty: 0,
             presence_penalty: 0,
@@ -171,7 +183,7 @@ app.post('/addtodo', async (req, res) => {
         console.log('add to do request', req.body)
         const result = await db.query('INSERT INTO ready_items(item, item_due_date, list_id) VALUES($1, $2, $3)', [item, item_due_date, list_id]);
 
-        const { rows } = await db.query('select ready_lists.list_id, list_name, trip_id, user_id, is_template, list_created, item_id, item, item_is_done, item_due_date, item_version from ready_lists left join ready_items on ready_lists.list_id=ready_items.list_id where trip_id=$1;', [trip_id])
+        const { rows } = await db.query('select ready_lists.list_id, list_name, trip_id, user_id, is_template, list_created, item_id, item, item_is_done, item_due_date, item_version from ready_lists left join ready_items on ready_lists.list_id=ready_items.list_id where trip_id=$1', [trip_id])
         let lists = {}
         for (let i = 0; i < rows.length; i++) {
             let list_name = rows[i].list_name;
@@ -262,6 +274,23 @@ app.put('/edittodo/:item_id', async (req, res) => {
         console.log('all trip todo lists', lists)
     } catch (error) {
         console.error(error)
+    }
+})
+
+// a put request to mark an item done
+
+app.put('/markdone/:item_id', async (req, res) => {
+    const { item_id } = req.params;
+    const { item_is_done, trip_id } = req.body;
+
+    try {
+        const setDone = await db.query('update ready_items set item_is_done=$1 where item_id=$2;', [item_is_done, item_id]);
+        
+        const { rows: done_items } = await db.query('select * from ready_items left join ready_lists on ready_lists.list_id=ready_items.list_id where item_is_done=true AND trip_id=$1;', [trip_id]);
+        console.log("all done items for a specific trip", done_items);
+        res.send(done_items);
+    } catch (error) {
+        console.error(error.message)
     }
 })
 

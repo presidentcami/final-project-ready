@@ -9,21 +9,20 @@ const Container = styled.div`
   border: 1px solid lightgrey;
   border-radius: 2px;
   width: 220px;
-  background-color: white;
+  background-color: #ececec;
 
   display: flex;
   flex-direction: column;
 `;
-const Title = styled.h4`
+export const Title = styled.h4`
     padding: 8px;
 
 `;
-const ItemList = styled.div`
+export const ItemList = styled.div`
   padding: 8px;
-  background-color: ${(props) => (props.isDragging ? "black" : "white")};
+  background-color: #ececec;
   flex-grow: 1;
-  min-height: 100px;
-  height: 200px;
+  min-height: 200px;
   overflow-y: scroll;
 `;
 
@@ -43,9 +42,10 @@ const ListColumn = ({ column, items, list_id, tripId, setTodos }) => {
             isDraggingOver={snapshot.isDraggingOver}
           >
             {items.map((item, index) => (
-              <Item
+              
+             item?.length > 0 && <Item
                 key={item[0]}
-                item={[...item]}
+                item={item}
                 index={index}
                 setTodos={setTodos}
                 tripId={tripId}

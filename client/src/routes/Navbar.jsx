@@ -53,6 +53,7 @@ const addUser = (auth0User, setUser) => {
       margin-top: -5px;
   `;
 
+
   const Button = styled.button`
     border-radius: 10px;
     border: none;
@@ -76,6 +77,9 @@ function MyNavBar({ user, setUser }) {
     isLoading,
   } = useAuth0();
 
+    // console.log("isLoading", isLoading);
+
+
   const handleSignUp = async () => {
     await loginWithRedirect({
       appState: {
@@ -91,15 +95,8 @@ function MyNavBar({ user, setUser }) {
     if (auth0User) addUser(auth0User, setUser);
   }, [auth0User]);
 
-  if (isLoading) {
-    return (
-      <div className="page-layout">
-        <PageLoader />
-      </div>
-    );
-  }
+ 
 
-  // console.log(user);
   return (
     <NavBar data-testid="navbar">
       {!user ? null : (
