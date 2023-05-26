@@ -8,6 +8,7 @@ import OneTrip from './components/OneTrip';
 import Layout from './components/Layout';
 import ChangeInfo from './components/ChangeInfo';
 import AddTrip from './components/AddNewTrip';
+import Support from './components/Support';
 
 
 
@@ -49,6 +50,7 @@ function App() {
             <Route path='dashboard/profile'  element={<ChangeInfo user={user} setUser={setUser} />} />
             <Route path='trips' element={<AllTrips user={user} setTrips={setTrips} trips={trips} />} />
             <Route path='trips/:trip_id' element={<OneTrip />} />
+            <Route path='support' element={<Support />} />
         </Route>
       </Routes>
     
