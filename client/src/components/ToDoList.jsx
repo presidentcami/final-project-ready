@@ -23,7 +23,7 @@ const ToDoList = ({ trip_id, todos, setTodos }) => {
             .then((response) => response.json())
             .then((deets) => {
 
-                console.log("intial data from backend", deets)
+            // console.log("intial data from backend", deets)
                 setTodos(deets);
             });
     }
