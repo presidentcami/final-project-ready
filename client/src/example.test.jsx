@@ -1,24 +1,27 @@
-
 import MyNavBar from './routes/Navbar.jsx';
 import {expect, test } from 'vitest';
-import {getByRole, render, screen} from '@testing-library/react';
+import {getByRole, render, screen, waitFor, fireEvent } from '@testing-library/react';
 import NotLoggedInLandingPage from './components/NotLoggedInLandingPage';
 import PageLoader from './components/PageLoader.jsx';
 import Profile from './components/Profile.jsx';
 import AddTrip from './components/AddNewTrip.jsx';
 import Sidebar from './components/Sidebar.jsx';
 import { MemoryRouter } from 'react-router-dom';
+import ChangeInfo from './components/ChangeInfo.jsx';
 
 //Navbar rendering
 const user = [{
-  user_auth0_nickname: "camiwills325",
+  user_auth0_nickname: "testuser",
   user_created: "2023-05-09T21:55:22.122Z",
-  user_email: "camiwills325@gmail.com",
-  user_first_name: "Camille",
+  user_email: "testuser@gmail.com",
+  user_first_name: "Test",
   user_id: 1,
-  user_last_name: "Williams",
+  user_last_name: "User",
   user_username: null
 }]
+
+const setUser = vi.fn();
+const handleSubmit = vi.fn();
 
 // this test passes when i comment out the isLoading function
 test('Navbar renders correctly', () => {
@@ -40,10 +43,10 @@ test('Loading page renders', () => {
   expect(loadingPage).toBe;
 });
 
-test('Profile page shows add new trip button', () => {
+test('Dashboard shows add new trip form', () => {
   const { getByText } = render(<AddTrip />)
-  const addNewTripButton = getByText('Add a New Trip');
-  expect(addNewTripButton).toBe;
+  const addNewTripForm = getByText('Add New Trip');
+  expect(addNewTripForm).toBe;
 })
 
 test("renders Sidebar component correctly", () => {
@@ -65,4 +68,29 @@ test("renders Sidebar component correctly", () => {
     <Sidebar trips={trips} user={user} />
   </MemoryRouter>
   );
+});
+
+
+test("renders Profile component correctly", () => {
+
+  const { getByText } = render(<Profile user={user} />);
+
+  const fullName = getByText("Test User");
+  const welcomeMessage = getByText(
+    "Welcome to your homepage, user at testuser@gmail.com"
+  );
+  const dashboardMessage = getByText("Go to your Dashboard to add a new trip!");
+
+  expect(fullName).toBe;
+  expect(welcomeMessage).toBe;
+  expect(dashboardMessage).toBe;
+});
+
+test("renders ChangeInfo component with user data in form", async () => {
+
+  render(<ChangeInfo user={user} setUser={setUser} />);
+
+   expect(screen.getByLabelText("Email Address").value).toBe("testuser@gmail.com");
+   expect(screen.getByLabelText("First Name").value).toBe("Test");
+   expect(screen.getByLabelText("Last Name").value).toBe("User");
 });

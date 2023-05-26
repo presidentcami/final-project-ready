@@ -75,21 +75,25 @@ const ChangeInfo = ({ user, setUser }) => {
 
   return (
     <div className="profile" style={{ paddingTop: "10%" }}>
-      <form onSubmit={handleSubmit} style={{ textAlign: 'center' }}>
+      <form onSubmit={handleSubmit} style={{ textAlign: "center" }}>
         <h2>Your Profile</h2>
         <div>
-          <label><h3>Email Address</h3></label>
+          <h3>
+            <label htmlFor="user-email">Email Address</label>
+          </h3>
         </div>
         <input
           type="text"
-          id="update-trip_name"
+          id="user-email"
           name="user_email"
           defaultValue={user_email}
           readOnly
-          style={{ minWidth: '250px'}}
+          style={{ minWidth: "250px" }}
         />
         <div>
-          <label><h3>First Name</h3></label>
+          <h3>
+            <label htmlFor="update-first-name">First Name</label>
+          </h3>
         </div>
         <input
           type="text"
@@ -99,7 +103,9 @@ const ChangeInfo = ({ user, setUser }) => {
           onChange={inputAction}
         />
         <div>
-          <label><h3>Last Name</h3></label>
+          <h3>
+            <label htmlFor="update-last-name">Last Name</label>
+          </h3>
         </div>
         <input
           type="text"
@@ -109,7 +115,9 @@ const ChangeInfo = ({ user, setUser }) => {
           onChange={inputAction}
         />
         <div>
-          <label><h3>Username</h3></label>
+          <h3>
+            <label htmlFor="update-user-name">Username</label>
+          </h3>
         </div>
         <input
           type="text"
