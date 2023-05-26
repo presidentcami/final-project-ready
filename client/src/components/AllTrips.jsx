@@ -10,9 +10,10 @@ export default function AllTrips({ user, trips, setTrips }) {
   const { user_id } = user[0];
   // console.log("trips", trips)
     const navigate = useNavigate();
- const loadTrips = () => {
+ const loadTrips = (userid) => {
+  console.log(userid, 'in alltrips component')
     // A function to fetch the list of students that will be load anytime that list change
-    fetch(`/trips/${user_id}`)
+    fetch(`/usertrips/${userid}`)
       .then((response) => response.json())
       .then((trips) => {
         // console.log(trips)
@@ -21,8 +22,8 @@ export default function AllTrips({ user, trips, setTrips }) {
   }
 
   useEffect(() => {
-    loadTrips();
-  }, []);
+    loadTrips(user_id);
+  }, [user_id]);
 
     // console.log("trips", trips)
   return trips && (

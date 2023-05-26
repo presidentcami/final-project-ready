@@ -17,7 +17,7 @@ function App() {
 
     const loadTrips = (userid) => {
       // A function to fetch the list of students that will be load anytime that list change
-      fetch(`/trips/${userid}`)
+      fetch(`/usertrips/${userid}`)
         .then((response) => response.json())
         .then((trips) => {
           // console.log('trips in app', trips)

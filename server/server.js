@@ -88,8 +88,9 @@ app.get('/donetodos/:trip_id', async (req, res) => {
     }
 });
 
-app.get('/trips/:userid', async (req, res) => {
+app.get('/usertrips/:userid', async (req, res) => {
     try {
+        // console.log("from getting all trips by user id request",req.params)
         const { userid } = req.params;
         const { rows: ready_trip } = await db.query('SELECT * FROM ready_trips WHERE user_id=$1', [userid]);
         res.send(ready_trip);
