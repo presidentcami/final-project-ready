@@ -23,6 +23,7 @@ const NotLoggedInLandingPage = () => {
     const Text = styled.h3`
         line-height: 34px;
         font-weight: lighter;
+        font-size: 20px
     `;
 
     return (
@@ -32,9 +33,7 @@ const NotLoggedInLandingPage = () => {
           your trip AND come back to reality. Create to-do lists for
           before, during, and after your trips. Lists can be associated with a
           specific trip, which will include a location, date, and a description
-          to help AI recommend an itinerary and things to pack.
-          They can also add in ad-hoc lists or details
-          that are specific to that vacation. Log in to get Ready!</Text>
+          to help AI recommend an itinerary and things to pack. Log in to get Ready!</Text>
         </Blurb>
       </Background>
     );

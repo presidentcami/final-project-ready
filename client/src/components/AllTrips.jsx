@@ -9,7 +9,8 @@ export default function AllTrips({ user, trips, setTrips }) {
 
   const { user_id } = user[0];
   // console.log("trips", trips)
-    const navigate = useNavigate();
+ const navigate = useNavigate();
+ 
  const loadTrips = (userid) => {
   // console.log(userid, 'in alltrips component')
     // A function to fetch the list of students that will be load anytime that list change
@@ -30,6 +31,7 @@ export default function AllTrips({ user, trips, setTrips }) {
         <div className='profile'>
           <Card.Group itemsPerRow={2} style={{margin: '1em'}}>
                 {trips.length > 0 ? trips.map((trip) => {
+                  // console.log(trip, "in all trips map")
                 return (
                   <Card 
                   key={trip.trip_id} 

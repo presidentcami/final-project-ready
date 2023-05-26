@@ -119,6 +119,11 @@ input[type=text], [type=date] {
   font-weight: lighter;
 }
 
+input[type=textarea] {
+  font-family: 'Lato', sans-serif;
+  font-weight: lighter;
+}
+
 @media (max-width: 1600px) {
   
   .App {align-items: center;}
