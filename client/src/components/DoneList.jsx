@@ -22,7 +22,7 @@ const getDoneItems = (trip_id) => {
        
    try {
     //  console.log(trip_id);
-     fetch(`http://localhost:8080/donetodos/${trip_id}`)
+     fetch(`/donetodos/${trip_id}`)
        .then((response) => response.json())
        .then((doneTodos) => {
 

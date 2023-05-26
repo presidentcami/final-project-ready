@@ -59,7 +59,7 @@ const SuggestionBoxForm = ({ tripDetails }) => {
         // setSuggestions(noEmptiesArray);
         // console.log(userPrompt)
         try {
-         fetch(`http://localhost:8080/api/openai/${userPrompt}`)
+         fetch(`/api/openai/${userPrompt}`)
          .then((response) => response.json())
          .then((data) => {
             console.log('line 38 in suggestion box frontend - response', data)
