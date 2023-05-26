@@ -93,10 +93,10 @@ const AddToDoList = ({ setTodos, tripDetails }) => {
     <>
       {show ? (
         <>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} data-testid='add-todo-list'>
             <h4>Add New List</h4>
             <div>
-              <label>List Name</label>
+              <label htmlFor='add-new-list-name'>List Name</label>
             </div>
             <input
               type="text"

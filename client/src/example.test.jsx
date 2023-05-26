@@ -9,6 +9,7 @@ import Sidebar from './components/Sidebar.jsx';
 import { MemoryRouter } from 'react-router-dom';
 import ChangeInfo from './components/ChangeInfo.jsx';
 import TripDetails from './components/TripDetails.jsx';
+import AddToDoList from './components/AddTripToDoList.jsx';
 
 //Navbar rendering
 const user = [{
@@ -116,23 +117,56 @@ test("renders trip details and toggles to edit mode on button click", () => {
     <TripDetails tripDetails={tripDetails} setTripDetails={setTripDetails} />
   );
 
-  // Assert initial trip details are rendered
   expect(screen.getByText("Trip 1")).toBe;
   expect(screen.getByText("Location 1")).toBe;
   expect(screen.getByText("Description 1")).toBe;
   expect(screen.getByText("2023-01-01-2023-01-10")).toBe;
 
-  // Assert button exists and click it
   const editButton = screen.getByText("Edit Trip");
   expect(editButton).toBe;
   fireEvent.click(editButton);
 
-  // Assert edit mode is toggled and EditTripDetails component is rendered
   expect(screen.queryByText("Trip 1")).not.toBe;
   expect(screen.queryByText("Location 1")).not.toBe;
   expect(screen.queryByText("Description 1")).not.toBe;
   expect(screen.queryByText("2023-01-01-2023-01-10")).not.toBe;
   expect(screen.getByText("Edit Trip")).toBe;
 
-  // Additional assertions for the behavior of EditTripDetails component can be added here
+});
+
+test("renders AddToDoList component and submits form", () => {
+  const setTodos = vi.fn();
+  const handleSubmit = vi.fn();
+
+  const tripDetails = [
+    {
+      trip_id: 1,
+      user_id: 1,
+    },
+  ];
+
+  render(<AddToDoList setTodos={setTodos} tripDetails={tripDetails} handleSubmit={handleSubmit} />);
+
+  // Assert "New List" button exists and click it
+  const newListButton = screen.getByText("New List");
+  expect(newListButton).toBe;
+  fireEvent.click(newListButton);
+
+  // // Assert form is rendered after button click
+  const form = screen.getByTestId('add-todo-list');
+  expect(form).toBe;
+
+  // Assert form inputs exist
+  const listNameInput = screen.getByLabelText("List Name");
+  expect(listNameInput).toBe;
+  // console.log(listNameInput.value)
+  // Simulate typing into the input
+  fireEvent.change(listNameInput, { target: { value: "Shopping List" } });
+
+  // Assert input value is updated
+  expect(listNameInput).toBeDefined("Shopping List");
+
+  // Submit the form
+  fireEvent.submit(form);
+
 });
