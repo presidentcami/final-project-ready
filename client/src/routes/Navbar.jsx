@@ -58,7 +58,7 @@ const addUser = (auth0User, setUser) => {
     border-radius: 10px;
     border: none;
     background-color: #fddc95;
-    margin: 0 2em;
+    margin: 0 2vw;
     font-family: "Lato", sans-serif;
     font-weight: lighter;
   `;
@@ -101,7 +101,7 @@ function MyNavBar({ user, setUser }) {
     <NavBar data-testid="navbar" className="navbar">
       {!user ? null : (
         <div>
-          <Nav.Link to="/user-profile">
+          <Nav.Link to="/profile">
             {user[0].user_first_name} {user[0].user_last_name}
           </Nav.Link>
         </div>

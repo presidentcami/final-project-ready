@@ -10,17 +10,7 @@ import DoneList from './DoneList';
 
 const Container = styled.div`
     display: flex;
-`;
-
-const Title = styled.h4`
-  padding: 8px;
-`;
-
-const ItemList = styled.div`
-  padding: 8px;
-  background-color: ${(props) => (props.isDragging ? "black" : "white")};
-  flex-grow: 1;
-  min-height: 100px;
+    flex-wrap: wrap;
 `;
 
 const ToDoList = ({ trip_id, todos, setTodos }) => {
