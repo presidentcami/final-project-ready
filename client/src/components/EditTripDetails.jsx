@@ -61,7 +61,7 @@ const EditTripDetails = ({ tripDetails, setTripDetails, show, setShow }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            fetch(`http://localhost:8080/edittrip/${trip_id}`, {
+            fetch(`/edittrip/${trip_id}`, {
                 method: "PUT",
                 headers: {
                     Accept: "application/json",
