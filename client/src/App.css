@@ -2,7 +2,7 @@
 
 .App {
   min-height: 100vh;
-  font-family: 'Lato', sans-serif, 16px, !important;
+  font-family: 'Lato', sans-serif, 2rem, !important;
   font-weight: lighter !important;
   background-color: #e5ccc0;
   /* margin: 5px; */
@@ -40,6 +40,7 @@ h1, h2, h3, h4 {
   background-color: #333333;
   height: 100%;
   /* Full-height: remove this if you want "auto" height */
+  max-width: max-content;
   width: 20%;
   /* Set the width of the sidebar */
   position: fixed;
@@ -87,7 +88,7 @@ button {
 
 .nav-link {
   color: white !important;
-  margin-left: 40em;
+  margin: 0 20vw;
 }
 
 ul {
@@ -108,12 +109,15 @@ input[type=text], [type=date] {
   display: inline-block;
   margin-top: -10px;
   width: 80%;
-  font-size: 15px;
+  font-size: 1.15rem;
   border-radius: 2px;
   border: 1px solid #c1beea;
   font-family: 'Lato', sans-serif;
   font-weight: lighter;
 }
 
-
+@media (max-width: 1600px) {
+  
+  .App {align-items: center;}
+}
 
