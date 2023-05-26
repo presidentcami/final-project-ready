@@ -11,7 +11,7 @@ export default function AllTrips({ user, trips, setTrips }) {
   // console.log("trips", trips)
     const navigate = useNavigate();
  const loadTrips = (userid) => {
-  console.log(userid, 'in alltrips component')
+  // console.log(userid, 'in alltrips component')
     // A function to fetch the list of students that will be load anytime that list change
     fetch(`/usertrips/${userid}`)
       .then((response) => response.json())
