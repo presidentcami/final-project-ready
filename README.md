@@ -21,6 +21,10 @@ Ready is a vacation management app that can make you ready to go on your trip AN
     <br />
     <!-- Need to add pictures for demo -->
     <a href="https://server-n6hd.onrender.com">View Demo</a> 
+    <br />
+    Use this test login to play around: <br />
+    · email address: camiwills325+testing1@gmail.com <br />
+    · password: Testing123 <br />
     ·
     <a href="https://github.com/presidentcami/ready/issues">Report Bug</a>
     ·
@@ -35,8 +39,6 @@ Ready is a vacation management app that can make you ready to go on your trip AN
 [![Ready Screen Shot][product-screenshot]](https://server-n6hd.onrender.com/)
 
 I am a person who loves planning, going on vacations, and having a good time. Sometimes that means coming back down to earth from an experience and re-entering real life can be challenging! With the Ready app, you are encouraged to not only plan the things you want to do and pack to prepare for a trip, but also plan what you'll need to do when the trip is over. 
-
-<!-- Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description` -->
 
 <!-- <p align="right">(<a href="#readme-top">back to top</a>)</p> -->
 
