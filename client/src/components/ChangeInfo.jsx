@@ -74,11 +74,11 @@ const ChangeInfo = ({ user, setUser }) => {
     }
 
   return (
-    <div className="profile">
-      <form onSubmit={handleSubmit}>
-        <h3>Your Profile</h3>
+    <div className="profile" style={{ paddingTop: "10%" }}>
+      <form onSubmit={handleSubmit} style={{ textAlign: 'center' }}>
+        <h2>Your Profile</h2>
         <div>
-          <label>Email Address</label>
+          <label><h3>Email Address</h3></label>
         </div>
         <input
           type="text"
@@ -86,10 +86,10 @@ const ChangeInfo = ({ user, setUser }) => {
           name="user_email"
           defaultValue={user_email}
           readOnly
-          // style={{lineHeight: '50px'}}
+          style={{ minWidth: '250px'}}
         />
         <div>
-          <label>First Name</label>
+          <label><h3>First Name</h3></label>
         </div>
         <input
           type="text"
@@ -99,7 +99,7 @@ const ChangeInfo = ({ user, setUser }) => {
           onChange={inputAction}
         />
         <div>
-          <label>Last Name</label>
+          <label><h3>Last Name</h3></label>
         </div>
         <input
           type="text"
@@ -109,7 +109,7 @@ const ChangeInfo = ({ user, setUser }) => {
           onChange={inputAction}
         />
         <div>
-          <label>Username</label>
+          <label><h3>Username</h3></label>
         </div>
         <input
           type="text"

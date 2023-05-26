@@ -36,7 +36,9 @@ const Layout = ({ setUser, user, trips }) => {
     <div className="App">
       <MyNavBar setUser={setUser} user={user} />
 
-      {isLoggingIn ? <PageLoader /> : !!user ? (
+      {isLoggingIn ? (
+        <PageLoader />
+      ) : !!user ? (
         <div style={{ flex: true }}>
           <Sidebar trips={trips} user={user} />
           <Outlet />

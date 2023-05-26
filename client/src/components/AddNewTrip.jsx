@@ -40,7 +40,7 @@ const AddTrip = ({ setTrips, user }) => {
     const [state, dispatch] = useReducer(reducer, initialValue);
     const [show, setShow] = useState(false);
 
-    const handleClose = () => setShow(current => !current);
+    const handleClose = () => dispatch({ type: "reset", initialValue });
     const handleShow = () => {
         // console.log(initialValue)
         setShow(!show)
@@ -97,10 +97,9 @@ const AddTrip = ({ setTrips, user }) => {
 
     return (
         <>
-            {show ? <>
-                <form onSubmit={handleSubmit} id="addNewTripForm">
-                    <h3>Add New Trip</h3>
-                    <div><label>Trip Name</label></div>
+                <form onSubmit={handleSubmit} id="addNewTripForm" className='profile' style={{ paddingTop: '10%'}}>
+                    <h2>Add New Trip</h2>
+                    <div><label><h3>Trip Name</h3></label></div>
                     <input
                         type="text"
                         id="add-new-trip-name"
@@ -108,7 +107,7 @@ const AddTrip = ({ setTrips, user }) => {
                         value={state.trip_name}
                         onChange={inputAction}
                     />
-                    <div><label>Location</label></div>
+                    <div><label><h3>Location</h3></label></div>
                     <input
                         type="text"
                         id="add-location"
@@ -116,7 +115,7 @@ const AddTrip = ({ setTrips, user }) => {
                         value={state.location}
                         onChange={inputAction}
                     />
-                    <div><label>Trip Description</label></div>
+                    <div><label><h3>Trip Description</h3></label></div>
                     <textarea
                         rows="13"
                         cols="96"
@@ -126,7 +125,7 @@ const AddTrip = ({ setTrips, user }) => {
                         value={state.trip_description}
                         onChange={inputAction}
                     />
-                    <div><label>Start Date</label></div>
+                    <div><label><h3>Start Date</h3></label></div>
                     <div>
                         <input
                             type="date"
@@ -136,7 +135,7 @@ const AddTrip = ({ setTrips, user }) => {
                             onChange={inputAction}
                         />
                     </div>
-                    <div><label>End Date</label></div>
+                    <div><label><h3>End Date</h3></label></div>
                     <div>
                         <input
                             type="date"
@@ -151,10 +150,6 @@ const AddTrip = ({ setTrips, user }) => {
                         <Button type="button" onClick={handleClose}>Cancel</Button>
                     </section>
                 </form>
-            </> : <Button onClick={handleShow}> Add a New Trip </Button>
-}
-
-
         </>
     );
 };

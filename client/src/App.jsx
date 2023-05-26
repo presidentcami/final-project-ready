@@ -7,6 +7,7 @@ import AllTrips from './components/AllTrips';
 import OneTrip from './components/OneTrip';
 import Layout from './components/Layout';
 import ChangeInfo from './components/ChangeInfo';
+import AddTrip from './components/AddNewTrip';
 
 
 
@@ -43,8 +44,8 @@ function App() {
    
       <Routes className="App">
         <Route path='/' element={<Layout setUser={setUser} user={user} trips={trips} setTrips={setTrips} />}>
-            
-            <Route path='dashboard' element={<Profile user={user} setTrips={setTrips} trips={trips} />} />
+            <Route index element={<Profile user={user} setTrips={setTrips} trips={trips} />}  />
+            <Route path='dashboard' element={<AddTrip user={user} setTrips={setTrips} />} />
             <Route path='dashboard/profile'  element={<ChangeInfo user={user} setUser={setUser} />} />
             <Route path='trips' element={<AllTrips user={user} setTrips={setTrips} trips={trips} />} />
             <Route path='trips/:trip_id' element={<OneTrip />} />

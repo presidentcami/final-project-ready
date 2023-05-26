@@ -1,7 +1,16 @@
 import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import background from '../assets/blue-window.jpg'
 import AddTrip from "./AddNewTrip";
 import { useAuth0 } from "@auth0/auth0-react";
 
+    const Background = styled.div`
+      background-image: url(${background});
+      min-height: 100vh;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    `;
 
 const Profile = ({ user, setTrips }) => {
 
@@ -17,14 +26,13 @@ const Profile = ({ user, setTrips }) => {
     // }
 
     return user && ( 
-            <div className="dashboard">
-                <div className="profile">
+        <div className="dashboard"> 
+                <div className="profile" style={{ textAlign: 'center', padding: '100px'}}> 
                 <h2>{user_first_name} {user_last_name}</h2>
-                <p>Welcome to your homepage, user at {user_email}</p>
-                <AddTrip user={user} setTrips={setTrips} />
-                </div>
-            </div>
-        
+                <h3>Welcome to your homepage, user at {user_email}</h3>
+                <h3>Go to your Dashboard to add a new trip!</h3>
+                </div> 
+            </div> 
     );
 };
 
