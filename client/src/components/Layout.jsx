@@ -38,7 +38,7 @@ const Layout = ({ setUser, user, trips }) => {
 
       {isLoggingIn ? <PageLoader /> : !!user ? (
         <div style={{ flex: true }}>
-          <SideBar trips={trips} user={user} />
+          <Sidebar trips={trips} user={user} />
           <Outlet />
         </div>
       ) : (

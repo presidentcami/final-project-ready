@@ -6,7 +6,7 @@ import NotLoggedInLandingPage from './components/NotLoggedInLandingPage';
 import PageLoader from './components/PageLoader.jsx';
 import Profile from './components/Profile.jsx';
 import AddTrip from './components/AddNewTrip.jsx';
-import Sidebar from './components/SideBar.jsx';
+import Sidebar from './components/Sidebar.jsx';
 import { MemoryRouter } from 'react-router-dom';
 
 //Navbar rendering
@@ -46,7 +46,7 @@ test('Profile page shows add new trip button', () => {
   expect(addNewTripButton).toBe;
 })
 
-test("renders SideBar component correctly", () => {
+test("renders Sidebar component correctly", () => {
   const trips = [
    {
      trip_id: 3,
@@ -62,7 +62,7 @@ test("renders SideBar component correctly", () => {
 
   render(
   <MemoryRouter>
-    <SideBar trips={trips} user={user} />
+    <Sidebar trips={trips} user={user} />
   </MemoryRouter>
   );
 });
