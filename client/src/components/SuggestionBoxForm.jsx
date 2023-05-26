@@ -25,6 +25,15 @@ import Suggestions from './Suggestions';
     border-radius: 16px;
     font-family: "Lato", sans-serif;
     font-weight: lighter;
+
+    &:hover::after {
+      position: absolute;
+      content: attr(title);
+      display: inline-block;
+      padding: 5px;
+      background-color: #afc8ee;
+      color: black;
+    }
   `;
 
 const SuggestionBoxForm = ({ tripDetails }) => {
@@ -41,6 +50,11 @@ const SuggestionBoxForm = ({ tripDetails }) => {
         setActivities(null)
     }
 
+    const handleCopy = (item) => {
+      // console.log('on click', item)
+      navigator.clipboard.writeText(item)
+    }
+ 
     const handleSubmit = (e) => {
         e.preventDefault();
         // console.log(activities)
@@ -77,10 +91,10 @@ const SuggestionBoxForm = ({ tripDetails }) => {
               />
               <Button type="submit">Submit</Button>
         </form>
-        {!suggestions ? null : <div>{suggestions.map((item, index) => {
+        {!suggestions ? null : <div title='Click to copy to your clipboard'>{suggestions.map((item, index) => {
           console.log(item)
           return( 
-        <PillButton key={index}>{item}</PillButton>)})}</div> }
+        <PillButton key={index} onClick={() => handleCopy(item)}>{item}</PillButton>)})}</div> }
 
     </div>
   )
