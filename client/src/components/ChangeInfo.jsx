@@ -53,7 +53,7 @@ const ChangeInfo = ({ user, setUser }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
                 try {
-                  fetch(`http://localhost:8080/edituser/${user_id}`, {
+                  fetch(`/edituser/${user_id}`, {
                     method: "PUT",
                     headers: {
                       Accept: "application/json",

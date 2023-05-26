@@ -35,7 +35,7 @@ const ToDoList = ({ trip_id, todos, setTodos }) => {
       }
       // console.log('testing trycatch')
       try {
-        fetch(`http://localhost:8080/markdone/${item_id}`, {
+        fetch(`/markdone/${item_id}`, {
           method: "PUT",
           headers: {
             Accept: "application/json",
