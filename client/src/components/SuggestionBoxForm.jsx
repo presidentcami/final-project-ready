@@ -25,16 +25,25 @@ import * as MdIcons from "react-icons/md";
     border-radius: 16px;
     font-family: "Lato", sans-serif;
     font-weight: lighter;
+
+    &:hover::after {
+      position: absolute;
+      content: attr(title);
+      display: inline-block;
+      padding: 5px;
+      background-color: #afc8ee;
+      color: black;
+    }
   `;
 
+    const ClearButton = styled.button`
+      border: none;
+      background-color: white;
+      color: red;
+      font-family: "Lato", sans-serif;
+      font-weight: lighter;
+    `;
 
-  const ClearButton = styled.button`
-    border: none;
-    background-color: white;
-    color: red;
-    font-family: "Lato", sans-serif;
-    font-weight: lighter;
-  `;
 
 const SuggestionBoxForm = ({ tripDetails }) => {
 
@@ -49,7 +58,11 @@ const SuggestionBoxForm = ({ tripDetails }) => {
     const clearForm = () => {
         setActivities(null)
     }
-
+    const handleCopy = (item) => {
+      // console.log('on click', item)
+      navigator.clipboard.writeText(item)
+    }
+ 
     const handleSubmit = (e) => {
         e.preventDefault();
         // console.log(activities)
@@ -91,7 +104,7 @@ const SuggestionBoxForm = ({ tripDetails }) => {
         {!suggestions ? null : <div> <ClearButton type="button" onClick={() => setSuggestions(null)}><MdIcons.MdClear /></ClearButton> {suggestions.map((item, index) => {
           // console.log(item)
           return( 
-        <PillButton key={index}>{item}</PillButton>)})}</div> }
+        <PillButton key={index} onClick={() => handleCopy(item)}>{item}</PillButton>)})}</div> }
 
     </div>
   )
