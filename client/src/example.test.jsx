@@ -6,7 +6,7 @@ import NotLoggedInLandingPage from './components/NotLoggedInLandingPage';
 import PageLoader from './components/PageLoader.jsx';
 import Profile from './components/Profile.jsx';
 import AddTrip from './components/AddNewTrip.jsx';
-import SideBar from './components/SideBar.jsx';
+import Sidebar from './components/SideBar.jsx';
 import { MemoryRouter } from 'react-router-dom';
 
 //Navbar rendering

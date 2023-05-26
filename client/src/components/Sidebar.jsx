@@ -40,7 +40,7 @@ import * as AiIcons from 'react-icons/ai'
 // `
 
 
-const SideBar = ({ trips, user }) => {
+const Sidebar = ({ trips, user }) => {
 
 // console.log(user)
 // user && console.log(user)
@@ -63,4 +63,4 @@ const SideBar = ({ trips, user }) => {
   );
 };
 
-export default SideBar
+export default Sidebar
